@@ -1,0 +1,54 @@
+.button {
+  @apply .bg-button .no-underline .rounded-lg .py-2 .px-4 .text-sm .border .border-transparent;
+
+  color: white;
+
+  &:hover {
+    @apply .bg-card .border-accent .text-accent;
+  }
+
+  .theme-light & {
+    box-shadow: 0 2px 7px 0 #b0eaffab;
+  }
+
+  .theme-dark & {
+    box-shadow: 0 2px 7px 0 #00668bab;
+  }
+}
+
+.button-sm-red {
+  @apply .bg-red-400 .no-underline .rounded-lg .py-1 .px-2 .text-xs .border .border-transparent;
+
+  color: white;
+  box-shadow: 0 2px 7px 0 #ca264f33;
+
+  &:hover {
+    @apply .bg-card .border-red-300 .text-red-300;
+  }
+}
+
+.button-sm-blue {
+  @apply .bg-accent .no-underline .rounded-lg .py-1 .px-2 .text-xs .border .border-transparent;
+
+  color: white;
+
+  .theme-light & {
+    box-shadow: 0 2px 7px 0 #b0eaffab;
+  }
+
+  .theme-dark & {
+    box-shadow: 0 2px 7px 0 #00668bab;
+  }
+
+  &:hover {
+    @apply .bg-card .border-accent .text-accent;
+  }
+}
+
+.button-sm-no-bg {
+  @apply .text-sm .text-accent .no-underline .whitespace-no-wrap .border .border-transparent .py-2 .px-4 .rounded-lg;
+
+  &:hover {
+    @apply .border-accent;
+  }
+}

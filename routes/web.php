@@ -15,4 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'welcome')->name('welcome');
+Route::resource('threads', 'ThreadsController');
+
+Route::group(['middleware' => 'auth'], function () {
+});
+
 Auth::routes();

@@ -11,5 +11,9 @@
             </article>
     </div>
 
-    <x-replies :replies="$thread->replies"/>
+    <x-replies.card :replies="$thread->replies"/>
+
+    @auth
+        <x-replies.form :thread="$thread" />
+    @endauth
 @endsection

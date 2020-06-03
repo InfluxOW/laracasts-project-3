@@ -18,10 +18,13 @@
 <body class="theme-light bg-page h-screen antialiased leading-none">
     <div id="app">
         <nav class="bg-header border-b-2 border-default mb-4 py-4">
-            <div class="mx-auto px-6 md:px-0">
+            <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-between ml-4">
-                    <a href="{{ route('welcome') }}">
-                        {{ config('app.name', 'Laravel') }}
+                    <div class="mr-2 cursor-default text-gray-500 text-xl">
+                        Forum
+                    </div>
+                    <a href="{{ route('threads.index') }}">
+                        Threads
                     </a>
 
                     <div class="flex items-center ml-auto mr-4">

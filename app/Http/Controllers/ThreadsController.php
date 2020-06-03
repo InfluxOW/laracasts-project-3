@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ThreadsRequest;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ class ThreadsController extends Controller
     public function __construct()
     {
         // $this->authorizeResource(Thread::class);
+        $this->middleware('auth')->only('store');
     }
 
     /**
@@ -40,9 +42,12 @@ class ThreadsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ThreadsRequest $request)
     {
-        //
+        $this->authorize(Thread::class);
+        $thread = $request->user()->threads()->create($request->validated());
+
+        return redirect()->route('threads.show', $thread);
     }
 
     /**

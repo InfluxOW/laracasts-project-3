@@ -26,7 +26,6 @@ class ThreadsRequest extends FormRequest
         return [
             'body' => ['required', 'string', 'min:3', 'max:1000'],
             'title' => ['required', 'string', 'min:3', 'max:200'],
-            'user_id' => ['required', 'exists:users,id']
         ];
     }
 }

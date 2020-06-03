@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ThreadRepliesRequest;
 use App\Reply;
 use App\Thread;
 use Illuminate\Http\Request;
@@ -38,10 +39,10 @@ class ThreadRepliesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Thread $thread)
+    public function store(ThreadRepliesRequest $request, Thread $thread)
     {
         $this->authorize(Reply::class);
-        $reply = $thread->addReply($request->all());
+        $reply = $thread->addReply($request->validated());
 
         return redirect()->route('threads.show', $thread);
     }

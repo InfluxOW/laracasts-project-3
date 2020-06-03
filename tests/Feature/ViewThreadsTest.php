@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class ReadThreadsTest extends TestCase
+class ViewThreadsTest extends TestCase
 {
     protected $user;
     protected $thread;
@@ -20,7 +20,7 @@ class ReadThreadsTest extends TestCase
 
         $this->user = factory(User::class)->create();
         $this->thread = factory(Thread::class)->create();
-        $this->reply = factory(Reply::class)->create(['thread_id' => $this->thread->id]);
+        $this->reply = factory(Reply::class)->create();
     }
 
     /** @test */

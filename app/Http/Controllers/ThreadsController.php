@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ThreadsController extends Controller
 {
+    public function __construct()
+    {
+        // $this->authorizeResource(Thread::class);
+    }
+
     /**
      * Display a listing of the resource.
      *

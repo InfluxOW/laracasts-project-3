@@ -9,6 +9,8 @@ use Tests\TestCase;
 
 class ReplyTest extends TestCase
 {
+    protected $reply;
+
     protected function setUp(): void
     {
         parent::setUp();

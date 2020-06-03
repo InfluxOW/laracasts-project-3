@@ -10,6 +10,10 @@ use Tests\TestCase;
 
 class ReadThreadsTest extends TestCase
 {
+    protected $user;
+    protected $thread;
+    protected $reply;
+
     protected function setUp(): void
     {
         parent::setUp();

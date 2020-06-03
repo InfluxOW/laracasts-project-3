@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::resource('threads', 'ThreadsController');
+Route::resource('threads.replies', 'ThreadRepliesController');
 
 Route::group(['middleware' => 'auth'], function () {
 });

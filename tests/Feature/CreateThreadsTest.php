@@ -41,4 +41,34 @@ class CreateThreadsTest extends TestCase
             ->assertRedirect(route('login'));
         $this->assertDatabaseMissing('threads', $this->thread);
     }
+
+    /** @test */
+    public function a_thread_requires_a_body()
+    {
+        $attributes = factory(Thread::class)->raw(['body' => '']);
+
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $attributes)
+            ->assertSessionHasErrors('body');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_title()
+    {
+        $attributes = factory(Thread::class)->raw(['title' => '']);
+
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $attributes)
+            ->assertSessionHasErrors('title');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_valid_channel()
+    {
+        $attributes = factory(Thread::class)->raw(['channel_id' => '']);
+
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $attributes)
+            ->assertSessionHasErrors('channel_id');
+    }
 }

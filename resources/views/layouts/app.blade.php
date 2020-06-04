@@ -41,8 +41,9 @@
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 <span class="text-accent">Logout</span>
 
-                                {{Form::open(['url' => route('logout'), 'method' => 'POST', 'id' => 'logout-form', 'class' => 'invisible'])}}
-                                {{Form::close()}}
+                                {!! Form::open(['url' => route('logout'), 'id' => 'logout-form', 'class' => 'invisible']) !!}
+                                {!! Form::close() !!}
+                            </a>
                         @endguest
                     </div>
                 </div>

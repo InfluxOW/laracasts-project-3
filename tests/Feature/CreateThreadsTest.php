@@ -34,6 +34,8 @@ class CreateThreadsTest extends TestCase
     /** @test */
     public function guest_can_not_create_new_forum_threads()
     {
+        $this->get(route('threads.create'))->assertRedirect(route('login'));
+
         $this->post(route('threads.store'), $this->thread);
         $this->assertDatabaseMissing('threads', $this->thread);
     }

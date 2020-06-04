@@ -11,7 +11,7 @@ class ThreadsController extends Controller
     public function __construct()
     {
         // $this->authorizeResource(Thread::class);
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store', 'create');
     }
 
     /**
@@ -33,7 +33,9 @@ class ThreadsController extends Controller
      */
     public function create()
     {
-        //
+        $thread = new Thread();
+
+        return view('threads.create', $thread);
     }
 
     /**

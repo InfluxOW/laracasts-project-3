@@ -18,9 +18,7 @@ class ViewThreadsTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
         $this->thread = factory(Thread::class)->create();
-        $this->reply = factory(Reply::class)->create();
     }
 
     /** @test */
@@ -35,13 +33,10 @@ class ViewThreadsTest extends TestCase
     /** @test */
     public function a_user_can_view_a_specific_thread()
     {
-        $response = $this->get(route('threads.show', $this->thread));
+        $response = $this->get(route('threads.show', [$this->thread->channel, $this->thread]));
 
         $response->assertOk();
-        // Thread itself
         $response->assertSee($this->thread->title)
                 ->assertSee($this->thread->body);
-        // Thread replies
-        $response->assertSee($this->reply->body);
     }
 }

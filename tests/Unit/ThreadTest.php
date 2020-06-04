@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Reply;
+use App\Channel;
 use App\Thread;
 use App\User;
 use Illuminate\Support\Collection;
@@ -17,7 +18,6 @@ class ThreadTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
         $this->thread = factory(Thread::class)->create();
     }
 
@@ -30,7 +30,7 @@ class ThreadTest extends TestCase
     /** @test */
     public function it_has_replies()
     {
-        factory(Reply::class, 10)->create();
+        factory(Reply::class, 10)->create(['thread_id' => $this->thread->id]);
 
         $this->assertInstanceOf(Collection::class, $this->thread->replies);
         $this->assertCount(10, $this->thread->replies);
@@ -39,10 +39,16 @@ class ThreadTest extends TestCase
     /** @test */
     public function it_can_add_a_reply()
     {
-        $this->actingAs($this->user);
+        $this->actingAs($this->thread->user);
 
         $this->thread->addReply(['body' => 'test reply']);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    /** @test */
+    public function a_thread_belongs_to_a_channel()
+    {
+        $this->assertInstanceOf(Channel::class, $this->thread->channel);
     }
 }

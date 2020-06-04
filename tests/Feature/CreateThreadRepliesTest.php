@@ -19,24 +19,23 @@ class CreateThreadRepliesTest extends TestCase
     {
         parent::setUp();
 
-        $this->user = factory(User::class)->create();
         $this->thread = factory(Thread::class)->create();
-        $this->reply = factory(Reply::class)->raw();
+        $this->reply = collect(factory(Reply::class)->raw())->only('body')->toArray();
     }
 
     /** @test */
     public function an_authenticated_user_may_add_replies()
     {
         $this->followingRedirects()
-            ->actingAs($this->user)
-            ->post(route('threads.replies.store', $this->thread), $this->reply);
+            ->actingAs($this->thread->user)
+            ->post(route('threads.replies.store', [$this->thread->channel, $this->thread]), $this->reply);
         $this->assertDatabaseHas('replies', $this->reply);
     }
 
     /** @test */
     public function an_authenticated_user_may_not_add_replies()
     {
-        $this->post(route('threads.replies.store', $this->thread), $this->reply);
+        $this->post(route('threads.replies.store', [$this->thread->channel, $this->thread]), $this->reply);
         $this->assertDatabaseMissing('replies', $this->reply);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Channel;
 use App\Http\Requests\ThreadsRequest;
 use App\Thread;
 use Illuminate\Http\Request;
@@ -10,7 +11,6 @@ class ThreadsController extends Controller
 {
     public function __construct()
     {
-        // $this->authorizeResource(Thread::class);
         $this->middleware('auth')->only('store', 'create');
     }
 
@@ -49,7 +49,7 @@ class ThreadsController extends Controller
         $this->authorize(Thread::class);
         $thread = $request->user()->threads()->create($request->validated());
 
-        return redirect()->route('threads.show', $thread);
+        return redirect()->route('threads.show', [$thread->channel, $thread]);
     }
 
     /**
@@ -58,7 +58,7 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function show(Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
         return view('threads.show', compact('thread'));
     }
@@ -81,7 +81,7 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Thread $thread)
+    public function update(Request $request, Channel $channel, Thread $thread)
     {
         //
     }
@@ -92,7 +92,7 @@ class ThreadsController extends Controller
      * @param  \App\Thread  $thread
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Thread $thread)
+    public function destroy(Channel $channel, Thread $thread)
     {
         //
     }

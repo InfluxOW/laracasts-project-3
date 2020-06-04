@@ -1,6 +1,7 @@
 <?php
 
 use App\Thread;
+use App\User;
 use Illuminate\Database\Seeder;
 
 class ThreadsSeeder extends Seeder
@@ -12,6 +13,6 @@ class ThreadsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Thread::class, 20)->create();
+        factory(Thread::class, 20)->create(['user_id' => User::all()->random()->id]);
     }
 }

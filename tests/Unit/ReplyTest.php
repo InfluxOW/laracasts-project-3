@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Channel;
 use App\Reply;
 use App\Thread;
 use App\User;
@@ -15,7 +16,6 @@ class ReplyTest extends TestCase
     {
         parent::setUp();
 
-        factory(User::class)->create();
         factory(Thread::class)->create();
         $this->reply = factory(Reply::class)->create();
     }

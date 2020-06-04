@@ -26,6 +26,7 @@ class ThreadsRequest extends FormRequest
         return [
             'body' => ['required', 'string', 'min:3', 'max:1000'],
             'title' => ['required', 'string', 'min:3', 'max:200'],
+            'channel_id' => ['required', 'exists:channels,id']
         ];
     }
 }

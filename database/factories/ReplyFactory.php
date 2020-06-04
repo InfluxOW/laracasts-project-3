@@ -9,7 +9,9 @@ use Faker\Generator as Faker;
 
 $factory->define(Reply::class, function (Faker $faker) {
     return [
-        'body' => $faker->paragraph()
+        'body' => $faker->paragraph(),
+        'thread_id' => factory(Thread::class),
+        'user_id' => factory(User::class),
     ];
 });
 

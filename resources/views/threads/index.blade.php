@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-        @foreach ($threads as $thread)
+        @foreach ($threads->load('channel') as $thread)
             <div class="border border-gray-300 rounded-lg {{ $loop->last ? 'mb-2' : 'mb-4' }} {{ $loop->first ? '' : 'mt-4' }}">
                 <article>
                     <div class="text-lg border-b border-gray-300 px-4 py-2">

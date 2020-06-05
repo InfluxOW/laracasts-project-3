@@ -167,6 +167,11 @@ return [
          */
 
         /*
+         * View Service Providers...
+         */
+        App\Providers\ViewServiceProvider::class,
+
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

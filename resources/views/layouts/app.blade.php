@@ -89,49 +89,6 @@
                 </div>
             </div>
         </nav>
-        {{-- <nav class="bg-header border-b-2 border-default mb-4 py-4 flex items-center">
-            <div class="container mx-auto px-6 md:px-0">
-                <div class="flex items-center justify-between ml-4">
-                    <div class="mr-2 cursor-default text-gray-500 text-xl">
-                        Forum
-                    </div>
-                    <a href="{{ route('threads.index') }}">
-                        Threads
-                    </a>
-
-                    <dropdown>
-                        <template v-slot:items>
-                            @foreach (App\Channel::all() as $channel)
-                                <a href="#" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
-                                    {{ $channel->slug }}
-                                </a>
-                            @endforeach
-                        </template>
-
-                    </dropdown>
-
-                    <div class="flex items-center ml-auto mr-4">
-                        @guest
-                            <a class="no-underline text-muted text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            @if (Route::has('register'))
-                                <a class="no-underline text-muted text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            @endif
-                        @else
-                            <div class="mr-2">
-                                {{ Auth::user()->name }}
-                            </div>
-
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                <span class="text-accent">Logout</span>
-
-                                {!! Form::open(['url' => route('logout'), 'id' => 'logout-form', 'class' => 'invisible']) !!}
-                                {!! Form::close() !!}
-                            </a>
-                        @endguest
-                    </div>
-                </div>
-            </div>
-        </nav> --}}
 
         <div class="mx-auto py-4 container">
             @yield('content')

@@ -247,6 +247,11 @@ module.exports = {
         default: '1',
       },
       fontFamily: {
+        header: [
+            'Montserrat',
+            'Nunito',
+            'Helvetica'
+          ],
         sans: [
           'system-ui',
           '-apple-system',

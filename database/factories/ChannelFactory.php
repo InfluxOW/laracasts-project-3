@@ -11,3 +11,10 @@ $factory->define(Channel::class, function (Faker $faker) {
         'slug' => $faker->word,
     ];
 });
+
+$factory->state(Channel::class, 'random', function () {
+    return [
+        'name' => 'Random',
+        'slug' => 'random',
+    ];
+});

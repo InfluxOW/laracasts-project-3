@@ -20,7 +20,7 @@
         <nav class="relative flex flex-wrap items-center justify-between">
             <div class="container bg-blue-500 rounded px-4 py-2 mx-auto flex flex-wrap items-center justify-between">
                 <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
-                    <div class="text-md font-bold leading-relaxed inline-block mr-4 py-2 whitespace-no-wrap uppercase text-white cursor-pointer">
+                    <div class="text-md font-bold leading-relaxed inline-block py-2 whitespace-no-wrap uppercase text-white cursor-pointer">
                         Forum
                     </div>
                 </div>
@@ -30,9 +30,20 @@
                     <!-- Left Navbar Side -->
                     <ul class="flex flex-col lg:flex-row list-none">
                         <li>
-                            <a class="px-4 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75" href="{{ route('threads.index') }}">
-                                Threads
-                            </a>
+                            <dropdown
+                                button_classes="button-dropdown w-full"
+                                button_title="Threads"
+                            >
+                                <template v-slot:items>
+                                    <a href="{{ route('threads.index') }}" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
+                                        All Threads
+                                    </a>
+
+                                    <a href="{{ route('threads.create') }}" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
+                                        New Thread
+                                    </a>
+                                </template>
+                            </dropdown>
                         </li>
 
                         <li>
@@ -41,7 +52,7 @@
                                 button_title="Channels"
                             >
                                 <template v-slot:items>
-                                    @foreach (App\Channel::all() as $channel)
+                                    @foreach ($channels as $channel)
                                         <a href="{{ route('threads.filter', $channel) }}" class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
                                             {{ $channel->slug }}
                                         </a>

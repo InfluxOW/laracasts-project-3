@@ -1,5 +1,6 @@
 // Tailwind
 @import "tailwindcss/base";
+
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 //Themes
@@ -7,3 +8,7 @@
 @import 'themes/dark';
 //Components
 @import 'components/button';
+//Fonts
+@import url('https://fonts.googleapis.com/css?family=Helvetica');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');

@@ -1,12 +1,12 @@
 <template>
     <div class="flex flex-wrap items-center dropdown">
-        <div class="w-full px-4">
+        <div class="w-full">
             <div class="relative inline-flex align-middle w-full">
                 <button :class="button_classes" style="transition:all .15s ease" type="button" v-on:click="toggleDropdown()" ref="btnDropdownRef">
                     {{ button_title }}
                 </button>
 
-                <div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="bg-white text-base z-50 right-0 float-left py-2 list-none rounded shadow-lg mt-1 text-center" ref="popoverDropdownRef">
+                <div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="bg-white text-base py-2 list-none rounded shadow-lg mt-1 text-center" ref="popoverDropdownRef">
                     <slot name="items"></slot>
                 </div>
             </div>

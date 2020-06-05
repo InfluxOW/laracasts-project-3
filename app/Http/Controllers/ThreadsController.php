@@ -19,9 +19,9 @@ class ThreadsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Channel $channel = null)
     {
-        $threads = Thread::latest()->paginate(10);
+        $threads = $channel ? $channel->threads()->latest()->paginate(10) : Thread::latest()->paginate(10);
 
         return view('threads.index', compact('threads'));
     }

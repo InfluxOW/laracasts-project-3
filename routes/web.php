@@ -18,6 +18,7 @@ Route::view('/', 'welcome')->name('welcome');
 
 Route::get('threads', 'ThreadsController@index')->name('threads.index');
 Route::get('threads/create', 'ThreadsController@create')->name('threads.create');
+Route::get('threads/{channel:slug}', 'ThreadsController@index')->name('threads.filter');
 Route::get('threads/{channel:slug}/{thread}', 'ThreadsController@show')->name('threads.show');
 Route::patch('threads/{channel:slug}/{thread}', 'ThreadsController@update')->name('threads.update');
 Route::delete('threads/{channel:slug}/{thread}', 'ThreadsController@destroy')->name('threads.destroy');

@@ -52,3 +52,26 @@
     @apply .border-accent;
   }
 }
+
+.button-new {
+    @apply .text-blue-500 .bg-transparent .border .border-solid .border-blue-500 .font-bold .uppercase .text-xs .px-4 .py-2 .rounded .outline-none;
+
+    &:hover {
+        @apply .text-white .bg-blue-500;
+    }
+
+    &:active {
+        @apply .bg-blue-600;
+    }
+    &:focus {
+        @apply .outline-none;
+    }
+}
+
+.button-dropdown {
+    @apply .text-white .uppercase .font-bold .text-xs .rounded .bg-blue-500 .px-4 .py-2 .border .border-transparent;
+
+    &:hover {
+        @apply .opacity-75 .border-white;
+    }
+}

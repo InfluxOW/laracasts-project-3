@@ -30,10 +30,11 @@ class ThreadTest extends TestCase
     /** @test */
     public function it_has_replies()
     {
-        factory(Reply::class, 10)->create(['thread_id' => $this->thread->id]);
+        $reply = factory(Reply::class)->create(['thread_id' => $this->thread->id]);
 
         $this->assertInstanceOf(Collection::class, $this->thread->replies);
-        $this->assertCount(10, $this->thread->replies);
+        $this->assertCount(1, $this->thread->replies);
+        $this->assertTrue($this->thread->replies->contains($reply));
     }
 
     /** @test */

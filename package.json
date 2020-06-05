@@ -26,6 +26,7 @@
     "dependencies": {
         "@rails/ujs": "^6.0.3-1",
         "htmlhint": "^0.13.0",
+        "popper.js": "1.15.0",
         "stylelint": "^13.5.0",
         "stylelint-config-standard": "^20.0.0",
         "turbolinks": "^5.2.0"

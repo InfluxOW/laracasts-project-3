@@ -6,6 +6,7 @@ use App\Channel;
 use App\Http\Requests\ThreadsRequest;
 use App\Thread;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class ThreadsController extends Controller
 {
@@ -21,7 +22,11 @@ class ThreadsController extends Controller
      */
     public function index(Channel $channel = null)
     {
-        $threads = $channel ? $channel->threads()->latest()->paginate(10) : Thread::latest()->paginate(10);
+        $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
+        $threads = QueryBuilder::for($query)
+            ->allowedFilters('user.username')
+            ->latest()
+            ->paginate(10);
 
         return view('threads.index', compact('threads'));
     }

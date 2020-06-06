@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateThreadRepliesTest extends TestCase
 {
-    protected $user;
     protected $thread;
     protected $reply;
 

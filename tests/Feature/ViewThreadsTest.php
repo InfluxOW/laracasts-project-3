@@ -2,17 +2,12 @@
 
 namespace Tests\Feature;
 
-use App\Reply;
 use App\Thread;
-use App\User;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ViewThreadsTest extends TestCase
 {
-    protected $user;
     protected $thread;
-    protected $reply;
 
     protected function setUp(): void
     {
@@ -49,5 +44,15 @@ class ViewThreadsTest extends TestCase
         $this->get(route('threads.filter', $threadInChannel->channel))
             ->assertSee($threadInChannel->title)
             ->assertDontSee($threadNotInChannel->title);
+    }
+
+    /** @test */
+    public function a_user_can_filter_threads_by_any_username()
+    {
+        $threadOfAnotherUser = factory(Thread::class)->create();
+
+        $this->get(route('threads.index', ['filter[user.username]' => $this->thread->user->username]))
+            ->assertSee($this->thread->title)
+            ->assertDontSee($threadOfAnotherUser->title);
     }
 }

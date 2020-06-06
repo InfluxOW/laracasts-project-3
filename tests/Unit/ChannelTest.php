@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class ChannelTest extends TestCase
 {
-    protected $thread;
+    protected $channel;
 
     protected function setUp(): void
     {

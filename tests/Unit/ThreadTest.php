@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class ThreadTest extends TestCase
 {
-    protected $user;
     protected $thread;
 
     protected function setUp(): void

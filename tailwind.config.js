@@ -91,6 +91,7 @@ module.exports = {
           900: '#234e52',
         },
         blue: {
+          dark: '#001638',
           100: '#ebf8ff',
           200: '#bee3f8',
           300: '#90cdf4',
@@ -134,16 +135,16 @@ module.exports = {
           800: '#97266d',
           900: '#702459',
         },
-        default: 'var(--text-default-color)',
-        accent: 'var(--text-accent-color)',
-        'accent-light': 'var(--text-accent-light-color)',
-        muted: 'var(--text-muted-color)',
-        'muted-light': 'var(--text-muted-light-color)',
-        'muted-dark': 'var(--text-muted-dark-color)',
-        page: 'var(--page-background-color)',
-        card: 'var(--card-background-color)',
-        button: 'var(--button-background-color)',
-        header: 'var(--header-background-color)'
+        default: '#222',
+        accent: '#47cdff',
+        'accent-light': '#8ae2fe',
+        muted: 'rgba(0, 0, 0, 0.3)',
+        'muted-light': '#cdd7dad8;',
+        'muted-dark': '#939899d8',
+        page: 'rgba(255, 255, 255, 1)',
+        card: '#f5f6f9',
+        button: '#47cdff',
+        header: '#fff'
         },
       spacing: {
         px: '1px',
@@ -216,7 +217,9 @@ module.exports = {
         outline: '0 0 0 3px rgba(66, 153, 225, 0.5)',
         none: 'none',
       },
-      container: {},
+      container: {
+        center: true,
+      },
       cursor: {
         auto: 'auto',
         default: 'default',

@@ -6,7 +6,7 @@
                     {{ button_title }}
                 </button>
 
-                <div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="bg-white text-base py-2 list-none rounded shadow-lg mt-1 text-center" ref="popoverDropdownRef">
+                <div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="bg-white text-base py-2 list-none rounded shadow-lg mt-1 text-center w-full" ref="popoverDropdownRef">
                     <slot name="items"></slot>
                 </div>
             </div>

@@ -25,7 +25,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['threads.*'], function ($view) {
+        View::composer(['threads.*', 'auth.*', 'components.*'], function ($view) {
             $view->with('channels', Channel::all());
         });
     }

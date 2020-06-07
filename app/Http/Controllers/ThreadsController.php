@@ -23,6 +23,7 @@ class ThreadsController extends Controller
     public function index(Channel $channel = null)
     {
         $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
+
         $threads = QueryBuilder::for($query)
             ->allowedFilters('user.username')
             ->latest()
@@ -65,7 +66,9 @@ class ThreadsController extends Controller
      */
     public function show(Channel $channel, Thread $thread)
     {
-        return view('threads.show', compact('thread'));
+        $replies = $thread->replies()->paginate(10);
+
+        return view('threads.show', compact('thread', 'replies'));
     }
 
     /**

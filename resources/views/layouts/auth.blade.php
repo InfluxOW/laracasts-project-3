@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <x-footer/>
+            <x-footer styles="bottom-0 pb-6 absolute" dark="false"/>
 
         </section>
     </main>

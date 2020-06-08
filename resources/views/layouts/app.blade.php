@@ -7,5 +7,7 @@
     <div class="mx-auto py-4 px-8 container">
         @yield('content')
     </div>
+
+    <x-footer styles="absolute py-6" dark="true"/>
 </div>
 @endsection

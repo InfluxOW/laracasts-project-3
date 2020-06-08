@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::view('/about', 'about');
 
 Route::get('threads', 'ThreadsController@index')->name('threads.index');
 Route::get('threads/create', 'ThreadsController@create')->name('threads.create');

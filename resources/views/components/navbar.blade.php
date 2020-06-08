@@ -1,4 +1,4 @@
-<nav class="w-full px-4 py-2 flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} {{ $styles ?? '' }}">
+<nav class="w-full py-2 flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} {{ $styles ?? '' }}">
     <div class="container px-4 mx-auto flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'border-b border-gray-800 border-opacity-25' : '' }}">
         <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
             <div class="text-md font-bold leading-relaxed inline-block py-2 whitespace-no-wrap uppercase cursor-pointer {{ $dark == 'true' ? 'text-black' : 'text-white' }}">

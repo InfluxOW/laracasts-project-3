@@ -5,10 +5,15 @@ namespace App;
 use App\Reply;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Thread extends Model
+class Thread extends Model implements Viewable
 {
+    use InteractsWithViews;
+
     protected $fillable = ['body', 'title', 'channel_id', 'user_id'];
+    protected $with = ['channel', 'user'];
 
     protected static function boot()
     {
@@ -16,6 +21,10 @@ class Thread extends Model
 
         static::addGlobalScope('replyCount', function ($builder) {
             $builder->withCount('replies');
+        });
+
+        static::addGlobalScope('viewsCount', function ($builder) {
+            $builder->withCount('views');
         });
     }
 
@@ -28,7 +37,7 @@ class Thread extends Model
 
     public function replies()
     {
-        return $this->hasMany(Reply::class)->where('thread_id', $this->id);
+        return $this->hasMany(Reply::class);
     }
 
     public function channel()
@@ -42,5 +51,10 @@ class Thread extends Model
     {
         $reply = Auth::user()->replies()->make($reply);
         $this->replies()->save($reply);
+    }
+
+    public function getImage()
+    {
+        return $this->image->url ?? "https://picsum.photos/seed/{$this->title}/720/400";
     }
 }

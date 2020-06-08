@@ -1,7 +1,7 @@
-@extends('layouts.auth-master')
+@extends('layouts.auth')
 
 @section('form')
-    <x-auth.login-form/>
+    <x-auth._login/>
 @endsection
 
 @section('bg-image')

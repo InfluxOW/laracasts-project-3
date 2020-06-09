@@ -90,7 +90,7 @@
             </div>
             <div class="w-1/2 text-right">
                 <a href="{{ route('register') }}" class="text-gray-800 text-xs hover:text-gray-600">
-                    Register
+                    Don't have an account?
                 </a>
             </div>
         </div>

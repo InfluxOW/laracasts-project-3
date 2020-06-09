@@ -14,8 +14,9 @@
     @apply .outline-none;
   }
 }
+
 .button {
-  @apply .uppercase .font-bold .text-xs .rounded .px-6 .py-2 .border .border-transparent;
+  @apply .uppercase .font-bold .text-xs .rounded .px-6 .py-2 .border .border-transparent .outline-none;
 
   &:focus {
     @apply .outline-none;
@@ -24,14 +25,17 @@
   &:hover {
     @apply .opacity-75;
   }
-
 }
 
 .button-dropdown-blue {
   @apply .button .text-white .bg-blue-500;
 
   &:hover {
-    @apply .border-white;
+    @apply .border-white .opacity-75;
+  }
+
+  &:focus {
+    @apply .outline-none;
   }
 }
 
@@ -39,14 +43,22 @@
   @apply .button .text-white .border .border-transparent;
 
   &:hover {
-    @apply .border-white;
+    @apply .border-white .opacity-75;
+  }
+
+  &:focus {
+    @apply .outline-none;
   }
 }
 
 .button-dropdown-dark {
-    @apply .button .text-gray-800 .border .border-transparent;
+  @apply .button .text-gray-800 .border .border-transparent;
 
-    &:hover {
-      @apply .border-gray-800;
-    }
+  &:hover {
+    @apply .border-gray-800 .opacity-75;
   }
+
+  &:focus {
+    @apply .outline-none;
+  }
+}

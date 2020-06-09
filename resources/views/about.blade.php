@@ -14,8 +14,11 @@
         <main class="font-sans">
             <section class="bg-white rounded-lg rounded-b-none bg-gray-300">
                 <div class="max-w-2xl px-6 pt-6 text-center mx-auto">
-                    <h2 class="text-3xl font-semibold text-gray-800">Hi, <span class="bg-indigo-600 text-white rounded px-1">I’m Nikita</span> . Nice to meet you.</h2>
-                    <p class="text-gray-600 mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. A aliquam veniam suscipit eaque iure, eligendi harum expedita cupiditate sequi, culpa autem! Quaerat ex fugit iste suscipit reiciendis, accusamus ipsum quae.</p>
+                    <h2 class="text-3xl font-semibold text-gray-800">Hi, <span
+                            class="bg-indigo-600 text-white rounded px-1">I’m Nikita</span> . Nice to meet you.</h2>
+                    <p class="text-gray-600 mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. A aliquam
+                        veniam suscipit eaque iure, eligendi harum expedita cupiditate sequi, culpa autem! Quaerat ex
+                        fugit iste suscipit reiciendis, accusamus ipsum quae.</p>
 
                     <div class="flex items-end justify-center">
                         <img src="{{ asset('storage/images/me.png') }}" alt="" width="200px">
@@ -27,7 +30,10 @@
                 <div class="max-w-5xl px-6 mx-auto text-center">
                     <h2 class="text-2xl font-semibold text-white">About Me</h2>
 
-                    <p class="text-gray-400 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper nulla nunc quis molestie volutpat elementum at. Ultrices ipsum, enim cursus lorem ac. Orci maecenas praesent arcu eget orci est orci nullam. Leo purus est pellentesque massa at tortor, est. Aliquet pulvinar a mattis sagittis. Suspendisse porta id elementum, massa.</p>
+                    <p class="text-gray-400 mt-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ullamcorper
+                        nulla nunc quis molestie volutpat elementum at. Ultrices ipsum, enim cursus lorem ac. Orci
+                        maecenas praesent arcu eget orci est orci nullam. Leo purus est pellentesque massa at tortor,
+                        est. Aliquet pulvinar a mattis sagittis. Suspendisse porta id elementum, massa.</p>
                 </div>
             </section>
 
@@ -38,11 +44,13 @@
                     <div class="flex items-center justify-center mt-4">
                         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                             <div class="max-w-xs w-full">
-                                <div class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
+                                <div
+                                    class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
                                     <img class="object-cover" src="{{ asset('storage/images/tweety.png') }}" alt="">
                                 </div>
 
-                                <a href="http://influx-tweety.herokuapp.com/" class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                                <a href="http://influx-tweety.herokuapp.com/"
+                                   class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                                     <div class="py-2 px-3 text-center text-sm">
                                         <p class="text-gray-300">Simple Twitter clone.</p>
 
@@ -52,11 +60,14 @@
                             </div>
 
                             <div class="max-w-xs w-full">
-                                <div class="flex items-center justify-center h-56 bg-white border-b-8 border-teal-400 rounded-md overflow-hidden">
-                                    <img class="object-cover" src="{{ asset('storage/images/task_manager.png') }}" alt="">
+                                <div
+                                    class="flex items-center justify-center h-56 bg-white border-b-8 border-teal-400 rounded-md overflow-hidden">
+                                    <img class="object-cover" src="{{ asset('storage/images/task_manager.png') }}"
+                                         alt="">
                                 </div>
 
-                                <a href="http://influx-task-manager.herokuapp.com/" class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                                <a href="http://influx-task-manager.herokuapp.com/"
+                                   class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                                     <div class="py-2 px-3 text-center text-sm">
                                         <p class="text-gray-300">Final Hexlet.io project - Task Manager.</p>
 
@@ -66,11 +77,13 @@
                             </div>
 
                             <div class="max-w-xs w-full">
-                                <div class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
+                                <div
+                                    class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
                                     <img class="object-cover" src="{{ asset('storage/images/birdboard.png') }}" alt="">
                                 </div>
 
-                                <a href="http://influx-birdboard.herokuapp.com/" class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+                                <a href="http://influx-birdboard.herokuapp.com/"
+                                   class="block bg-gray-700 mt-5 rounded-md overflow-hidden transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
                                     <div class="py-2 px-3 text-center text-sm">
                                         <p class="text-gray-300">Simple project board.</p>
 
@@ -82,11 +95,13 @@
                     </div>
 
                     <div class="flex items-center justify-center mt-12 pb-12">
-                        <a class="flex items-center text-white hover:underline hover:text-gray-200" href="https://github.com/InfluxOW">
+                        <a class="flex items-center text-white hover:underline hover:text-gray-200"
+                           href="https://github.com/InfluxOW">
                             <span>View More On Github</span>
 
                             <svg class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                             </svg>
                         </a>
                     </div>

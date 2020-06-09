@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Thread;
 use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model

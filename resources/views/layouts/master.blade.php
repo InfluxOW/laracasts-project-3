@@ -6,7 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="csrf-param" content="_token" />
+    <meta name="csrf-param" content="_token"/>
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -17,10 +17,10 @@
 </head>
 <body>
 
-    @yield('body')
+@yield('body')
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    @stack('scripts')
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+@stack('scripts')
 </body>
 </html>

@@ -14,19 +14,7 @@ class Thread extends Model implements Viewable
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id'];
     protected $with = ['channel', 'user'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('replyCount', function ($builder) {
-            $builder->withCount('replies');
-        });
-
-        static::addGlobalScope('viewsCount', function ($builder) {
-            $builder->withCount('views');
-        });
-    }
+    protected $withCount = ['replies', 'views'];
 
     //Relations
 

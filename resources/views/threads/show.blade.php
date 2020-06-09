@@ -17,6 +17,6 @@
     <x-replies.card :replies="$replies"/>
 
     @auth
-        <x-replies.form :thread="$thread" />
+        <x-replies.form :thread="$thread"/>
     @endauth
 @endsection

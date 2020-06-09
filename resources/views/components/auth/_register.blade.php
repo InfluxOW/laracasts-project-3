@@ -1,4 +1,5 @@
-<div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-2 border-white bg-opacity-75">
+<div
+    class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-2 border-white bg-opacity-75">
     <div class="flex-auto px-4 lg:px-10 py-6">
         <div class="text-gray-800 text-center mb-6 font-bold text-sm">
             Create new account
@@ -10,16 +11,16 @@
             </label>
 
             <input
-            type="text"
-            name="name"
-            class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('name') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-            placeholder="Name..."
-            value="{{ old('name') }}"
-            autocomplete="name"
-            style="transition: all 0.15s ease 0s;"
-        />
+                type="text"
+                name="name"
+                class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('name') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                placeholder="Name..."
+                value="{{ old('name') }}"
+                autocomplete="name"
+                style="transition: all 0.15s ease 0s;"
+            />
 
-        <x-error name="name" classes="mt-2"/>
+            <x-error name="name" classes="mt-2"/>
 
         </div>
 
@@ -29,16 +30,16 @@
             </label>
 
             <input
-            type="text"
-            name="username"
-            class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('username') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-            placeholder="Username..."
-            value="{{ old('username') }}"
-            autocomplete="username"
-            style="transition: all 0.15s ease 0s;"
-        />
+                type="text"
+                name="username"
+                class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('username') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                placeholder="Username..."
+                value="{{ old('username') }}"
+                autocomplete="username"
+                style="transition: all 0.15s ease 0s;"
+            />
 
-        <x-error name="username" classes="mt-2"/>
+            <x-error name="username" classes="mt-2"/>
 
         </div>
 
@@ -48,16 +49,16 @@
             </label>
 
             <input
-            type="email"
-            name="email"
-            class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('email') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-            placeholder="Email..."
-            value="{{ old('email') }}"
-            autocomplete="email"
-            style="transition: all 0.15s ease 0s;"
+                type="email"
+                name="email"
+                class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('email') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                placeholder="Email..."
+                value="{{ old('email') }}"
+                autocomplete="email"
+                style="transition: all 0.15s ease 0s;"
             />
 
-        <x-error name="email" classes="mt-2"/>
+            <x-error name="email" classes="mt-2"/>
 
         </div>
 
@@ -66,15 +67,15 @@
                 Password
             </label>
             <input
-            type="password"
-            name="password"
-            class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('password') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-            placeholder="Password..."
-            autocomplete="new-password"
-            style="transition: all 0.15s ease 0s;"
+                type="password"
+                name="password"
+                class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white border-2 border-transparent @error('password') border-red-500 @enderror rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                placeholder="Password..."
+                autocomplete="new-password"
+                style="transition: all 0.15s ease 0s;"
             />
 
-        <x-error name="password" classes="mt-2"/>
+            <x-error name="password" classes="mt-2"/>
 
         </div>
 
@@ -83,12 +84,12 @@
                 Password Confirmation
             </label>
             <input
-            type="password"
-            name="password_confirmation"
-            class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-            placeholder="Password confimation..."
-            autocomplete="new-password"
-            style="transition: all 0.15s ease 0s;"
+                type="password"
+                name="password_confirmation"
+                class="px-3 py-3 placeholder-gray-600 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                placeholder="Password confimation..."
+                autocomplete="new-password"
+                style="transition: all 0.15s ease 0s;"
             />
         </div>
 

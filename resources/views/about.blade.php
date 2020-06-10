@@ -10,7 +10,7 @@
         </style>
     @endpush
 
-    <div class="overflow-hidden flex items-center justify-center">
+    <div class="overflow-hidden flex items-center justify-center container">
         <main class="font-sans z-10">
             <section class="bg-white rounded-lg rounded-b-none bg-gray-300">
                 <div class="max-w-2xl px-6 pt-6 text-center mx-auto">

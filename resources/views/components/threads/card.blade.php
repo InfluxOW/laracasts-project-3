@@ -1,6 +1,6 @@
 <div class="p-4 lg:w-1/3">
     <div
-        class="h-full bg-gray-200 rounded-lg overflow-hidden text-center relative border-2 border-transparent border-opacity-25 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+        class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
         <a href="{{ route('threads.show', [$thread->channel, $thread]) }}">
             <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->getImage() }}" alt="blog">
             <div class="px-8 pb-16 pt-8">
@@ -8,7 +8,7 @@
                     <a href="{{ route('threads.filter', $thread->channel) }}">{{ $thread->channel->name }}</a>
                 </h2>
                 <h1 class="sm:text-2xl text-xl font-medium text-gray-900 mb-3">{{ $thread->title }}</h1>
-                <p class="leading-relaxed mb-3">{{ $thread->body }}</p>
+                <p class="leading-relaxed mb-3">{{ Str::limit($thread->body, 200) }}</p>
                 <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full pb-8">
                     <span
                         class="text-gray-600 mr-3 inline-flex items-center leading-none text-sm pr-3 border-r-2 border-gray-300">

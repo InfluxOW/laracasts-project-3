@@ -4,7 +4,7 @@
     <div id="app" class="h-screen antialiased leading-none">
         @yield('navbar')
 
-        <div class="mx-auto py-4 px-8 container">
+        <div class="mx-auto">
             @yield('content')
         </div>
 

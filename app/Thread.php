@@ -2,11 +2,10 @@
 
 namespace App;
 
-use App\Reply;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
 class Thread extends Model implements Viewable
 {
@@ -43,6 +42,18 @@ class Thread extends Model implements Viewable
 
     public function getImage()
     {
-        return $this->image->url ?? "https://picsum.photos/seed/{$this->title}/720/400";
+        return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
+    }
+
+    public function getSlugAttribute()
+    {
+        return slugify($this->title);
+    }
+
+    public function randomThreadsInTheSameChannel()
+    {
+        return $this->channel->threads->filter(function($value, $key) {
+            return $value !== $this;
+        })->random(min(3, count($this->channel->threads) - 1));
     }
 }

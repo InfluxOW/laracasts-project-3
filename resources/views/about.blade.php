@@ -11,7 +11,7 @@
     @endpush
 
     <div class="overflow-hidden flex items-center justify-center">
-        <main class="font-sans">
+        <main class="font-sans z-10">
             <section class="bg-white rounded-lg rounded-b-none bg-gray-300">
                 <div class="max-w-2xl px-6 pt-6 text-center mx-auto">
                     <h2 class="text-3xl font-semibold text-gray-800">Hi, <span
@@ -109,4 +109,12 @@
             </section>
         </main>
     </div>
+@endsection
+
+@section('navbar')
+    <x-navbar dark="true" background="bg-white bg-opacity-25" dropdownButtonClass="button-dropdown-dark"/>
+@endsection
+
+@section('footer')
+    <x-footer dark="true" background="bg-white bg-opacity-25"/>
 @endsection

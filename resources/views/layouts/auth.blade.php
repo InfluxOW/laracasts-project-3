@@ -2,7 +2,7 @@
 
 @section('body')
     <div id="app">
-        <x-navbar styles="top-0 absolute z-50" dark="false"/>
+        <x-navbar styles="top-0 absolute z-50" dropdownButtonClass="button-dropdown-light" dark="false"/>
 
         <main>
             <section class="absolute w-full h-full">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
 
-                <x-footer styles="bottom-0 pb-6 absolute" dark="false"/>
+                <x-footer styles="bottom-0" dark="false"/>
 
             </section>
         </main>

@@ -14,4 +14,12 @@
     {{ $threads->links() }}
 @endsection
 
+@section('navbar')
+    <x-navbar dark="true" background="bg-white bg-opacity-25" dropdownButtonClass="button-dropdown-dark"/>
+@endsection
+
+@section('footer')
+    <x-footer styles="{{ count($threads->items()) <=3 ? 'bottom-0' : '' }}" background="bg-white bg-opacity-25" dark="true"/>
+@endsection
+
 

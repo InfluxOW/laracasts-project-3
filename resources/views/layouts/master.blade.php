@@ -15,7 +15,7 @@
 
     @stack('styles')
 </head>
-<body>
+<body style="background-image: url( {{asset('storage/patterns/email-pattern.png')}} );">
 
 @yield('body')
 

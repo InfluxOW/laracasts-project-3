@@ -39,7 +39,7 @@
   }
 }
 
-.button-dropdown-transparent {
+.button-dropdown-light {
   @apply .button .text-white .border .border-transparent;
 
   &:hover {
@@ -61,4 +61,16 @@
   &:focus {
     @apply .outline-none;
   }
+}
+
+.button-dropdown-gray {
+    @apply .button .text-gray-600 .border .border-transparent .bg-gray-300;
+
+    &:hover {
+        @apply .border-gray-500 .border-opacity-25 .bg-gray-200;
+    }
+
+    &:focus {
+        @apply .outline-none;
+    }
 }

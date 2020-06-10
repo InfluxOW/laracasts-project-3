@@ -1,7 +1,7 @@
 <nav
-    class="w-full py-2 flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} {{ $styles ?? '' }}">
+    class="w-full py-2 flex flex-wrap items-center justify-between {{ $styles ?? '' }} ">
     <div
-        class="container px-4 mx-auto flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'border-b border-gray-800 border-opacity-25' : '' }}">
+        class="z-50 {{ $background ?? '' }} container px-4 mx-auto flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }}">
         <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
             <div
                 class="text-md font-bold leading-relaxed inline-block py-2 whitespace-no-wrap uppercase cursor-pointer {{ $dark == 'true' ? 'text-black' : 'text-white' }}">
@@ -15,7 +15,7 @@
             <ul class="flex flex-col lg:flex-row list-none">
                 <li>
                     <dropdown
-                        button_classes="{{ $dropdownButtonClass ?? 'button-dropdown-transparent' }} w-full"
+                        button_classes="{{ $dropdownButtonClass }} w-full"
                         button_title="Threads"
                     >
                         <template v-slot:items>
@@ -41,7 +41,7 @@
 
                 <li>
                     <dropdown
-                        button_classes="{{ $dropdownButtonClass ?? 'button-dropdown-transparent' }} w-full"
+                        button_classes="{{ $dropdownButtonClass }} w-full"
                         button_title="Channels"
                     >
                         <template v-slot:items>
@@ -62,7 +62,7 @@
                 @auth
                     <li>
                         <dropdown
-                            button_classes="{{ $dropdownButtonClass ?? 'button-dropdown-transparent' }} w-full"
+                            button_classes="{{ $dropdownButtonClass }} w-full"
                             button_title="{{ Auth::user()->name }}"
                         >
                             <template v-slot:items>

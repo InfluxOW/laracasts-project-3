@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 Route::view('/about', 'about')->name('about');
 
-Route::get('threads', 'ThreadsController@index')->name('threads.index');
+Route::get('threads', 'ThreadsController@index')->name('threads.index')->middleware('applies_sort');
 Route::get('threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('threads/{channel:slug}', 'ThreadsController@index')->name('threads.filter');
 Route::get('threads/{channel:slug}/{thread:slug}', 'ThreadsController@show')->name('threads.show');;

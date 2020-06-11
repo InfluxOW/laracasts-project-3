@@ -29,10 +29,14 @@ class ThreadsController extends Controller
 
         $threads = QueryBuilder::for($query)
             ->allowedFilters('user.username')
-            ->allowedSorts(
+            ->allowedSorts([
                 AllowedSort::field('views', 'views_count'),
-                AllowedSort::field('replies', 'replies_count')
-            )
+                AllowedSort::field('views_last_week', 'views_last_week_count'),
+                AllowedSort::field('views_last_month', 'views_last_month_count'),
+                AllowedSort::field('replies', 'replies_count'),
+                AllowedSort::field('replies_last_week', 'replies_last_week_count'),
+                AllowedSort::field('replies_last_month', 'replies_last_month_count')
+            ])
             ->latest()
             ->paginate(12)
             ->appends(request()->query());

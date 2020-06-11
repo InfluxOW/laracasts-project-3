@@ -12,5 +12,6 @@ $factory->define(Reply::class, function (Faker $faker) {
         'body' => $faker->paragraph(),
         'thread_id' => factory(Thread::class),
         'user_id' => factory(User::class),
+        'created_at' => $faker->dateTimeBetween('-3 months')
     ];
 });

@@ -14,6 +14,8 @@ class RepliesSeeder extends Seeder
      */
     public function run()
     {
-        factory(Reply::class, 100)->create(['thread_id' => Thread::all()->random(), 'user_id' => User::all()->random()]);
+        for ($i = 0; $i < 100; $i++) {
+            factory(Reply::class)->create(['thread_id' => Thread::all()->random(), 'user_id' => User::all()->random()]);
+        }
     }
 }

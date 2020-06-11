@@ -13,13 +13,14 @@ class Thread extends Model implements Viewable
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
     protected $with = ['channel', 'user'];
-    protected $withCount = ['replies', 'views'];
+    protected $withCount = ['replies', 'repliesLastWeek', 'repliesLastMonth', 'views', 'viewsLastWeek', 'viewsLastMonth'];
+    protected $removeViewsOnDelete = true;
 
     protected static function boot()
     {
         parent::boot();
 
-        static::created(function ($thread) {
+        static::created(function($thread) {
             $thread->update(['slug' => slugify($thread->title)]);
         });
     }
@@ -31,22 +32,22 @@ class Thread extends Model implements Viewable
         return $this->belongsTo(User::class);
     }
 
-    public function replies()
-    {
-        return $this->hasMany(Reply::class);
-    }
-
     public function channel()
     {
         return $this->belongsTo(Channel::class);
     }
 
-    //
-
     public function addReply($reply)
     {
         $reply = Auth::user()->replies()->make($reply);
         $this->replies()->save($reply);
+    }
+
+    //
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 
     public function getImage()
@@ -60,4 +61,27 @@ class Thread extends Model implements Viewable
             return !$this->is($value);
         })->random(min(3, count($this->channel->threads) - 1));
     }
+
+    // Helpers
+
+    public function viewsLastWeek()
+    {
+        return $this->views()->where('viewed_at', '>=', now()->subWeek());
+    }
+
+    public function viewsLastMonth()
+    {
+        return $this->views()->where('viewed_at', '>=', now()->subMonth());
+    }
+
+    public function repliesLastWeek()
+    {
+        return $this->replies()->where('created_at', '>=', now()->subWeek());
+    }
+
+    public function repliesLastMonth()
+    {
+        return $this->replies()->where('created_at', '>=', now()->subMonth());
+    }
+
 }

@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use App\Channel;
+use App\Http\View\Composers\ThreadsCard;
+use App\Http\View\Composers\ThreadsFiltration;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,15 +26,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['*'], function ($view) {
-            // $view->with('channels', Channel::all());
-        });
-
-        View::composer(['components.threads.filtration'], function ($view) {
-            $sorts = ['replies' => 'Less Commented', '-replies' => 'Most Commented', 'views' => 'Less Viewed', '-views' => 'Most Viewed'];
-            $currentSort = request()->query('sort');
-            $view->with('sorts', $sorts);
-            $view->with('currentSort', $currentSort);
-        });
+        View::composer(['components.threads.filtration'], ThreadsFiltration::class);
+        View::composer(['components.threads.card'], ThreadsCard::class);
     }
 }

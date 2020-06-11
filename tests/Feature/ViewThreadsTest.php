@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Reply;
 use App\Thread;
 use Tests\TestCase;
 
@@ -54,5 +55,44 @@ class ViewThreadsTest extends TestCase
         $this->get(route('threads.index', ['filter[user.username]' => $this->thread->user->username]))
             ->assertSee($this->thread->title)
             ->assertDontSee($threadOfAnotherUser->title);
+    }
+
+    /** @test */
+    public function a_user_can_sort_threads_by_views_count()
+    {
+        $threadOne = $this->thread;
+        $threadTwo = factory(Thread::class)->create();
+        $threadThree = factory(Thread::class)->create();
+
+        for ($i = 0; $i < 10; $i++) {
+            $this->get(route('threads.show', [$threadOne->channel, $threadOne]));
+        }
+        for ($i = 0; $i < 5; $i++) {
+            $this->get(route('threads.show', [$threadTwo->channel, $threadTwo]));
+        }
+        for ($i = 0; $i < 15; $i++) {
+            $this->get(route('threads.show', [$threadThree->channel, $threadThree]));
+        }
+
+        $response = $this->getJson(route('threads.index', ['sort' => '-views']))->json();
+        $views = array_column($response['data'], 'views_count');
+        $this->assertEquals([15, 10, 5], $views);
+    }
+
+    /** @test */
+    public function a_user_can_sort_threads_by_comments_count()
+    {
+        $threadOne = $this->thread;
+        factory(Reply::class, 5)->create(['thread_id' => $threadOne->id]);
+
+        $threadTwo = factory(Thread::class)->create();
+        factory(Reply::class, 15)->create(['thread_id' => $threadTwo->id]);
+
+        $threadThree = factory(Thread::class)->create();
+        factory(Reply::class, 10)->create(['thread_id' => $threadThree->id]);
+
+        $response = $this->getJson(route('threads.index', ['sort' => '-replies']))->json();
+        $replies = array_column($response['data'], 'replies_count');
+        $this->assertEquals([15, 10, 5], $replies);
     }
 }

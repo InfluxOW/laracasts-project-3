@@ -2,7 +2,7 @@
     <div class="container mx-auto {{ $background ?? '' }}">
         <div
             class="flex flex-wrap items-center md:justify-between justify-center">
-            <div class="w-full md:w-4/12 px-4">
+            <div class="w-full md:w-4/12">
                 <div class="text-sm {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} font-semibold py-1">
                     Copyright © 2020
                     <a href="https://github.com/InfluxOW"
@@ -10,7 +10,7 @@
                     >Influx</a>
                 </div>
             </div>
-            <div class="w-full md:w-8/12 px-4">
+            <div class="w-full md:w-8/12">
                 <ul class="flex flex-wrap list-none md:justify-end justify-center">
                     <li>
                         <a href="{{ route('about') }}"

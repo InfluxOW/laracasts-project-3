@@ -14,8 +14,3 @@ $factory->define(Reply::class, function (Faker $faker) {
         'user_id' => factory(User::class),
     ];
 });
-
-$factory->afterMaking(Reply::class, function ($reply) {
-    $reply->user()->associate(User::all()->random());
-    $reply->thread()->associate(Thread::all()->random());
-});

@@ -1,41 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    {{--    <div class="overflow-hidden flex items-center justify-center">
-            <main class="z-10">
-                <div class="border border-gray-300 rounded-lg mb-6 bg-page">
-                    <article>
-                        <div class="text-lg border-b border-gray-300 px-4 py-2 flex justify-between items-center">
-                            <div>
-                                <a href=""
-                                   class="hover:text-blue-300 text-blue-500 border-r pr-2">{{ $thread->user->name }}</a>
-                                <span>{{ $thread->title }}</span>
-                            </div>
-                            <div class="text-muted text-xs">{{ $thread->created_at->diffForHumans() }}</div>
-                        </div>
-                        <div class="text-sm p-4">{{ $thread->body }}</div>
-                    </article>
-                </div>
-
-
-                <x-replies.card :replies="$replies"/>
-
-                @auth
-                    <x-replies.form :thread="$thread"/>
-                @endauth
-            </main>
-        </div>--}}
-
-    <!--Title-->
+   <!--Title-->
     <div class="text-center pt-4 md:pt-8 bg-white bg-opacity-25">
-        <p class="text-sm md:text-base text-teal-600 font-bold">{{ $thread->created_at->format('M d Y') }}<span
+        <p class="text-sm md:text-base text-teal-600 font-bold">{{ $thread->created_at->format('M d, Y') }}<span
                 class="text-gray-900 mx-2">/</span><a
                 href="#" class="hover:text-teal-300">{{ $thread->user->name }}</a></p>
         <h1 class="font-bold break-normal text-3xl md:text-5xl">{{ $thread->title }}</h1>
     </div>
 
     <!--image-->
-
     <div class="container w-full max-w-6xl mx-auto bg-cover my-8 rounded"
          style="background-image:url({{ $thread->getImage() }}); height: 75vh;"></div>
 
@@ -73,6 +47,7 @@
         <x-replies.card :replies="$replies"/>
 
         @auth
+            <hr class="my-6 border-2 opacity-75">
             <x-replies.form :thread="$thread"/>
         @endauth
     </div>

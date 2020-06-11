@@ -19,7 +19,7 @@
                     </div>
                 </div>
 
-                <x-footer styles="bottom-0 py-1" background="bg-white bg-opacity-25" dark="true"/>
+                <x-footer styles="bottom-0 pb-4 pt-1" background="bg-white bg-opacity-25" dark="true"/>
             </section>
         </main>
     </div>

@@ -6,6 +6,7 @@ use App\Channel;
 use App\Http\Requests\ThreadsRequest;
 use App\Thread;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ThreadsController extends Controller
@@ -28,8 +29,17 @@ class ThreadsController extends Controller
 
         $threads = QueryBuilder::for($query)
             ->allowedFilters('user.username')
+            ->allowedSorts(
+                AllowedSort::field('views', 'views_count'),
+                AllowedSort::field('replies', 'replies_count')
+            )
             ->latest()
-            ->paginate(12);
+            ->paginate(12)
+            ->appends(request()->query());
+
+        if (request()->wantsJson()) {
+            return $threads;
+        }
 
         return view('threads.index', compact('threads'));
     }

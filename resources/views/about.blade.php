@@ -116,5 +116,5 @@
 @endsection
 
 @section('footer')
-    <x-footer dark="true" background="bg-white bg-opacity-25"/>
+    <x-footer dark="true" background="bg-white bg-opacity-25" styles="py-1"/>
 @endsection

@@ -1,11 +1,28 @@
 @foreach ($replies as $reply)
-    <div class="bg-page border border-gray-300 rounded-lg {{ $loop->last ? '' : 'mb-2' }}">
-        <div class="border-b border-gray-300 text-xs px-4 py-1 flex justify-between items-center">
-            <a href="" class="hover:text-blue-300 text-blue-500">{{ $reply->user->name }}</a>
-            <div class="text-muted">{{ $reply->created_at->diffForHumans() }}</div>
-        </div>
-        <div class="text-sm p-4">
-            {{ $reply->body }}
+    <div class="font-sans py-2 {{ $loop->last ? '' : 'mb-2' }} bg-white rounded-lg border border-gray-300">
+        <div class="flex py-2">
+            <div class="w-1/8">
+                <img src="{{ $reply->user->getAvatar() }}" alt="" class="h-12 w-12 rounded-full mx-2">
+            </div>
+            <div class="w-7/8">
+                <div class="flex justify-between">
+                    <div>
+                        <span class="font-bold"><a href="#" class="text-black">{{ $reply->user->name }}</a></span>
+                        <span class="text-gray-700"> {{ "@{$reply->user->username}" }}</span>
+                        <span class="text-gray-700">·</span>
+                        <span class="text-gray-700">{{ $reply->created_at->format('M d') }}</span>
+                    </div>
+                    <div>
+                        <a href="#" class="text-gray-700 hover:text-black"><i class="fa fa-chevron-down"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <p class="my-3 text-sm">Many desktop publishing packages and web page editors now use Lorem Ipsum as
+                        their default model text, and a search for 'lorem ipsum' will uncover many web sites still in
+                        their
+                        infancy.</p>
+                </div>
+            </div>
         </div>
     </div>
 @endforeach
@@ -13,4 +30,3 @@
 <div class="mt-2">
     {{ $replies->links() }}
 </div>
-

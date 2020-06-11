@@ -2,8 +2,7 @@
 
 @section('body')
     <div id="app">
-        <x-navbar dark="true" background="bg-white bg-opacity-25" dropdownButtonClass="button-dropdown-dark"
-                  styles="top-0 absolute"/>
+        <x-navbar dark="true" background="bg-white bg-opacity-25" dropdownButtonClass="button-dropdown-dark" navStyles="top-0 absolute"/>
         <main>
             <section class="absolute w-full h-full">
                 <div class="container mx-auto px-4 h-full">
@@ -20,7 +19,7 @@
                     </div>
                 </div>
 
-                <x-footer styles="bottom-0" background="bg-white bg-opacity-25" dark="true"/>
+                <x-footer styles="bottom-0 py-1" background="bg-white bg-opacity-25" dark="true"/>
             </section>
         </main>
     </div>

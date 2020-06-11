@@ -11,9 +11,18 @@ class Thread extends Model implements Viewable
 {
     use InteractsWithViews;
 
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
     protected $with = ['channel', 'user'];
     protected $withCount = ['replies', 'views'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($thread) {
+            $thread->update(['slug' => slugify($thread->title)]);
+        });
+    }
 
     //Relations
 
@@ -45,15 +54,10 @@ class Thread extends Model implements Viewable
         return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
     }
 
-    public function getSlugAttribute()
-    {
-        return slugify($this->title);
-    }
-
-    public function randomThreadsInTheSameChannel()
+    public function recomendations()
     {
         return $this->channel->threads->filter(function($value, $key) {
-            return $value !== $this;
+            return !$this->is($value);
         })->random(min(3, count($this->channel->threads) - 1));
     }
 }

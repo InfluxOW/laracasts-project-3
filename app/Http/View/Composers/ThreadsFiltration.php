@@ -11,12 +11,14 @@ class ThreadsFiltration
     public function compose(View $view)
     {
         $query = request()->query('sort');
-        preg_match('([^_]+)', $query, $matches);
-        $currentSort = $matches[0] ?? null;
-        $currentSortPeriod = isset($matches[0]) ? str_replace("{$currentSort}_", null ,$query) : null;
 
-        $view->with('currentSort', $currentSort);
-        $view->with('currentSortPeriod', $currentSortPeriod);
+        if (preg_match('([^_]+)', $query, $matches)) {
+            $currentSort = $matches[0];
+            $currentSortPeriod = str_replace("{$currentSort}_", null ,$query);
+        }
+
+        $view->with('currentSort', $currentSort ?? null);
+        $view->with('currentSortPeriod', $currentSortPeriod ?? null);
         $view->with('sorts', self::SORTS);
         $view->with('sortPeriod', self::SORT_PERIOD);
     }

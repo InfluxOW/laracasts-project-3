@@ -15,9 +15,10 @@ class AppliesSort
      */
     public function handle($request, Closure $next)
     {
-        if ($request->has('sort_period') && $request->has('sort')) {
-            $periodQuery = empty($request->query('sort_period')) ? '' : "_{$request->query('sort_period')}";
-            $sort = "{$request->query('sort')}{$periodQuery}";
+        if ($request->has(['sort_period', 'sort'])) {
+            $periodQuery = $request->query('sort_period');
+            $sortQuery = $request->query('sort');
+            $sort = empty($periodQuery) ? $sortQuery : "{$sortQuery}_{$periodQuery}";
 
             return redirect()->route('threads.index', ['sort' => $sort]);
         }

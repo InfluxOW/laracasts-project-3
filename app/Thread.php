@@ -43,23 +43,9 @@ class Thread extends Model implements Viewable
         $this->replies()->save($reply);
     }
 
-    //
-
     public function replies()
     {
         return $this->hasMany(Reply::class);
-    }
-
-    public function getImage()
-    {
-        return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
-    }
-
-    public function recomendations()
-    {
-        return $this->channel->threads->filter(function($value, $key) {
-            return !$this->is($value);
-        })->random(min(3, count($this->channel->threads) - 1));
     }
 
     // Helpers
@@ -82,6 +68,18 @@ class Thread extends Model implements Viewable
     public function repliesLastMonth()
     {
         return $this->replies()->where('created_at', '>=', now()->subMonth());
+    }
+
+    public function getImage()
+    {
+        return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
+    }
+
+    public function recomendations()
+    {
+        return $this->channel->threads->filter(function($value, $key) {
+            return !$this->is($value);
+        })->random(min(3, count($this->channel->threads) - 1));
     }
 
 }

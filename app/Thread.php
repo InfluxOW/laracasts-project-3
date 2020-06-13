@@ -74,7 +74,7 @@ class Thread extends Model implements Viewable
     public function recomendations()
     {
         return $this->channel->threads->filter(function($value, $key) {
-            return !$this->is($value);
+            return ! $this->is($value);
         })->random(min(3, count($this->channel->threads) - 1));
     }
 

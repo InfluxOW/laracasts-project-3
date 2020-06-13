@@ -1,4 +1,4 @@
-<nav class="w-full {{ $navStyles ?? '' }} ">
+<nav class="w-full {{ $navStyles ?? '' }}">
     <div
         class="{{ $background ?? '' }} container py-1 px-4 mx-auto flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }}">
         <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">

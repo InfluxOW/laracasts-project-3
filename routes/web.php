@@ -27,6 +27,10 @@ Route::patch('threads/{channel:slug}/{thread}', 'ThreadsController@update')->nam
 Route::delete('threads/{channel:slug}/{thread}', 'ThreadsController@destroy')->name('threads.destroy');
 Route::post('threads', 'ThreadsController@store')->name('threads.store');
 
+Route::resource('profiles', 'ProfilesController')->only('show', 'edit', 'update')->parameters([
+    'profiles' => 'user:username'
+]);
+
 Route::post('/threads/{channel:slug}/{thread}/replies', 'ThreadRepliesController@store')->name('threads.replies.store');
 
 Route::post('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@store')->name('favorites.store');

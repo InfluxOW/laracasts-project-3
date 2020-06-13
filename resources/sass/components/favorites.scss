@@ -1,0 +1,15 @@
+.favorited {
+    stroke: #718096;
+    fill: #ecc94b;
+    &:hover {
+        fill: none;
+    }
+}
+
+.unfavorited {
+    stroke: #718096;
+    fill: none;
+    &:hover {
+        fill: #ecc94b;
+    }
+}

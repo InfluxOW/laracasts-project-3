@@ -38,6 +38,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $withCount = ['threads', 'replies'];
+
     //Relations
 
     public function threads()
@@ -55,5 +57,10 @@ class User extends Authenticatable
     public function getAvatar()
     {
         return $this->avatar->url ?? $this->avatar_url ?? "https://api.adorable.io/avatars/200/abott@adorable{$this->username}";
+    }
+
+    public function getBanner()
+    {
+        return $this->banner->url ?? $this->banner_url ?? "https://picsum.photos/seed/{$this->username}/1836/500";
     }
 }

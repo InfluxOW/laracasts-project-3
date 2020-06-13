@@ -63,6 +63,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'applies_sort' => \App\Http\Middleware\AppliesSort::class
+        'clean_query_string' => \App\Http\Middleware\RemoveEmptyQueryStringParams::class
     ];
 }

@@ -2,19 +2,22 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Thread extends Model implements Viewable
 {
     use InteractsWithViews;
+    use Favoriteable;
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
     protected $with = ['channel', 'user'];
-    protected $withCount = ['replies', 'repliesLastWeek', 'repliesLastMonth', 'views', 'viewsLastWeek', 'viewsLastMonth'];
     protected $removeViewsOnDelete = true;
+    public const COUNTABLES = ['replies', 'views', 'favorites'];
 
     protected static function boot()
     {
@@ -22,6 +25,19 @@ class Thread extends Model implements Viewable
 
         static::created(function($thread) {
             $thread->update(['slug' => slugify($thread->title)]);
+        });
+
+        static::addGlobalScope("countablesCount", function($builder) {
+            if (is_null(request()->sort_from_date)) {
+                $builder->withCount(Thread::COUNTABLES);
+            } else {
+                foreach(Thread::COUNTABLES as $property) {
+                    $builder->withCount([$property => function($query) {
+                        $sortFromDate = Carbon::createFromDate(request()->sort_from_date);
+                        $query->where('created_at', '>=', $sortFromDate);
+                    }]);
+                }
+            }
         });
     }
 
@@ -49,26 +65,6 @@ class Thread extends Model implements Viewable
     }
 
     // Helpers
-
-    public function viewsLastWeek()
-    {
-        return $this->views()->where('viewed_at', '>=', now()->subWeek());
-    }
-
-    public function viewsLastMonth()
-    {
-        return $this->views()->where('viewed_at', '>=', now()->subMonth());
-    }
-
-    public function repliesLastWeek()
-    {
-        return $this->replies()->where('created_at', '>=', now()->subWeek());
-    }
-
-    public function repliesLastMonth()
-    {
-        return $this->replies()->where('created_at', '>=', now()->subMonth());
-    }
 
     public function getImage()
     {

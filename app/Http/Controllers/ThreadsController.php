@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Http\Requests\ThreadsRequest;
+use App\Sorts\CountsByPeriod;
+use App\Sorts\CountsByPeriodSort;
 use App\Thread;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ThreadsController extends Controller
 {
-    /**
-     * ThreadsController constructor.
-     */
+
     public function __construct()
     {
         $this->middleware('auth')->only('store', 'create');
@@ -31,11 +32,8 @@ class ThreadsController extends Controller
             ->allowedFilters('user.username')
             ->allowedSorts([
                 AllowedSort::field('views', 'views_count'),
-                AllowedSort::field('views_last_week', 'views_last_week_count'),
-                AllowedSort::field('views_last_month', 'views_last_month_count'),
                 AllowedSort::field('replies', 'replies_count'),
-                AllowedSort::field('replies_last_week', 'replies_last_week_count'),
-                AllowedSort::field('replies_last_month', 'replies_last_month_count')
+                AllowedSort::field('favorites', 'favorites_count'),
             ])
             ->latest()
             ->paginate(12)

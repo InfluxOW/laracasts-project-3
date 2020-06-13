@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Overtrue\LaravelFavorite\Traits\Favoriteable;
 
 class Reply extends Model
 {
+    use Favoriteable;
+
     protected $fillable = ['body', 'thread_id', 'user_id', 'created_at'];
     protected $with = ['user', 'thread'];
 

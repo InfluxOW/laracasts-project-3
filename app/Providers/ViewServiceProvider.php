@@ -27,6 +27,5 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer(['components.threads.filtration'], ThreadsFiltration::class);
-        View::composer(['components.threads.card'], ThreadsCard::class);
     }
 }

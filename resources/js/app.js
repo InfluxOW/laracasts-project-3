@@ -11,3 +11,4 @@ const app = new Vue({
 const ujs = require('@rails/ujs');
 ujs.start();
 
+

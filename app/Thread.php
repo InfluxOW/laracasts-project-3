@@ -15,7 +15,7 @@ class Thread extends Model implements Viewable
     use Favoriteable;
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
-    protected $with = ['channel', 'user'];
+    protected $with = ['channel', 'user', 'favorites'];
     protected $removeViewsOnDelete = true;
     public const COUNTABLES = ['replies', 'views', 'favorites'];
 

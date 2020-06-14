@@ -10,8 +10,9 @@ class Reply extends Model
     use Favoriteable;
 
     protected $fillable = ['body', 'thread_id', 'user_id', 'created_at'];
-    protected $with = ['user', 'thread', 'favorites'];
+    protected $with = ['user', 'favorites'];
     protected $withCount = ['favorites'];
+    protected $touches = ['thread'];
 
     //Relations
 

@@ -33,8 +33,8 @@
             <div class="container px-12">
                 <div class="flex flex-wrap -mx-2">
 
-                    @foreach ($thread->recomendations() as $thread)
-                        <x-threads.card :thread="$thread" classes="shadow-lg"/>
+                    @foreach ($thread->recomendations() as $recomendation)
+                        <x-threads.card :thread="$recomendation" classes="shadow-lg"/>
                     @endforeach
 
                 </div>
@@ -43,11 +43,15 @@
     @endif
 
     <div class="container">
-        <hr class="mb-6 border-2 opacity-75">
+        @if ($thread->replies_count > 0)
+            <hr class="my-6 border-2 opacity-75">
+        @endif
         <x-replies.card :replies="$replies"/>
 
         @auth
-            <hr class="my-6 border-2 opacity-75">
+            @if ($thread->replies_count > 0)
+                <hr class="my-6 border-2 opacity-75">
+            @endif
             <x-replies.form :thread="$thread"/>
         @endauth
     </div>

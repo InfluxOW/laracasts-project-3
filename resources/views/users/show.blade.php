@@ -46,7 +46,7 @@
                                     <div class="mr-4 p-3 text-center">
                                       <span
                                           class="text-xl font-bold block uppercase tracking-wide text-gray-700"
-                                      >{{ $user->threads_count }}</span
+                                      ><a href="{{ route('threads.index', ['filter[user.username]' => $user->username]) }}">{{ $user->threads_count }}</a></span
                                       ><span class="text-sm text-gray-500">Threads</span>
                                     </div>
                                     <div class="mr-4 p-3 text-center">

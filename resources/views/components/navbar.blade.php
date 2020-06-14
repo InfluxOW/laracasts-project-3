@@ -44,7 +44,7 @@
                         button_title="Channels"
                     >
                         <template v-slot:items>
-                            @foreach (App\Channel::all() as $channel)
+                            @foreach ($channels as $channel)
                                 <a href="{{ route('threads.filter', $channel) }}"
                                    class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-400">
                                     {{ $channel->slug }}

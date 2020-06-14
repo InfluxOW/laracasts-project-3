@@ -16,7 +16,7 @@
         {!! Form::label('channel_id', 'Channel', ['class' => 'text-default font-light text-xs opacity-75']) !!}
         <div class="relative">
             {!! Form::select('channel_id',
-                App\Channel::all()->pluck('slug', 'id'),
+                $channels->pluck('slug', 'id'),
                 $thread->channel->id ?? null,
                 ['class' => 'mt-2 block appearance-none w-full border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:shadow-outline',
                 'placeholder' => 'Choose a channel...',

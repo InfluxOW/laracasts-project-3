@@ -13,6 +13,6 @@ class ThreadsSeeder extends Seeder
      */
     public function run()
     {
-        factory(Thread::class, 20)->create(['user_id' => User::all()->random()->id]);
+            factory(Thread::class, 24)->create();
     }
 }

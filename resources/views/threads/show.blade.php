@@ -5,7 +5,7 @@
     <div class="text-center pt-4 md:pt-8 bg-white bg-opacity-25">
         <p class="text-sm md:text-base text-teal-600 font-bold">{{ $thread->created_at->format('M d, Y') }}<span
                 class="text-gray-900 mx-2">/</span><a
-                href="#" class="hover:text-teal-300">{{ $thread->user->name }}</a></p>
+                href="{{ route('profiles.show', $thread->user) }}" class="hover:text-teal-300">{{ $thread->user->name }}</a></p>
         <h1 class="font-bold break-normal text-3xl md:text-5xl">{{ $thread->title }}</h1>
     </div>
 

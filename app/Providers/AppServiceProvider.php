@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Channel;
+use App\Observers\ChannelObserver;
+use App\Observers\ThreadObserver;
+use App\Thread;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -32,5 +36,8 @@ class AppServiceProvider extends ServiceProvider
             'reply' => 'App\Reply',
             'thread' => 'App\Thread',
         ]);
+
+        Thread::observe(ThreadObserver::class);
+        Channel::observe(ChannelObserver::class);
     }
 }

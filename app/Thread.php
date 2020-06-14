@@ -23,10 +23,6 @@ class Thread extends Model implements Viewable
     {
         parent::boot();
 
-        static::created(function($thread) {
-            $thread->update(['slug' => slugify($thread->title)]);
-        });
-
         static::addGlobalScope("countablesCount", function($builder) {
             if (is_null(request()->sort_from_date)) {
                 $builder->withCount(Thread::COUNTABLES);
@@ -53,12 +49,6 @@ class Thread extends Model implements Viewable
         return $this->belongsTo(Channel::class);
     }
 
-    public function addReply($reply)
-    {
-        $reply = Auth::user()->replies()->make($reply);
-        $this->replies()->save($reply);
-    }
-
     public function replies()
     {
         return $this->hasMany(Reply::class);
@@ -73,9 +63,12 @@ class Thread extends Model implements Viewable
 
     public function recomendations()
     {
-        return $this->channel->threads->filter(function($value, $key) {
-            return ! $this->is($value);
-        })->random(min(3, count($this->channel->threads) - 1));
+        return self::where('channel_id', $this->channel_id)->where('id', '<>', $this->id)->inRandomOrder();
     }
 
+    public function addReply($reply)
+    {
+        $reply = Auth::user()->replies()->make($reply);
+        $this->replies()->save($reply);
+    }
 }

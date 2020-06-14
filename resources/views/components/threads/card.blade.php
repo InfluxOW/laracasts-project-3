@@ -1,15 +1,17 @@
 <div class="p-4 lg:w-1/3">
     <div class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110">
-        <a href="{{ route('threads.show', [$thread->channel, $thread]) }}">
+        <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
             <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->getImage() }}" alt="blog">
         </a>
         <div class="px-8 pb-16 pt-8">
             <h2 class="tracking-widest text-xs font-medium text-gray-500 mb-1 uppercase">
-                <a href="{{ route('threads.filter', $thread->channel) }}">{{ $thread->channel->name }}</a>
+                <a href="{{ route('threads.filter', $thread->channel) }}" class="outline-none focus:outline-none">{{ $thread->channel->name }}</a>
             </h2>
-            <a href="{{ route('threads.show', [$thread->channel, $thread]) }}">
-                <h1 class="sm:text-2xl text-xl font-medium text-gray-900 mb-3">{{ $thread->title }}</h1>
-            </a>
+            <h1 class="sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+                <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
+                    {{ $thread->title }}
+                </a>
+            </h1>
             <p class="leading-relaxed mb-3">{{ Str::limit($thread->body, 200) }}</p>
 
             <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full pb-8">

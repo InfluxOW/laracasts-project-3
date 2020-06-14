@@ -7,7 +7,6 @@ use App\Http\Requests\ThreadsRequest;
 use App\Sorts\CountsByPeriod;
 use App\Sorts\CountsByPeriodSort;
 use App\Thread;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;

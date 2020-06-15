@@ -63,4 +63,10 @@ class User extends Authenticatable
     {
         return $this->banner->url ?? $this->banner_url ?? "https://picsum.photos/seed/{$this->username}/1836/500";
     }
+
+    //
+    public function isAdmin()
+    {
+        return $this->admin;
+    }
 }

@@ -5,11 +5,12 @@ namespace Tests\Feature;
 use App\User;
 use App\Reply;
 use App\Thread;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateThreadsTest extends TestCase
+class ManageThreadsTest extends TestCase
 {
     protected $user;
     protected $thread;
@@ -68,5 +69,31 @@ class CreateThreadsTest extends TestCase
         $this->actingAs($this->user)
             ->post(route('threads.store'), $attributes)
             ->assertSessionHasErrors('channel_id');
+    }
+
+    /** @test */
+    public function a_thread_can_be_deleted_by_its_owner()
+    {
+        $thread = factory(Thread::class)->create();
+        $attributes = Arr::only($thread->toArray(), ['id', 'body', 'user_id', 'channel_id']);
+
+        $this->assertDatabaseHas('threads', $attributes);
+        $this->actingAs($thread->user)->delete(route('threads.destroy', $thread));
+        $this->assertDatabaseMissing('threads', $attributes);
+    }
+
+    /** @test */
+    public function a_thread_can_not_be_deleted_by_unauthorized_users()
+    {
+        $thread = factory(Thread::class)->create();
+        $attributes = Arr::only($thread->toArray(), ['id', 'body', 'user_id', 'channel_id']);
+
+        $this->delete(route('threads.destroy', $thread))
+            ->assertRedirect(route('login'));
+        $this->assertDatabaseHas('threads', $attributes);
+
+        $this->actingAs($this->user)->delete(route('threads.destroy', $thread))
+            ->assertForbidden();
+        $this->assertDatabaseHas('threads', $attributes);
     }
 }

@@ -95,4 +95,24 @@ class ViewThreadsTest extends TestCase
         $replies = array_column($response['data'], 'replies_count');
         $this->assertEquals([15, 10, 5], $replies);
     }
+
+    /** @test */
+    public function a_user_can_sort_threads_by_favorites_count()
+    {
+        $threadOne = $this->thread;
+        $this->actingAs($threadOne->user)->post(route('favorites.store', ['thread', $threadOne->id]));
+
+        $threadTwo = factory(Thread::class)->create();
+        $this->actingAs($threadOne->user)->post(route('favorites.store', ['thread', $threadTwo->id]));
+        $this->actingAs($threadTwo->user)->post(route('favorites.store', ['thread', $threadTwo->id]));
+
+        $threadThree = factory(Thread::class)->create();
+        $this->actingAs($threadOne->user)->post(route('favorites.store', ['thread', $threadThree->id]));
+        $this->actingAs($threadTwo->user)->post(route('favorites.store', ['thread', $threadThree->id]));
+        $this->actingAs($threadThree->user)->post(route('favorites.store', ['thread', $threadThree->id]));
+
+        $response = $this->getJson(route('threads.index', ['sort' => '-favorites']))->json();
+        $replies = array_column($response['data'], 'favorites_count');
+        $this->assertEquals([3, 2, 1], $replies);
+    }
 }

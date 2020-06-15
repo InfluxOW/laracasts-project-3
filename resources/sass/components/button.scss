@@ -74,3 +74,15 @@
         @apply .outline-none;
     }
 }
+
+.button-dropdown-red {
+    @apply .button .text-red-600 .border .border-transparent .bg-red-200;
+
+    &:hover {
+        @apply .border-red-500 .border-opacity-25 .bg-red-100;
+    }
+
+    &:focus {
+        @apply .outline-none;
+    }
+}

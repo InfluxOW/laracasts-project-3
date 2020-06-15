@@ -16,7 +16,7 @@ class ThreadsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only('store', 'create');
+        $this->middleware('auth')->only('store', 'create', 'destroy', 'update', 'edit');
     }
 
     /**
@@ -87,13 +87,17 @@ class ThreadsController extends Controller
         //
     }
 
-    public function update(Request $request, Channel $channel, Thread $thread)
+    public function update(Request $request, Thread $thread)
     {
         //
     }
 
-    public function destroy(Channel $channel, Thread $thread)
+    public function destroy(Thread $thread)
     {
-        //
+        $this->authorize($thread);
+
+        $thread->delete();
+
+        return redirect()->route('threads.index');
     }
 }

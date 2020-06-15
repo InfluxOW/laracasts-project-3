@@ -2,7 +2,7 @@
     <div class="flex flex-wrap items-center dropdown">
         <div class="w-full">
             <div class="relative inline-flex align-middle w-full z-50">
-                <button :class="button_classes" style="transition:all .15s ease" type="button" v-on:click="toggleDropdown()" ref="btnDropdownRef">
+                <button :class="button_classes" style="transition: all 0.15s ease;" type="button" v-on:click="toggleDropdown()" ref="btnDropdownRef">
                     {{ button_title }}
                 </button>
 

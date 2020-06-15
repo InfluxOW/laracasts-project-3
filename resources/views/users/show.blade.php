@@ -22,7 +22,7 @@
                                 <div class="relative">
                                     <img
                                         alt="..."
-                                        src="{{ Auth::user()->getAvatar() }}"
+                                        src="{{ $user->getAvatar() }}"
                                         class="shadow-lg rounded-full h-auto align-middle border-none absolute -m-20 -ml-20"
                                         style="max-width: 150px;"
                                     />

@@ -65,6 +65,10 @@
                             button_title="{{ Auth::user()->name }}"
                         >
                             <template v-slot:items>
+                                <a href="{{ route('profiles.show', Auth::user()) }}"
+                                   class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
+                                    Profile
+                                </a>
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                                    class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">

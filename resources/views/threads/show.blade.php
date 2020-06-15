@@ -31,7 +31,7 @@
     <!--Container-->
     <div class="container max-w-5xl mx-auto -mt-32 mb-4">
         <div class="mx-0 sm:mx-6">
-            <div class="bg-black rounded w-full p-4 md:p-8 text-xl md:text-2xl text-gray-800 leading-normal text-center"
+            <div class="bg-white rounded w-full p-4 md:p-8 text-xl md:text-2xl text-gray-800 leading-normal text-center"
                  style="font-family:Georgia,serif;">
 
                 <!--Post Content-->

@@ -8,33 +8,47 @@ use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Thread extends Model implements Viewable
 {
     use InteractsWithViews;
     use Favoriteable;
+    use LogsActivity;
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
     protected $with = ['channel', 'user', 'favorites'];
-    protected $removeViewsOnDelete = true;
     public const COUNTABLES = ['replies', 'views', 'favorites'];
+    // views
+    protected $removeViewsOnDelete = true;
+    // logs
+    protected static $logAttributes = ['body', 'title', 'channel_id'];
+    protected static $logName = 'threads_log';
+    protected static $ignoreChangedAttributes = ['updated_at', 'slug'];
+    protected static $logOnlyDirty = true;
+    protected static $submitEmptyLogs = false;
 
     protected static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope("countablesCount", function($builder) {
+        static::addGlobalScope("countablesCount", function ($builder) {
             if (is_null(request()->sort_from_date)) {
                 $builder->withCount(Thread::COUNTABLES);
             } else {
-                foreach(Thread::COUNTABLES as $property) {
-                    $builder->withCount([$property => function($query) {
+                foreach (Thread::COUNTABLES as $property) {
+                    $builder->withCount([$property => function ($query) {
                         $sortFromDate = Carbon::createFromDate(request()->sort_from_date);
                         $query->where('created_at', '>=', $sortFromDate);
                     }]);
                 }
             }
         });
+    }
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "Thread '{$this->title}' has been {$eventName}";
     }
 
     //Relations

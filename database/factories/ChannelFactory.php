@@ -8,13 +8,11 @@ use Faker\Generator as Faker;
 $factory->define(Channel::class, function (Faker $faker) {
     return [
         'name' => $faker->word,
-        'slug' => $faker->word,
     ];
 });
 
 $factory->state(Channel::class, 'random', function () {
     return [
         'name' => 'Random',
-        'slug' => 'random',
     ];
 });

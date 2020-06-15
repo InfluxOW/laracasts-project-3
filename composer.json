@@ -20,6 +20,7 @@
         "laravelcollective/html": "^6.1",
         "league/flysystem-aws-s3-v3": "^1.0",
         "overtrue/laravel-favorite": "^2.0",
+        "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-query-builder": "^2.8"
     },
     "require-dev": {

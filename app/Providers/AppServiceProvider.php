@@ -35,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'reply' => 'App\Reply',
             'thread' => 'App\Thread',
+            'user' => 'App\User',
+            'channel' => 'App\Channel'
         ]);
 
         Thread::observe(ThreadObserver::class);

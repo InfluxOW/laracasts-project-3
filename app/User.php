@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
+use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -49,11 +50,6 @@ class User extends Authenticatable
 //    protected static $ignoreChangedAttributes = ['updated_at', 'slug'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
-
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "User '{$this->username}' has been {$eventName}";
-    }
 
     //Relations
 

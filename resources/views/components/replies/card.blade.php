@@ -1,5 +1,5 @@
 @foreach ($replies as $reply)
-    <div class="font-sans py-2 {{ $loop->last ? '' : 'mb-2' }} bg-white rounded-lg border border-gray-300">
+    <div class="font-sans py-2 {{ $loop->last ? '' : 'mb-2' }} bg-white rounded-lg border border-gray-300" id="reply-{{ $reply->id }}">
         <div class="flex py-2">
             <div class="w-1/8">
                 <img src="{{ $reply->user->getAvatar() }}" alt="" class="h-12 w-12 rounded-full mx-2">
@@ -11,6 +11,8 @@
                             <span class="text-gray-700"> {{ "@{$reply->user->username}" }}</span>
                             <span class="text-gray-700">·</span>
                             <span class="text-gray-700">{{ $reply->created_at->format('M d') }}</span>
+                            <span class="text-gray-700">·</span>
+                            <span class="text-gray-700"><a href="{{ $reply->getLink() }}" class="text-black hover:text-opacity-50">#</a></span>
                         </div>
                         <div class="mr-2">
                             {!! Form::open(['url' => route('favorites.store', ['reply', $reply->id])]) !!}

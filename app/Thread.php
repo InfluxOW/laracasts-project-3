@@ -22,7 +22,7 @@ class Thread extends Model implements Viewable
     // views
     protected $removeViewsOnDelete = true;
     // logs
-    protected static $logAttributes = ['body', 'title', 'channel_id'];
+    protected static $logAttributes = ['body', 'title', 'channel.name'];
     protected static $logName = 'threads_log';
     protected static $ignoreChangedAttributes = ['updated_at', 'slug'];
     protected static $logOnlyDirty = true;
@@ -44,11 +44,6 @@ class Thread extends Model implements Viewable
                 }
             }
         });
-    }
-
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "Thread '{$this->title}' has been {$eventName}";
     }
 
     //Relations
@@ -75,9 +70,14 @@ class Thread extends Model implements Viewable
         return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
     }
 
-    public function recomendations()
+    public function getRecomendationsAttribute()
     {
-        return self::where('channel_id', $this->channel_id)->where('id', '<>', $this->id)->inRandomOrder();
+        $takeRecomendations = min(3, $this->channel->threads_count - 1);
+        return $this
+            ->channel
+            ->threads
+            ->where('id', '<>', $this->id)
+            ->random($takeRecomendations);
     }
 
     public function addReply($reply)

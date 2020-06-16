@@ -11,9 +11,8 @@ class Reply extends Model
     use Favoriteable;
     use LogsActivity;
 
-
     protected $fillable = ['body', 'thread_id', 'user_id', 'created_at'];
-    protected $with = ['user', 'favorites'];
+    protected $with = ['user', 'favorites', 'thread.channel'];
     protected $withCount = ['favorites'];
     protected $touches = ['thread'];
     // logs
@@ -22,11 +21,6 @@ class Reply extends Model
     protected static $ignoreChangedAttributes = ['updated_at'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
-
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "Reply '{$this->body}' has been {$eventName}";
-    }
 
     //Relations
 
@@ -38,5 +32,15 @@ class Reply extends Model
     public function thread()
     {
         return $this->belongsTo(Thread::class);
+    }
+
+    //Helpers
+
+    public function getLink(): string
+    {
+//    $commentableResourceName = str_plural(strtolower(class_basename($comment->commentable_type)));
+        $threadUrl = route('threads.show', [$this->thread->channel, $this->thread]);
+        $replyUrl = "{$threadUrl}#reply-{$this->id}";
+        return $replyUrl;
     }
 }

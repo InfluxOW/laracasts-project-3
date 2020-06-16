@@ -40,18 +40,14 @@
         </div>
     </div>
 
-    @if (count($thread->recomendations()->get()) > 0)
+    @if ($thread->recomendations->count() > 0)
         <div class="bg-blue-200 rounded-lg bg-opacity-25">
-            <h2 class="text-2xl text-center py-2 font-bold tracking-wider text-gray-800">It may seem interesting to
-                you...</h2>
-
+            <h2 class="text-2xl text-center py-2 font-bold tracking-wider text-gray-800">It may seem interesting to you...</h2>
             <div class="container px-12">
                 <div class="flex flex-wrap -mx-2">
-
-                    @foreach ($thread->recomendations()->take(3)->get() as $recomendation)
+                    @foreach ($thread->recomendations as $recomendation)
                         <x-threads.card :thread="$recomendation" classes="shadow-lg"/>
                     @endforeach
-
                 </div>
             </div>
         </div>

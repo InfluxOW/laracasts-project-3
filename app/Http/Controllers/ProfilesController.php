@@ -54,7 +54,9 @@ class ProfilesController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $actions = $user->actions()->with('subject')->latest()->paginate(20);
+
+        return view('users.show', compact('user', 'actions'));
     }
 
     /**

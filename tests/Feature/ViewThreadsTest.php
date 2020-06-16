@@ -22,8 +22,7 @@ class ViewThreadsTest extends TestCase
     {
         $response = $this->get(route('threads.index'));
         $response->assertOk()
-            ->assertSee($this->thread->title)
-            ->assertSee($this->thread->body);
+            ->assertSee($this->thread->title);
     }
 
     /** @test */

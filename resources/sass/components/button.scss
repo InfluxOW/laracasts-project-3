@@ -31,7 +31,7 @@
   @apply .button .text-white .bg-blue-500;
 
   &:hover {
-    @apply .border-white .opacity-75;
+    @apply .border-blue-500 .opacity-75 .bg-transparent .text-blue-500;
   }
 
   &:focus {

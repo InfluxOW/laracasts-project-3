@@ -27,13 +27,14 @@ class ProfilesTest extends TestCase
     {
         $user = factory(User::class)->create();
         $this->be($user);
+
         $channel = factory(Channel::class)->create();
         $thread = factory(Thread::class)->create(['user_id' => $user->id, 'channel_id' => $channel->id]);
         $reply = factory(Reply::class)->create(['thread_id' => $thread->id, 'user_id' => $user->id]);
+        $this->actingAs($user)->delete(route('threads.destroy', $thread));
 
-        $this->assertCount(3, $user->actions);
-        $this->assertInstanceOf(Channel::class, $user->actions->get(0)->subject);
-        $this->assertInstanceOf(Thread::class, $user->actions->get(1)->subject);
-        $this->assertInstanceOf(Reply::class, $user->actions->get(2)->subject);
+        $this->assertCount(4, $user->actions);
+        $this->get(route('profiles.show', $user))
+            ->assertOk();
     }
 }

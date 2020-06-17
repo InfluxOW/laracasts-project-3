@@ -90,7 +90,7 @@
                         </div>
                     </div>
 
-                    <button onclick="showUserActions()" class="button-dropdown-blue w-48 m-4">User Activity</button>
+                    <button onclick="showUserActions()" class="button-dropdown-blue self-center mb-2">User Activity</button>
 
                     @if (! empty($actions))
                         <x-users.actions :actions="$actions" :user="$user"/>

@@ -72,12 +72,8 @@ class Thread extends Model implements Viewable
 
     public function getRecomendationsAttribute()
     {
-        $takeRecomendations = min(3, $this->channel->threads_count - 1);
-        return $this
-            ->channel
-            ->threads
-            ->where('id', '<>', $this->id)
-            ->random($takeRecomendations);
+        $recomendationsAmount = min(3, $this->channel->threads_count - 1);
+        return $this->channel->threads->where('id', '<>', $this->id)->random($recomendationsAmount);
     }
 
     public function addReply($reply)

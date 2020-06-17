@@ -16,8 +16,7 @@
             Sort from
         </div>
         {{ Form::date('sort_from_date', $sortFromDate,
-        ['class' => 'border border-gray-300 text-gray-700 py-2 bg-gray-200 px-4 rounded rounded-l-none leading-tight focus:shadow-outline',
-        'placeholder' => 'Choose first sort date...']) }}
+        ['class' => 'border border-gray-300 text-gray-700 py-2 bg-gray-200 px-4 rounded rounded-l-none leading-tight focus:shadow-outline') }}
     </div>
     {{ Form::submit(__('Apply'), ['class' => 'button-dropdown-gray ml-2']) }}
     {{ Form::close() }}

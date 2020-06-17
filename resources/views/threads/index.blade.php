@@ -7,9 +7,11 @@
                 <x-threads.filtration/>
 
                 <div class="flex flex-wrap -m-4">
-                    @foreach ($threads as $thread)
+                    @forelse ($threads as $thread)
                         <x-threads.card :thread="$thread"/>
-                    @endforeach
+                    @empty
+                        <p class="text-2xl p-4 bg-white rounded-lg">No threads has been found :(</p>
+                    @endforelse
                 </div>
             </div>
         </section>

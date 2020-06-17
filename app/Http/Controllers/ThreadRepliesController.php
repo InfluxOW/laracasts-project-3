@@ -37,6 +37,7 @@ class ThreadRepliesController extends Controller
         $this->authorize(Reply::class);
         $reply = $thread->addReply($request->validated());
 
+        flash('Reply has been created!')->success();
         return redirect()->route('threads.show', [$channel, $thread]);
     }
 

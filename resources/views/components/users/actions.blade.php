@@ -5,7 +5,7 @@
             class="border border-r-0 border-gray-300 text-gray-700 bg-page font-bold p-2 rounded rounded-r-none leading-tight cursor-not-allowed">
             Filter by day
         </div>
-        {{ Form::date('filter[created_at]', request()->query('filter')['created_at'],
+        {{ Form::date('filter[created_at]', request()->query('filter')['created_at'] ?? null,
         ['class' => 'border border-gray-300 text-gray-700 py-2 bg-gray-200 px-4 rounded rounded-l-none leading-tight focus:shadow-outline',
         'onChange' => "this.form.submit()"]) }}
     </div>

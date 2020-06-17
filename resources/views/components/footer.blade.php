@@ -1,4 +1,4 @@
-<footer class="w-full absolute {{ $styles ?? '' }}">
+<footer class="w-full {{ $styles ?? '' }}">
     <div class="container mx-auto {{ $background ?? '' }}">
         <div
             class="flex flex-wrap items-center md:justify-between justify-center">

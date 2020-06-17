@@ -65,6 +65,7 @@ class ThreadsController extends Controller
         $this->authorize(Thread::class);
         $thread = $request->user()->threads()->create($request->validated());
 
+        flash('Thread has been created!')->success();
         return redirect()->route('threads.show', [$thread->channel, $thread]);
     }
 
@@ -98,6 +99,7 @@ class ThreadsController extends Controller
 
         $thread->delete();
 
+        flash('Thread has been deleted!')->success();
         return redirect()->route('threads.index');
     }
 }

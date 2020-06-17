@@ -21,6 +21,9 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script>
+    $('div[role="flash"]').delay(2000).fadeOut(2000);
+</script>
 @stack('scripts')
 </body>
 </html>

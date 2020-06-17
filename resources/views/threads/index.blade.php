@@ -25,7 +25,7 @@
 @endsection
 
 @section('footer')
-    <x-footer styles="{{ count($threads->items()) <=3 ? 'bottom-0' : '' }} py-4" background="bg-white bg-opacity-25" dark="true"/>
+    <x-footer styles="{{ count($threads->items()) <=3 ? 'absolute bottom-0' : '' }} py-4" background="bg-white bg-opacity-25" dark="true"/>
 @endsection
 
 

@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Channel;
-use App\Observers\ChannelObserver;
-use App\Observers\ThreadObserver;
+use App\Reply;
 use App\Thread;
+use App\Observers\ChannelObserver;
+use App\Observers\ReplyObserver;
+use App\Observers\ThreadObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -36,10 +38,12 @@ class AppServiceProvider extends ServiceProvider
             'reply' => 'App\Reply',
             'thread' => 'App\Thread',
             'user' => 'App\User',
-            'channel' => 'App\Channel'
+            'channel' => 'App\Channel',
+            'favorite' => 'Overtrue\LaravelFavorite\Favorite'
         ]);
 
         Thread::observe(ThreadObserver::class);
         Channel::observe(ChannelObserver::class);
+        Reply::observe(ReplyObserver::class);
     }
 }

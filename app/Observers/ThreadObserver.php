@@ -49,7 +49,7 @@ class ThreadObserver
      */
     public function deleted(Thread $thread)
     {
-        //
+        $thread->favorites->each->delete();
     }
 
     /**

@@ -23,7 +23,6 @@ Route::get('threads', 'ThreadsController@index')->name('threads.index')->middlew
 Route::get('threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('threads/{channel:slug}', 'ThreadsController@index')->name('threads.filter')->middleware('clean_query_string');
 Route::get('threads/{channel:slug}/{thread:slug}', 'ThreadsController@show')->name('threads.show');
-;
 Route::patch('threads/{thread}', 'ThreadsController@update')->name('threads.update');
 Route::delete('threads/{thread}', 'ThreadsController@destroy')->name('threads.destroy');
 Route::post('threads', 'ThreadsController@store')->name('threads.store');

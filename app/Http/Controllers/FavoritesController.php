@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Overtrue\LaravelFavorite\Favorite;
 
 class FavoritesController extends Controller
 {
@@ -13,8 +14,9 @@ class FavoritesController extends Controller
 
     public function store(Request $request, string $type, int $id)
     {
+        $user = $request->user();
         $favoriteable = $this->identifyModel($type, $id);
-        $request->user()->toggleFavorite($favoriteable);
+        $user->toggleFavorite($favoriteable);
 
         return redirect()->back();
     }

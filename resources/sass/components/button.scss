@@ -27,6 +27,18 @@
   }
 }
 
+.button-sm {
+    @apply .uppercase .font-bold .text-xs .rounded .px-3 .py-1 .border .border-transparent .outline-none;
+
+    &:focus {
+        @apply .outline-none;
+    }
+
+    &:hover {
+        @apply .opacity-75;
+    }
+}
+
 .button-dropdown-blue {
   @apply .button .text-white .bg-blue-500;
 

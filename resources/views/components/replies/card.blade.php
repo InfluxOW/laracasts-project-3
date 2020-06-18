@@ -30,6 +30,16 @@
                 <div>
                     <p class="text-sm my-2">{{ $reply->body }}</p>
                 </div>
+                <div class="mt-2">
+                    @can('delete', $reply)
+                    <a
+                        href="{{ route('threads.replies.destroy', $reply) }}"
+                        data-confirm="Are you sure?"
+                        data-method="delete"
+                        rel="nofollow"
+                        class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75">Delete</a>
+                    @endcan
+                </div>
             </div>
         </div>
     </div>

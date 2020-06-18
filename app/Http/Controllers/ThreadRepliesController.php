@@ -12,7 +12,7 @@ class ThreadRepliesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store', 'destroy');
     }
 
     public function index()
@@ -58,6 +58,11 @@ class ThreadRepliesController extends Controller
 
     public function destroy(Reply $reply)
     {
-        //
+        $this->authorize($reply);
+
+        $reply->delete();
+
+        flash('Reply has been deleted!')->success();
+        return redirect()->route('threads.show', [$reply->thread->channel, $reply->thread]);
     }
 }

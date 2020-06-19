@@ -2,12 +2,10 @@
 
 namespace Tests\Feature;
 
-use App\User;
 use App\Reply;
 use App\Thread;
+use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageThreadRepliesTest extends TestCase
 {
@@ -60,7 +58,30 @@ class ManageThreadRepliesTest extends TestCase
         $this->actingAs($user)->delete(route('threads.replies.destroy', $reply))
             ->assertForbidden();
         $this->assertDatabaseHas('replies', ['id' => $reply->id]);
+    }
 
+    /** @test */
+    public function an_authorized_user_can_edit_replies()
+    {
+        $reply = factory(Reply::class)->create(['thread_id' => $this->thread->id]);
+        $attributes = ['body' => 'new body'];
+
+        $this->actingAs($reply->user)->patch(route('threads.replies.update', $reply), $attributes);
+        $this->assertDatabaseHas('replies', $attributes);
+    }
+
+    /** @test */
+    public function an_unauthorized_user_cannot_edit_replies()
+    {
+        $user = factory(User::class)->create();
+        $reply = factory(Reply::class)->create(['thread_id' => $this->thread->id]);
+        $attributes = ['body' => 'new body'];
+
+        $this->patch(route('threads.replies.update', $reply), $attributes)
+            ->assertRedirect(route('login'));
+        $this->actingAs($user)->patch(route('threads.replies.update', $reply), $attributes)
+            ->assertForbidden();
+        $this->assertDatabaseMissing('replies', $attributes);
     }
 
     /** @test */

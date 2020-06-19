@@ -12,7 +12,7 @@ class ThreadRepliesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store', 'destroy');
+        $this->middleware('auth')->only('store', 'destroy', 'update');
     }
 
     public function index()
@@ -51,9 +51,13 @@ class ThreadRepliesController extends Controller
         //
     }
 
-    public function update(Request $request, Reply $reply)
+    public function update(ThreadRepliesRequest $request, Reply $reply)
     {
-        //
+        $this->authorize($reply);
+
+        $reply->update($request->validated());
+
+        flash('Reply has been updated!')->success();
     }
 
     public function destroy(Reply $reply)

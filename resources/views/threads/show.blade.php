@@ -57,7 +57,14 @@
         @if ($thread->replies_count > 0)
             <hr class="my-6 border-2 opacity-75">
         @endif
-        <x-replies.card :replies="$replies"/>
+
+        @foreach ($replies as $reply)
+            <x-replies.card :reply="$reply" :classes="$loop->last ? '' : 'mb-2'" />
+        @endforeach
+
+        <div class="mt-2">
+            {{ $replies->links() }}
+        </div>
 
         @auth
             @if ($thread->replies_count > 0)

@@ -33,6 +33,7 @@ Route::resource('profiles', 'ProfilesController')->only('show', 'edit', 'update'
 
 Route::post('/threads/{channel:slug}/{thread}/replies', 'ThreadRepliesController@store')->name('threads.replies.store');
 Route::delete('replies/{reply}', 'ThreadRepliesController@destroy')->name('threads.replies.destroy');
+Route::patch('replies/{reply}', 'ThreadRepliesController@update')->name('threads.replies.update');
 
 Route::post('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@store')->name('favorites.store');
 Auth::routes();

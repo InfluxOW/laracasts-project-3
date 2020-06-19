@@ -1,5 +1,6 @@
-@foreach ($replies as $reply)
-    <div class="font-sans py-2 {{ $loop->last ? '' : 'mb-2' }} bg-white rounded-lg border border-gray-300" id="reply-{{ $reply->id }}">
+
+<reply :attributes="{{ $reply }}" inline-template v-cloak>
+    <div class="{{ $classes ?? '' }} font-sans py-2 bg-white rounded-lg border border-gray-300" id="reply-{{ $reply->id }}">
         <div class="flex py-2">
             <div class="w-1/8">
                 <img src="{{ $reply->user->getAvatar() }}" alt="" class="h-12 w-12 rounded-full mx-2">
@@ -27,24 +28,33 @@
                             {!! Form::close() !!}
                         </div>
                 </div>
-                <div>
-                    <p class="text-sm my-2">{{ $reply->body }}</p>
+                <div v-if="editing">
+                    <div class="pr-8">
+                        <textarea class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" v-model="body"></textarea>
+                    </div>
+
+                    <button @click="update" class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2">Update</button>
+                    <button @click="editing = false" class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2">Cancel</button>
                 </div>
-                <div class="mt-2">
-                    @can('delete', $reply)
-                    <a
-                        href="{{ route('threads.replies.destroy', $reply) }}"
-                        data-confirm="Are you sure?"
-                        data-method="delete"
-                        rel="nofollow"
-                        class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75">Delete</a>
-                    @endcan
+
+                <div v-if="! editing">
+                    <div class="text-sm my-2" v-text="body"></div>
+                    <div class="mt-4">
+                        @can('update', $reply)
+                            <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="editing = true">Edit</button>
+                        @endcan
+
+                        @can('delete', $reply)
+                            <a
+                                href="{{ route('threads.replies.destroy', $reply) }}"
+                                data-confirm="Are you sure?"
+                                data-method="delete"
+                                rel="nofollow"
+                                class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75">Delete</a>
+                        @endcan
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endforeach
-
-<div class="mt-2">
-    {{ $replies->links() }}
-</div>
+</reply>

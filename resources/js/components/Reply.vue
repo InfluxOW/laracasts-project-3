@@ -13,6 +13,10 @@
                     body: this.body
                 });
                 this.editing = false;
+            },
+            destroy() {
+                axios.delete('/replies/' + this.attributes.id);
+                $(this.$el).fadeOut(1000);
             }
         }
     }

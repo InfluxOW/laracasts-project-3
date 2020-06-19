@@ -45,12 +45,11 @@
                         @endcan
 
                         @can('delete', $reply)
-                            <a
-                                href="{{ route('threads.replies.destroy', $reply) }}"
-                                data-confirm="Are you sure?"
-                                data-method="delete"
-                                rel="nofollow"
-                                class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75">Delete</a>
+                                <button
+                                    @click="destroy"
+                                    class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75 mr-2"
+                                    data-confirm="Are you sure?"
+                                    data-method="delete">Delete</button>
                         @endcan
                     </div>
                 </div>

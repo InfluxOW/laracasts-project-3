@@ -60,13 +60,16 @@ class ThreadRepliesController extends Controller
         flash('Reply has been updated!')->success();
     }
 
-    public function destroy(Reply $reply)
+    public function destroy(Request $request, Reply $reply)
     {
         $this->authorize($reply);
 
         $reply->delete();
 
         flash('Reply has been deleted!')->success();
-        return redirect()->route('threads.show', [$reply->thread->channel, $reply->thread]);
+
+        if (! $request->wantsJson()) {
+            return redirect()->route('threads.show', [$reply->thread->channel, $reply->thread]);
+        }
     }
 }

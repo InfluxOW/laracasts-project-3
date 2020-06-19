@@ -26,7 +26,19 @@ class FavoriteTest extends TestCase
         $this->actingAs($user)->post(route('favorites.store', ['reply', $reply->id]));
         $this->assertTrue($reply->isFavoritedBy($user));
 
-        $this->actingAs($user)->post(route('favorites.store', ['reply', $reply->id]));
+        $this->actingAs($user)->delete(route('favorites.destroy', ['reply', $reply->id]));
+        $this->assertFalse($reply->isFavoritedBy($user));
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_unfavorite_any_reply()
+    {
+        $reply = factory(Reply::class)->create();
+        $user = factory(User::class)->create();
+
+        $user->favorite($reply);
+
+        $this->actingAs($user)->delete(route('favorites.destroy', ['reply', $reply->id]));
         $this->assertFalse($reply->isFavoritedBy($user));
     }
 
@@ -39,7 +51,19 @@ class FavoriteTest extends TestCase
         $this->actingAs($user)->post(route('favorites.store', ['thread', $thread->id]));
         $this->assertTrue($thread->isFavoritedBy($user));
 
-        $this->actingAs($user)->post(route('favorites.store', ['thread', $thread->id]));
+        $this->actingAs($user)->delete(route('favorites.destroy', ['thread', $thread->id]));
+        $this->assertFalse($thread->isFavoritedBy($user));
+    }
+
+    /** @test */
+    public function an_authenticated_user_can_unfavorite_any_thread()
+    {
+        $thread = factory(Thread::class)->create();
+        $user = factory(User::class)->create();
+
+        $user->favorite($thread);
+
+        $this->actingAs($user)->delete(route('favorites.destroy', ['thread', $thread->id]));
         $this->assertFalse($thread->isFavoritedBy($user));
     }
 }

@@ -9,15 +9,20 @@ class FavoritesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store', 'destroy');
     }
 
     public function store(Request $request, string $type, int $id)
     {
         $user = $request->user();
         $favoriteable = $this->identifyModel($type, $id);
-        $user->toggleFavorite($favoriteable);
+        $user->favorite($favoriteable);
+    }
 
-        return redirect()->back();
+    public function destroy(Request $request, string $type, int $id)
+    {
+        $user = $request->user();
+        $favoriteable = $this->identifyModel($type, $id);
+        $user->unfavorite($favoriteable);
     }
 }

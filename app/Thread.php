@@ -19,6 +19,7 @@ class Thread extends Model implements Viewable
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
     protected $with = ['channel', 'user', 'favorites'];
     public const COUNTABLES = ['replies', 'views', 'favorites'];
+    protected $appends = ['isFavorited'];
     // views
     protected $removeViewsOnDelete = true;
     // logs
@@ -74,6 +75,11 @@ class Thread extends Model implements Viewable
     {
         $recomendationsAmount = min(3, $this->channel->threads_count - 1);
         return $this->channel->threads->where('id', '<>', $this->id)->random($recomendationsAmount);
+    }
+
+    public function getIsFavoritedAttribute()
+    {
+        return $this->isFavoritedBy(Auth::user());
     }
 
     public function addReply($reply)

@@ -36,4 +36,5 @@ Route::delete('replies/{reply}', 'ThreadRepliesController@destroy')->name('threa
 Route::patch('replies/{reply}', 'ThreadRepliesController@update')->name('threads.replies.update');
 
 Route::post('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@store')->name('favorites.store');
+Route::delete('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@destroy')->name('favorites.destroy');
 Auth::routes();

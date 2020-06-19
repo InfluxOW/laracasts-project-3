@@ -13,10 +13,13 @@
                     body: this.body
                 });
                 this.editing = false;
+                flash('Reply has been updated!', 'success');
             },
             destroy() {
                 axios.delete('/replies/' + this.attributes.id);
-                $(this.$el).fadeOut(1000);
+                $(this.$el).fadeOut(2000, () => {
+                    flash('Reply has been deleted!', 'success');
+                });
             }
         }
     }

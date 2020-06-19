@@ -22,7 +22,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
-    $('div[role="flash"]').delay(2000).fadeOut(2000);
+    $('div[role="alert"]').delay(3000).fadeOut(1000);
 </script>
 @stack('scripts')
 </body>

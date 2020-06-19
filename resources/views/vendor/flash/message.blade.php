@@ -1,6 +1,5 @@
 @foreach (session('flash_notification', collect())->toArray() as $message)
-    <div class="{{ getFlashMessageStyles($message['level']) }} border px-4 py-3 rounded flex inline-flex items-center" role="{{ $message['important'] ? 'flash-important' : 'flash' }}">
-        <div class="font-bold mr-2">{{ ucfirst($message['level']) }}</div>
+    <div class="{{ "alert-{$message['level']}" }}" role="alert">
         <div class="block">{{ $message['message'] }}</div>
         @if ($message['important'])
             <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close" onclick="$(this).parent().remove();">

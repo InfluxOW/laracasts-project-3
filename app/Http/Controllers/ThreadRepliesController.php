@@ -56,8 +56,6 @@ class ThreadRepliesController extends Controller
         $this->authorize($reply);
 
         $reply->update($request->validated());
-
-        flash('Reply has been updated!')->success();
     }
 
     public function destroy(Request $request, Reply $reply)
@@ -65,8 +63,6 @@ class ThreadRepliesController extends Controller
         $this->authorize($reply);
 
         $reply->delete();
-
-        flash('Reply has been deleted!')->success();
 
         if (! $request->wantsJson()) {
             return redirect()->route('threads.show', [$reply->thread->channel, $reply->thread]);

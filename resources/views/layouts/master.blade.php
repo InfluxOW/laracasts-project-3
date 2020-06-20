@@ -20,6 +20,12 @@
 @yield('body')
 
 <!-- Scripts -->
+<script>
+    window.app = {!! json_encode([
+                'signedIn' => Auth::check(),
+                'user' => Auth::user(),
+            ]) !!}
+</script>
 <script src="{{ asset('js/app.js') }}"></script>
 <script>
     $('div[role="alert"]').delay(3000).fadeOut(1000);

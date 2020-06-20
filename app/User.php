@@ -31,7 +31,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'email', 'created_at', 'updated_at', 'email_verified_at'
     ];
 
     /**
@@ -44,6 +44,7 @@ class User extends Authenticatable
     ];
 
     protected $withCount = ['threads', 'replies'];
+    protected $appends = ['avatar'];
     // logs
     protected static $logAttributes = ['name', 'username', 'email'];
     protected static $logName = 'users_log';
@@ -64,6 +65,11 @@ class User extends Authenticatable
     }
 
     //
+
+    public function getAvatarAttribute()
+    {
+        return $this->getAvatar();
+    }
 
     public function getAvatar()
     {

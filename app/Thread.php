@@ -80,5 +80,6 @@ class Thread extends Model implements Viewable
     {
         $reply = Auth::user()->replies()->make($reply);
         $this->replies()->save($reply);
+        return $reply;
     }
 }

@@ -2,6 +2,13 @@ require('./bootstrap');
 
 import Vue from 'vue';
 
+Vue.prototype.authorize = function (handler) {
+    // Additional admin privileges here.
+    let user = window.app.user;
+
+    return user ? handler(user) : false;
+};
+
 /**
  * Our Vuejs event handler which we will be using for flash messaging
  * @type {Vue}
@@ -20,8 +27,8 @@ window.flash = function(message, type) {
 
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
-Vue.component('reply', require('./components/Reply.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);
+Vue.component('thread', require('./pages/Thread.vue').default);
 
 const app = new Vue({
     el: '#app',
@@ -29,5 +36,3 @@ const app = new Vue({
 
 const ujs = require('@rails/ujs');
 ujs.start();
-
-

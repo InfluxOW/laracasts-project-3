@@ -37,7 +37,10 @@ class ThreadRepliesController extends Controller
         $this->authorize(Reply::class);
         $reply = $thread->addReply($request->validated());
 
-        flash('Reply has been created!')->success();
+        if ($request->wantsJson()) {
+            return $reply->load('user')->loadCount('favorites');
+        }
+
         return redirect()->route('threads.show', [$channel, $thread]);
     }
 

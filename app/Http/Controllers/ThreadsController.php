@@ -70,14 +70,12 @@ class ThreadsController extends Controller
     }
 
     /**
-     * @param string $channel
-     * @param string $thread
+     * @param string $channelSlug
+     * @param Thread $thread
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(string $channelSlug, string $threadSlug)
+    public function show(string $channelSlug, Thread $thread)
     {
-        $channel = Channel::whereSlug($channelSlug)->firstOrFail();
-        $thread = Thread::whereSlug($threadSlug)->where('channel_id', $channel->id)->firstOrFail();
         views($thread)->record();
 
         $replies = $thread->replies()->paginate(10);

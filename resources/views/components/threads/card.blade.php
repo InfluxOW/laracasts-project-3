@@ -36,7 +36,7 @@
                         {{ $thread->replies_count }}
                     </span>
                     @auth
-                        <favorite :model="{{ $thread }}" type="thread"></favorite>
+                        <favorite :model="{{ $thread }}" type="thread" is-favorited="{{ $thread->isFavoritedBy(Auth::user()) }}"></favorite>
                     @else
                         <span class="inline-flex items-center leading-none text-sm">
                             <svg

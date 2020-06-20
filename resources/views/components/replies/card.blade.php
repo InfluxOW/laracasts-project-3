@@ -17,7 +17,7 @@
                         </div>
                         <div class="mr-2">
                             @auth
-                                <favorite :model="{{ $reply }}" type="reply"></favorite>
+                                <favorite :model="{{ $reply }}" type="reply" is-favorited="{{ $reply->isFavoritedBy(Auth::user()) }}"></favorite>
                             @else
                                 <span class="inline-flex items-center leading-none text-sm">
                                     <svg

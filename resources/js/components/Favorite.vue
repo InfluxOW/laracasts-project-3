@@ -11,20 +11,11 @@
 
 <script>
     export default {
-        props: {
-            model: {
-                type: Object,
-                required: true
-            },
-            type: {
-                type: String,
-                required: true
-            },
-        },
+        props: ['model', 'type', 'isFavorited'],
         data() {
             return {
                 count: this.model.favorites_count,
-                active: this.model.isFavorited
+                active: this.isFavorited
             }
         },
         computed: {
@@ -36,7 +27,7 @@
 
             endpoint() {
                 return '/favorites/' + this.type + '/' + this.model.id;
-            }
+            },
         },
         methods: {
             toggle() {

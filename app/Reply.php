@@ -16,7 +16,6 @@ class Reply extends Model
     protected $with = ['user', 'favorites', 'thread.channel'];
     protected $withCount = ['favorites'];
     protected $touches = ['thread'];
-    protected $appends = ['isFavorited'];
     // logs
     protected static $logAttributes = ['body'];
     protected static $logName = 'replies_log';
@@ -44,10 +43,5 @@ class Reply extends Model
         $threadUrl = route('threads.show', [$this->thread->channel, $this->thread]);
         $replyUrl = "{$threadUrl}#reply-{$this->id}";
         return $replyUrl;
-    }
-
-    public function getIsFavoritedAttribute()
-    {
-        return $this->isFavoritedBy(Auth::user());
     }
 }

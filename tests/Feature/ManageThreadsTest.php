@@ -27,7 +27,7 @@ class ManageThreadsTest extends TestCase
     {
         $this->actingAs($this->user)
             ->post(route('threads.store'), $this->thread);
-        $this->assertDatabaseHas('threads', $this->thread);
+        $this->assertDatabaseHas('threads', Arr::except($this->thread, 'created_at'));
     }
 
     /** @test */

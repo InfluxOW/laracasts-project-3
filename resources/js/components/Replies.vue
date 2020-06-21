@@ -1,7 +1,7 @@
 <template>
     <div>
         <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
-        <div v-for="(reply, index) in items">
+        <div v-for="(reply, index) in items" :key="reply.id">
             <reply :data="reply" @deleted="remove(index)"></reply>
         </div>
         <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">

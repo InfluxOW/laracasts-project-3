@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\AllowedSort;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class Thread extends Model implements Viewable
 {
@@ -87,5 +90,20 @@ class Thread extends Model implements Viewable
     public function scopeCreatedAfter(Builder $query, $date): Builder
     {
         return $query->where('created_at', '>=', Carbon::parse($date));
+    }
+
+    public static function buildQuery($query)
+    {
+        return QueryBuilder::for($query)
+            ->allowedFilters([
+                'user.username',
+                AllowedFilter::scope('created_after'),
+            ])
+            ->allowedSorts([
+                AllowedSort::field('views', 'views_count'),
+                AllowedSort::field('replies', 'replies_count'),
+                AllowedSort::field('favorites', 'favorites_count'),
+            ])
+            ->latest();
     }
 }

@@ -28,17 +28,7 @@ class ThreadsController extends Controller
     {
         $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
 
-        $threads = QueryBuilder::for($query)
-            ->allowedFilters([
-                'user.username',
-                AllowedFilter::scope('created_after')
-                ])
-            ->allowedSorts([
-                AllowedSort::field('views', 'views_count'),
-                AllowedSort::field('replies', 'replies_count'),
-                AllowedSort::field('favorites', 'favorites_count'),
-            ])
-            ->latest()
+        $threads = Thread::buildQuery($query)
             ->paginate(12)
             ->appends(request()->query());
 

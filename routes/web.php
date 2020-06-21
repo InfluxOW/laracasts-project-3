@@ -31,6 +31,7 @@ Route::resource('profiles', 'ProfilesController')->only('show', 'edit', 'update'
     'profiles' => 'user:username'
 ]);
 
+Route::get('/threads/{channel:slug}/{thread:slug}/replies', 'ThreadRepliesController@index')->name('threads.replies.index');
 Route::post('/threads/{channel:slug}/{thread:slug}/replies', 'ThreadRepliesController@store')->name('threads.replies.store');
 Route::delete('replies/{reply}', 'ThreadRepliesController@destroy')->name('threads.replies.destroy');
 Route::patch('replies/{reply}', 'ThreadRepliesController@update')->name('threads.replies.update');

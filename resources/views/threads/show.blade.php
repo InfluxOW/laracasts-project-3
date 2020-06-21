@@ -56,7 +56,7 @@
         @endif
 
         <div class="container">
-            <replies :data="{{ $thread->replies }}"></replies>
+            <replies></replies>
         </div>
     </div>
 </thread>
@@ -69,3 +69,12 @@
 @section('footer')
     <x-footer background="bg-white bg-opacity-25" styles="py-6" dark="true"/>
 @endsection
+
+@push('scripts')
+    <script>
+        window.app = {!! json_encode([
+                'signedIn' => Auth::check(),
+                'user' => Auth::user(),
+            ]) !!}
+    </script>
+@endpush

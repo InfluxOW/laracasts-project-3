@@ -78,9 +78,7 @@ class ThreadsController extends Controller
     {
         views($thread)->record();
 
-        $replies = $thread->replies()->paginate(10);
-
-        return view('threads.show', compact('thread', 'replies'));
+        return view('threads.show', compact('thread'));
     }
 
     public function edit(Thread $thread)

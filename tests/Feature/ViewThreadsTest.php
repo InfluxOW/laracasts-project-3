@@ -114,4 +114,15 @@ class ViewThreadsTest extends TestCase
         $replies = array_column($response['data'], 'favorites_count');
         $this->assertEquals([3, 2, 1], $replies);
     }
+
+    /** @test */
+    public function a_user_can_request_all_replies_for_a_given_thread()
+    {
+        $replies = factory(Reply::class, 20)->create(['thread_id' => $this->thread->id]);
+        $response = $this->getJson(route('threads.replies.index', [$this->thread->channel, $this->thread]))->json();
+
+        $this->assertCount(15, $response['data']);
+        $this->assertEquals(20, $response['total']);
+
+    }
 }

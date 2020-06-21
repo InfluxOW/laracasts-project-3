@@ -15,9 +15,9 @@ class ThreadRepliesController extends Controller
         $this->middleware('auth')->only('store', 'destroy', 'update');
     }
 
-    public function index()
+    public function index(Channel $channel, Thread $thread)
     {
-        //
+        return $thread->replies()->paginate(15);
     }
 
     public function create()

@@ -1,7 +1,7 @@
 <template>
     <div class="mb-2 font-sans py-2 bg-white rounded-lg border border-gray-300" :id="id">
         <div class="flex py-2">
-            <div class="w-1/8">
+            <div class="w-1/8 mr-1">
                 <img :src="data.user.avatar" alt="" class="h-12 w-12 rounded-full mx-2">
             </div>
             <div class="w-full">

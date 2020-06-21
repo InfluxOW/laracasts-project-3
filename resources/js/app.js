@@ -28,6 +28,7 @@ window.flash = function(message, type) {
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);
+Vue.component('paginator', require('./components/Paginator.vue').default);
 Vue.component('thread', require('./pages/Thread.vue').default);
 
 const app = new Vue({

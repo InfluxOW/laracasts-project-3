@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
@@ -16,7 +17,7 @@ class Thread extends Model implements Viewable
     use Favoriteable;
     use LogsActivity;
 
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at'];
     protected $with = ['channel', 'user', 'favorites'];
     public const COUNTABLES = ['replies', 'views', 'favorites'];
     // views
@@ -33,16 +34,16 @@ class Thread extends Model implements Viewable
         parent::boot();
 
         static::addGlobalScope("countablesCount", function ($builder) {
-            if (is_null(request()->sort_from_date)) {
+//            if (is_null(request()->sort_from_date)) {
                 $builder->withCount(Thread::COUNTABLES);
-            } else {
-                foreach (Thread::COUNTABLES as $property) {
-                    $builder->withCount([$property => function ($query) {
-                        $sortFromDate = Carbon::createFromDate(request()->sort_from_date);
-                        $query->where('created_at', '>=', $sortFromDate);
-                    }]);
-                }
-            }
+//            } else {
+//                foreach (Thread::COUNTABLES as $property) {
+//                    $builder->withCount([$property => function ($query) {
+//                        $sortFromDate = Carbon::createFromDate(request()->sort_from_date);
+//                        $query->where('created_at', '>=', $sortFromDate);
+//                    }]);
+//                }
+//            }
         });
     }
 
@@ -81,5 +82,10 @@ class Thread extends Model implements Viewable
         $reply = Auth::user()->replies()->make($reply);
         $this->replies()->save($reply);
         return $reply;
+    }
+
+    public function scopeCreatedAfter(Builder $query, $date): Builder
+    {
+        return $query->where('created_at', '>=', Carbon::parse($date));
     }
 }

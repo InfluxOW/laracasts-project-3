@@ -15,7 +15,7 @@ class ThreadsFiltration
     public function compose(View $view)
     {
         $view->with('currentSort', request()->query('sort'));
-        $view->with('sortFromDate', request()->query('sort_from_date'));
+        $view->with('createdAfter', request()->query('filter')['created_after'] ?? null);
 
         $view->with('sorts', self::SORTS);
     }

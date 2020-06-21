@@ -13,9 +13,9 @@
     <div class="flex inline-flex ml-2">
         <div
             class="border border-r-0 border-gray-300 text-gray-700 bg-page font-bold p-2 rounded rounded-r-none leading-tight cursor-not-allowed">
-            Sort from
+            Created after
         </div>
-        {{ Form::date('sort_from_date', $sortFromDate,
+        {{ Form::date('filter[created_after]', $createdAfter,
         ['class' => 'border border-gray-300 text-gray-700 py-2 bg-gray-200 px-4 rounded rounded-l-none leading-tight focus:shadow-outline']) }}
     </div>
     {{ Form::submit(__('Apply'), ['class' => 'button-dropdown-gray ml-2']) }}

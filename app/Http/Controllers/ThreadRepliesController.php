@@ -22,7 +22,7 @@ class ThreadRepliesController extends Controller
      */
     public function index($channel, Thread $thread)
     {
-        return $thread->replies()->paginate(15);
+        return $thread->replies()->oldest()->paginate(15);
     }
 
     public function create()

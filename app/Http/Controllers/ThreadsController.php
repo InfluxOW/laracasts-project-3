@@ -8,6 +8,7 @@ use App\Sorts\CountsByPeriod;
 use App\Sorts\CountsByPeriodSort;
 use App\Thread;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -28,7 +29,10 @@ class ThreadsController extends Controller
         $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
 
         $threads = QueryBuilder::for($query)
-            ->allowedFilters('user.username')
+            ->allowedFilters([
+                'user.username',
+                AllowedFilter::scope('created_after')
+                ])
             ->allowedSorts([
                 AllowedSort::field('views', 'views_count'),
                 AllowedSort::field('replies', 'replies_count'),

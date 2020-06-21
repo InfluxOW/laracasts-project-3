@@ -1,27 +1,29 @@
 <template>
     <div>
-        <hr class="my-6 border-2 opacity-75">
+        <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
         <div v-for="(reply, index) in items">
             <reply :data="reply" @deleted="remove(index)"></reply>
         </div>
-        <hr class="my-6 border-2 opacity-75">
+        <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
 
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 
-        <new-reply @created="add()"></new-reply>
+        <new-reply @created="add"></new-reply>
     </div>
 </template>
 
 <script>
     import Reply from './Reply.vue';
     import NewReply from './NewReply.vue';
-    import collection from '../mixins/Collection';
+    import collection from '../mixins/collection.js';
 
     export default {
         components: { Reply, NewReply },
-        mixins: ['collection'],
+        mixins: [collection],
         data() {
-            return { dataSet: false };
+            return {
+                dataSet: false
+            };
         },
         created() {
             this.fetch();

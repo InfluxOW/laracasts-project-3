@@ -15,7 +15,12 @@ class ThreadRepliesController extends Controller
         $this->middleware('auth')->only('store', 'destroy', 'update');
     }
 
-    public function index(Channel $channel, Thread $thread)
+    /**
+     * @param $channel
+     * @param Thread $thread
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function index($channel, Thread $thread)
     {
         return $thread->replies()->paginate(15);
     }
@@ -27,12 +32,12 @@ class ThreadRepliesController extends Controller
 
     /**
      * @param ThreadRepliesRequest $request
-     * @param Channel $channel
+     * @param $channel
      * @param Thread $thread
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ThreadRepliesRequest $request, Channel $channel, Thread $thread)
+    public function store(ThreadRepliesRequest $request, $channel, Thread $thread)
     {
         $this->authorize(Reply::class);
         $reply = $thread->addReply($request->validated());

@@ -20,8 +20,6 @@ class SubscriptionsController extends Controller
         $user = $request->user();
         $subscribable = $this->identifyModel($type, $id);
         $user->subscribeTo($subscribable);
-
-        return redirect()->back();
     }
 
     public function destroy(Request $request, string $type, int $id)
@@ -29,7 +27,5 @@ class SubscriptionsController extends Controller
         $user = $request->user();
         $subscribable = $this->identifyModel($type, $id);
         $user->unsubscribeFrom($subscribable);
-
-        return redirect()->back();
     }
 }

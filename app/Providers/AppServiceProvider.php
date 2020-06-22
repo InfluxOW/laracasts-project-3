@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Channel;
 use App\Reply;
+use App\Subscription;
 use App\Thread;
 use App\Observers\ChannelObserver;
 use App\Observers\ReplyObserver;
 use App\Observers\ThreadObserver;
+use App\Observers\SubscriptionObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -45,5 +47,6 @@ class AppServiceProvider extends ServiceProvider
         Thread::observe(ThreadObserver::class);
         Channel::observe(ChannelObserver::class);
         Reply::observe(ReplyObserver::class);
+        Subscription::observe(SubscriptionObserver::class);
     }
 }

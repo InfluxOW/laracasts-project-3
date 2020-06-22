@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Subscriber;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
@@ -15,6 +16,7 @@ class User extends Authenticatable
     use Favoriter;
     use CausesActivity;
     use LogsActivity;
+    use Subscriber;
 
     /**
      * The attributes that are mass assignable.

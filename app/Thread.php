@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\Subscribable;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use CyrildeWit\EloquentViewable\InteractsWithViews;
@@ -19,6 +20,7 @@ class Thread extends Model implements Viewable
     use InteractsWithViews;
     use Favoriteable;
     use LogsActivity;
+    use Subscribable;
 
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at'];
     protected $with = ['channel', 'user', 'favorites'];

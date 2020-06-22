@@ -39,18 +39,6 @@
     }
 }
 
-.button-dropdown-blue {
-  @apply .button .text-white .bg-blue-500;
-
-  &:hover {
-    @apply .border-blue-500 .opacity-75 .bg-transparent .text-blue-500;
-  }
-
-  &:focus {
-    @apply .outline-none;
-  }
-}
-
 .button-dropdown-light {
   @apply .button .text-white .border .border-transparent;
 
@@ -88,10 +76,22 @@
 }
 
 .button-dropdown-red {
-    @apply .button .text-red-600 .border .border-transparent .bg-red-200;
+    @apply .button .text-red-600 .bg-red-200;
 
     &:hover {
         @apply .border-red-500 .border-opacity-25 .bg-red-100;
+    }
+
+    &:focus {
+        @apply .outline-none;
+    }
+}
+
+.button-dropdown-blue {
+    @apply .button .text-white .bg-blue-300;
+
+    &:hover {
+        @apply .border-blue-500 .border-opacity-25 .bg-blue-100 .text-blue-500;
     }
 
     &:focus {

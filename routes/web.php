@@ -38,4 +38,7 @@ Route::patch('replies/{reply}', 'ThreadRepliesController@update')->name('threads
 
 Route::post('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@store')->name('favorites.store');
 Route::delete('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesController@destroy')->name('favorites.destroy');
+
+Route::post('/subscriptions/{subscribableType}/{subscribableId}', 'SubscriptionsController@store')->name('subscriptions.store');
+Route::delete('/subscriptions/{subscribableType}/{subscribableId}', 'SubscriptionsController@destroy')->name('subscriptions.destroy');
 Auth::routes();

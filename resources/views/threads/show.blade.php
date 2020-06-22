@@ -16,6 +16,20 @@
         </div>
 
         <div class="container max-w-6xl flex justify-end">
+            <div class="mr-2">
+                @auth
+                    @if (Auth::user()->isSubscribedTo($thread))
+                        {!! Form::open(['url' => route('subscriptions.destroy', [$thread->getMorphClass(), $thread->getKey()]), 'method' => 'DELETE']) !!}
+                            {!! Form::button('Unsubscribe', ['class' => 'button-dropdown-red', 'type' => 'submit']) !!}
+                        {!! Form::close() !!}
+                    @else
+                        {!! Form::open(['url' => route('subscriptions.store', [$thread->getMorphClass(), $thread->getKey()]), 'method' => 'POST']) !!}
+                            {!! Form::button('Subscribe', ['class' => 'button-dropdown-blue', 'type' => 'submit']) !!}
+                        {!! Form::close() !!}
+                    @endif
+                @endauth
+            </div>
+
             @can('delete', $thread)
                 <a
                     href="{{ route('threads.destroy', $thread) }}"

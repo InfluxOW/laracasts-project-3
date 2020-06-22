@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subscription extends Model
 {
+    protected $with = ['subscribable'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

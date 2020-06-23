@@ -28,11 +28,12 @@ class Thread extends Model implements Viewable
     // views
     protected $removeViewsOnDelete = true;
     // logs
-    protected static $logAttributes = ['body', 'title', 'channel.name'];
+    protected static $logAttributes = ['body', 'title'];
     protected static $logName = 'threads_log';
     protected static $ignoreChangedAttributes = ['updated_at', 'slug'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
+    protected static $recordEvents = ['created', 'updated'];
 
     protected static function boot()
     {
@@ -107,5 +108,15 @@ class Thread extends Model implements Viewable
                 AllowedSort::field('favorites', 'favorites_count'),
             ])
             ->latest();
+    }
+
+    public function getLinkAttribute()
+    {
+        return $this->getLink();
+    }
+
+    public function getLink(): string
+    {
+        return route('threads.show', [$this->channel, $this]);
     }
 }

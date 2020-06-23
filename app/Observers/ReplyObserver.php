@@ -37,6 +37,7 @@ class ReplyObserver
     public function deleted(Reply $reply)
     {
         $reply->favorites->each->delete();
+        $reply->activities->each->delete();
     }
 
     /**

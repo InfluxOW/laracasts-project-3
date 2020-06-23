@@ -58,7 +58,7 @@ class ThreadTest extends TestCase
         $user = factory(User::class)->create();
         $user->subscribeTo($this->thread);
         $subscribable = $user->subscriptions->first()->subscribable;
-        $this->assertCount(1, $user->subscribtions);
+        $this->assertCount(1, $user->subscriptions);
         $this->assertEquals([$subscribable->id, $subscribable->title], [$this->thread->id, $this->thread->title]);
     }
 

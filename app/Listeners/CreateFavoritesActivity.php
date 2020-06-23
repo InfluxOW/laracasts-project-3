@@ -2,8 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Reply;
+use App\Thread;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Overtrue\LaravelFavorite\Favorite;
+use Spatie\Activitylog\Models\Activity;
 
 class CreateFavoritesActivity
 {
@@ -31,7 +35,8 @@ class CreateFavoritesActivity
                 ->performedOn($event->favorite->favoriteable)
                 ->withProperties([
                     'favoriteable_type' => strtolower(class_basename($event->favorite->favoriteable)),
-                    'favoriteable' => $event->favorite->favoriteable->withoutRelations()
+                    'favoriteable.link' => $event->favorite->favoriteable->link,
+                    'favoriteable.main' => $event->favorite->favoriteable->title ?? $event->favorite->favoriteable->body
                 ])
                 ->log(strtolower(class_basename($event)));
         }

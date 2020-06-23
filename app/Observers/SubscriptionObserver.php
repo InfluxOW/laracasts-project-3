@@ -15,13 +15,9 @@ class SubscriptionObserver
     public function created(Subscription $subscription)
     {
         if (isset($subscription->subscribable)) {
-            activity('subscriptions_log')
+            activity('subscribes_log')
                 ->causedBy(request()->user())
                 ->performedOn($subscription->subscribable)
-                ->withProperties([
-                    'subscribable_type' => strtolower(class_basename($subscription->subscribable)),
-                    'subscribable' => $subscription->subscribable->withoutRelations()
-                ])
                 ->log('subscribed to');
         }
     }
@@ -46,13 +42,9 @@ class SubscriptionObserver
     public function deleted(Subscription $subscription)
     {
         if (isset($subscription->subscribable)) {
-            activity('subscriptions_log')
+            activity('subscribes_log')
                 ->causedBy(request()->user())
                 ->performedOn($subscription->subscribable)
-                ->withProperties([
-                    'subscribable_type' => strtolower(class_basename($subscription->subscribable)),
-                    'subscribable' => $subscription->subscribable->withoutRelations()
-                ])
                 ->log('unsubscribed from');
         }
     }

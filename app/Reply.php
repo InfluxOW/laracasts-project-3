@@ -17,6 +17,7 @@ class Reply extends Model
     protected static $ignoreChangedAttributes = ['updated_at'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
+    protected static $recordEvents = ['created', 'updated'];
     // logs
     protected $fillable = ['body', 'thread_id', 'user_id', 'created_at'];
     protected $with = ['user', 'favorites', 'thread.channel'];

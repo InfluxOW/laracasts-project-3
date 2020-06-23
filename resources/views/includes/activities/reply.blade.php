@@ -6,17 +6,11 @@
     @else
         <svg class="text-pink-600 fill-current h-6 w-6 z-10" viewBox="0 0 511.096 511.096" xmlns="http://www.w3.org/2000/svg"><path d="m74.414 480.548h-36.214l25.607-25.607c13.807-13.807 22.429-31.765 24.747-51.246-59.127-38.802-88.554-95.014-88.554-153.944 0-108.719 99.923-219.203 256.414-219.203 165.785 0 254.682 101.666 254.682 209.678 0 108.724-89.836 210.322-254.682 210.322-28.877 0-59.01-3.855-85.913-10.928-25.467 26.121-59.973 40.928-96.087 40.928z"/></svg>
     @endif
-    <div class="flex-1 ml-4 font-bold">
+        <div class="flex-1 ml-4 font-bold">
         {{ $action->created_at->format('M d, g:i a') }}
     </div>
 </div>
 <div class="ml-12">
     {{ ucwords($user->name) }} {{ $action->description }} {{ $action->subject_type }}
-    @if (isset($action->subject))
-        <a href="{{ $action->subject->getLink() }}" class="text-blue-500 hover:text-blue-300 italic">{{ $action->subject->body }}</a>
-    @elseif ($action->changes->count() > 0)
-        <span class="italic">"{{ json_decode($action->changes, true)['attributes']['body'] }}"</span>
-    @else
-        <span class="italic">"{{ $action->properties->toArray()['favoriteable']['body'] }}"</span>
-    @endif
+    <a href="{{ $action->subject->link }}" class="text-blue-500 hover:text-blue-300 italic">{{ $action->subject->body }}</a>
 </div>

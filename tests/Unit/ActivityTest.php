@@ -18,7 +18,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $thread->id,
-            'subject_type' => 'thread'
+            'subject_type' => 'thread',
+            'log_name' => 'threads_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
         $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
@@ -35,24 +36,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $thread->id,
-            'subject_type' => 'thread'
-        ]);
-        $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
-        $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
-    }
-
-    /** @test */
-    public function it_records_activity_when_a_thread_is_deleted()
-    {
-        activity()->disableLogging();
-        $thread = factory(Thread::class)->create();
-        activity()->enableLogging();
-
-        $thread->delete();
-
-        $this->assertDatabaseHas('activity_log', [
-            'subject_id' => $thread->id,
-            'subject_type' => 'thread'
+            'subject_type' => 'thread',
+            'log_name' => 'threads_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
         $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
@@ -65,7 +50,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $user->id,
-            'subject_type' => 'user'
+            'subject_type' => 'user',
+            'log_name' => 'users_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'user')->get());
         $this->assertEquals(Activity::where('subject_type', 'user')->first()->subject, User::find($user->id));
@@ -82,7 +68,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $user->id,
-            'subject_type' => 'user'
+            'subject_type' => 'user',
+            'log_name' => 'users_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'user')->get());
         $this->assertEquals(Activity::where('subject_type', 'user')->first()->subject, User::find($user->id));
@@ -99,7 +86,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $user->id,
-            'subject_type' => 'user'
+            'subject_type' => 'user',
+            'log_name' => 'users_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'user')->get());
         $this->assertEquals(Activity::where('subject_type', 'user')->first()->subject, User::find($user->id));
@@ -112,7 +100,8 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $reply->id,
-            'subject_type' => 'reply'
+            'subject_type' => 'reply',
+            'log_name' => 'replies_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'reply')->get());
         $this->assertEquals(Activity::where('subject_type', 'reply')->first()->subject, Reply::find($reply->id));
@@ -129,73 +118,121 @@ class ActivityTest extends TestCase
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $reply->id,
-            'subject_type' => 'reply'
+            'subject_type' => 'reply',
+            'log_name' => 'replies_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'reply')->get());
         $this->assertEquals(Activity::where('subject_type', 'reply')->first()->subject, Reply::find($reply->id));
     }
 
     /** @test */
-    public function it_records_activity_when_a_reply_is_deleted()
+    public function it_records_activity_when_a_reply_is_favorited()
     {
         activity()->disableLogging();
         $reply = factory(Reply::class)->create();
         activity()->enableLogging();
 
-        $reply->delete();
+        $reply->user->favorite($reply);
 
         $this->assertDatabaseHas('activity_log', [
             'subject_id' => $reply->id,
-            'subject_type' => 'reply'
+            'subject_type' => 'reply',
+            'log_name' => 'favorites_log'
         ]);
         $this->assertCount(1, Activity::where('subject_type', 'reply')->get());
         $this->assertEquals(Activity::where('subject_type', 'reply')->first()->subject, Reply::find($reply->id));
     }
 
     /** @test */
-    public function it_records_activity_when_a_channel_is_created()
+    public function it_records_activity_when_a_reply_is_unfavorited()
     {
-        $channel = factory(Channel::class)->create();
+        activity()->disableLogging();
+        $reply = factory(Reply::class)->create();
+        $reply->user->favorite($reply);
+        activity()->enableLogging();
+
+        $reply->user->unfavorite($reply);
 
         $this->assertDatabaseHas('activity_log', [
-            'subject_id' => $channel->id,
-            'subject_type' => 'channel'
+            'subject_id' => $reply->id,
+            'subject_type' => 'reply',
+            'log_name' => 'favorites_log'
         ]);
-        $this->assertCount(1, Activity::where('subject_type', 'channel')->get());
-        $this->assertEquals(Activity::where('subject_type', 'channel')->first()->subject, Channel::find($channel->id));
+        $this->assertCount(1, Activity::where('subject_type', 'reply')->get());
+        $this->assertEquals(Activity::where('subject_type', 'reply')->first()->subject, Reply::find($reply->id));
     }
 
     /** @test */
-    public function it_records_activity_when_a_channel_is_updated()
+    public function it_records_activity_when_a_thread_is_favorited()
     {
         activity()->disableLogging();
-        $channel = factory(Channel::class)->create();
+        $thread = factory(Thread::class)->create();
         activity()->enableLogging();
 
-        $channel->update(['name' => 'new name']);
+        $thread->user->favorite($thread);
 
         $this->assertDatabaseHas('activity_log', [
-            'subject_id' => $channel->id,
-            'subject_type' => 'channel'
+            'subject_id' => $thread->id,
+            'subject_type' => 'thread',
+            'log_name' => 'favorites_log'
         ]);
-        $this->assertCount(1, Activity::where('subject_type', 'channel')->get());
-        $this->assertEquals(Activity::where('subject_type', 'channel')->first()->subject, Channel::find($channel->id));
+        $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
+        $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
     }
 
     /** @test */
-    public function it_records_activity_when_a_channel_is_deleted()
+    public function it_records_activity_when_a_thread_is_unfavorited()
     {
         activity()->disableLogging();
-        $channel = factory(Channel::class)->create();
+        $thread = factory(Thread::class)->create();
+        $thread->user->favorite($thread);
         activity()->enableLogging();
 
-        $channel->delete();
+        $thread->user->unfavorite($thread);
 
         $this->assertDatabaseHas('activity_log', [
-            'subject_id' => $channel->id,
-            'subject_type' => 'channel'
+            'subject_id' => $thread->id,
+            'subject_type' => 'thread',
+            'log_name' => 'favorites_log'
         ]);
-        $this->assertCount(1, Activity::where('subject_type', 'channel')->get());
-        $this->assertEquals(Activity::where('subject_type', 'channel')->first()->subject, Channel::find($channel->id));
+        $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
+        $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
+    }
+
+    /** @test */
+    public function it_records_activity_when_a_thread_is_subscribed_to()
+    {
+        activity()->disableLogging();
+        $thread = factory(Thread::class)->create();
+        activity()->enableLogging();
+
+        $thread->user->subscribeTo($thread);
+
+        $this->assertDatabaseHas('activity_log', [
+            'subject_id' => $thread->id,
+            'subject_type' => 'thread',
+            'log_name' => 'subscribes_log'
+        ]);
+        $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
+        $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
+    }
+
+    /** @test */
+    public function it_records_activity_when_a_thread_is_unsubscribed_from()
+    {
+        activity()->disableLogging();
+        $thread = factory(Thread::class)->create();
+        $thread->user->subscribeTo($thread);
+        activity()->enableLogging();
+
+        $thread->user->unsubscribeFrom($thread);
+
+        $this->assertDatabaseHas('activity_log', [
+            'subject_id' => $thread->id,
+            'subject_type' => 'thread',
+            'log_name' => 'subscribes_log'
+        ]);
+        $this->assertCount(1, Activity::where('subject_type', 'thread')->get());
+        $this->assertEquals(Activity::where('subject_type', 'thread')->first()->subject, Thread::find($thread->id));
     }
 }

@@ -42,14 +42,21 @@ class ThreadObserver
     }
 
     /**
-     * Handle the thread "deleted" event.
+     * Handle the thread "deleting" event.
      *
      * @param  \App\Thread  $thread
      * @return void
      */
+    public function deleting(Thread $thread)
+    {
+        $thread->replies->each->delete();
+    }
+
     public function deleted(Thread $thread)
     {
         $thread->favorites->each->delete();
+        $thread->subscribable->each->delete();
+        $thread->activities->each->delete();
     }
 
     /**

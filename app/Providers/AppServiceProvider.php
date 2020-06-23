@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Channel;
+use App\Observers\FavoriteObserver;
 use App\Reply;
 use App\Subscription;
 use App\Thread;
@@ -13,6 +14,7 @@ use App\Observers\SubscriptionObserver;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Overtrue\LaravelFavorite\Favorite;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,7 +43,8 @@ class AppServiceProvider extends ServiceProvider
             'thread' => 'App\Thread',
             'user' => 'App\User',
             'channel' => 'App\Channel',
-            'favorite' => 'Overtrue\LaravelFavorite\Favorite'
+            'favorite' => 'Overtrue\LaravelFavorite\Favorite',
+            'subscription' => 'App\Subscription'
         ]);
 
         Thread::observe(ThreadObserver::class);

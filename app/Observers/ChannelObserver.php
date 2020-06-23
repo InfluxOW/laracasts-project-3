@@ -16,10 +16,7 @@ class ChannelObserver
     public function created(Channel $channel)
     {
         Cache::forget('channels');
-
-        $channel->disableLogging();
         $channel->update(['slug' => slugify($channel->name)]);
-        $channel->enableLogging();
     }
 
     /**

@@ -81,15 +81,9 @@
 
 @push('scripts')
     <script>
-        import SubscribeButton from "../../js/components/SubscribeButton";
-
-        window.app =
-        export default {
-            components: {SubscribeButton}
-        }
-        {!! json_encode([
-                        'signedIn' => Auth::check(),
-                        'user' => Auth::user(),
-                    ]) !!}
+        window.app = {!! json_encode([
+                'signedIn' => Auth::check(),
+                'user' => Auth::user(),
+            ]) !!}
     </script>
 @endpush

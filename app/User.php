@@ -50,9 +50,9 @@ class User extends Authenticatable
     // logs
     protected static $logAttributes = ['name', 'username', 'email'];
     protected static $logName = 'users_log';
-//    protected static $ignoreChangedAttributes = ['updated_at', 'slug'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
 
     //Relations
 

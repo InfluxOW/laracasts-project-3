@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ReplyCreated;
 use App\Notifications\ThreadWasUpdated;
 use App\Traits\Subscribable;
 use Carbon\Carbon;
@@ -89,13 +90,7 @@ class Thread extends Model implements Viewable
         $reply = $user->replies()->make($reply);
         $this->replies()->save($reply);
 
-        $this->subscriptions
-            ->filter(function ($subscription) use ($user) {
-            return $subscription->user->isNot($user);
-        })
-            ->each( function ($subscription) use ($reply) {
-            $subscription->user->notify(new ThreadWasUpdated($reply));
-        });
+        event(new ReplyCreated($reply));
 
         return $reply;
     }

@@ -15,7 +15,7 @@
             <h1 class="font-bold break-normal text-3xl md:text-5xl">{{ $thread->title }}</h1>
         </div>
 
-        <div class="container max-w-6xl flex justify-end">
+        <div class="container max-w-6xl flex justify-end mt-2">
                 @auth
                 <div class="mr-2">
                     <subscribe-button
@@ -36,7 +36,7 @@
         </div>
 
         <!--image-->
-        <div class="container w-full max-w-6xl mx-auto bg-cover my-4 rounded"
+        <div class="container w-full max-w-6xl mx-auto bg-cover mt-2 mb-4 rounded"
              style="background-image:url({{ $thread->getImage() }}); height: 75vh;"></div>
 
         <!--Container-->
@@ -78,12 +78,3 @@
 @section('footer')
     <x-footer background="bg-white bg-opacity-25" styles="py-6" dark="true"/>
 @endsection
-
-@push('scripts')
-    <script>
-        window.app = {!! json_encode([
-                'signedIn' => Auth::check(),
-                'user' => Auth::user(),
-            ]) !!}
-    </script>
-@endpush

@@ -1,6 +1,6 @@
 <nav class="w-full {{ $navStyles ?? '' }}">
     <div
-        class="{{ $background ?? '' }} container py-1 px-4 mx-auto flex flex-wrap items-center justify-between {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }}">
+        class="{{ $background ?? '' }} container py-1 px-4 mx-auto flex flex-wrap {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }}">
         <div class="w-full relative flex justify-between lg:w-auto px-4 lg:static lg:block lg:justify-start">
             <div
                 class="text-md font-bold leading-relaxed inline-block py-2 whitespace-no-wrap uppercase cursor-pointer {{ $dark == 'true' ? 'text-black' : 'text-white' }}">
@@ -56,9 +56,12 @@
             </ul>
 
             <!-- Right Navbar Side -->
-            <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+            <ul class="flex flex-col lg:flex-row list-none lg:ml-auto items-center">
 
                 @auth
+{{--                    @if (Auth::user()->unreadNotifications->count() > 0)--}}
+                        <user-notifications></user-notifications>
+{{--                    @endif--}}
                     <li>
                         <dropdown
                             button_classes="{{ $dropdownButtonClass }} w-full"

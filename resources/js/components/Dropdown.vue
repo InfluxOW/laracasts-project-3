@@ -1,15 +1,14 @@
 <template>
-    <div class="flex flex-wrap items-center dropdown">
-        <div class="w-full">
-            <div class="relative inline-flex align-middle w-full z-50">
-                <button :class="button_classes" style="transition: all 0.15s ease;" type="button" v-on:click="toggleDropdown()" ref="btnDropdownRef">
+    <div class="flex flex-wrap items-center dropdown align-middle z-50" :class="icon_dropdown ? '' : 'relative'">
+        <button :class="button_classes" style="transition: all 0.15s ease;" type="button" v-on:click="toggleDropdown()" ref="btnDropdownRef">
+                <span class="inline-flex">
+                    <slot name="icon"></slot>
                     {{ button_title }}
-                </button>
+                </span>
+        </button>
 
-                <div v-bind:class="{'hidden': !dropdownPopoverShow, 'block': dropdownPopoverShow}" class="bg-white text-base py-2 list-none rounded shadow-lg mt-1 text-center w-full" ref="popoverDropdownRef">
-                    <slot name="items"></slot>
-                </div>
-            </div>
+        <div :class="classes" class="bg-white text-base py-2 list-none rounded shadow-lg mt-1 text-center max-w-sm z-50" ref="popoverDropdownRef">
+            <slot name="items"></slot>
         </div>
     </div>
 </template>
@@ -22,12 +21,18 @@ export default {
     props: {
         button_classes: { default: '' },
         button_title: { default: '' },
+        icon_dropdown: { default: false }
+    },
+    computed: {
+        classes() {
+            return [this.icon_dropdown ? '' : 'w-full', this.dropdownPopoverShow ? 'block' : 'hidden'];
+        }
     },
     name: "dropdown",
     data() {
-    return {
-        dropdownPopoverShow: false
-    }
+        return {
+            dropdownPopoverShow: false
+        }
     },
     watch: {
         dropdownPopoverShow(dropdownPopoverShow) {

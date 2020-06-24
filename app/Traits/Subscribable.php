@@ -6,7 +6,7 @@ use App\Subscription;
 
 trait Subscribable
 {
-    public function subscribable()
+    public function subscriptions()
     {
         return $this->hasMany(Subscription::class, 'subscribable_id');
     }

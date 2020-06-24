@@ -41,7 +41,7 @@ class ThreadTest extends TestCase
     {
         $this->actingAs($this->thread->user);
 
-        $this->thread->addReply(['body' => 'test reply']);
+        $this->thread->addReply(['body' => 'test reply'], $this->thread->user);
 
         $this->assertCount(1, $this->thread->replies);
     }

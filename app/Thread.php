@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ThreadWasUpdated;
 use App\Traits\Subscribable;
 use Carbon\Carbon;
 use CyrildeWit\EloquentViewable\Contracts\Viewable;
@@ -83,10 +84,19 @@ class Thread extends Model implements Viewable
         return $this->channel->threads->where('id', '<>', $this->id)->random($recomendationsAmount);
     }
 
-    public function addReply($reply)
+    public function addReply($reply, $user)
     {
-        $reply = Auth::user()->replies()->make($reply);
+        $reply = $user->replies()->make($reply);
         $this->replies()->save($reply);
+
+        $this->subscriptions
+            ->filter(function ($subscription) use ($user) {
+            return $subscription->user->isNot($user);
+        })
+            ->each( function ($subscription) use ($reply) {
+            $subscription->user->notify(new ThreadWasUpdated($reply));
+        });
+
         return $reply;
     }
 

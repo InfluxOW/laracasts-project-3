@@ -40,7 +40,7 @@ class ThreadRepliesController extends Controller
     public function store(ThreadRepliesRequest $request, $channel, Thread $thread)
     {
         $this->authorize(Reply::class);
-        $reply = $thread->addReply($request->validated());
+        $reply = $thread->addReply($request->validated(), $request->user());
 
         if ($request->wantsJson()) {
             return $reply->load('user')->loadCount('favorites');

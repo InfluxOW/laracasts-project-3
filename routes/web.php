@@ -41,4 +41,8 @@ Route::delete('/favorites/{favoriteableType}/{favoriteableId}', 'FavoritesContro
 
 Route::post('/subscriptions/{subscribableType}/{subscribableId}', 'SubscriptionsController@store')->name('subscriptions.store');
 Route::delete('/subscriptions/{subscribableType}/{subscribableId}', 'SubscriptionsController@destroy')->name('subscriptions.destroy');
+
+Route::get('/profiles/{user:username}/notifications', 'NotificationsController@index')->name('notifications.index');
+Route::delete('/profiles/{user:username}/notifications/{notification}', 'NotificationsController@destroy')->name('notifications.destroy');
+
 Auth::routes();

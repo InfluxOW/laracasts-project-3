@@ -19,7 +19,7 @@
                 @auth
                 <div class="mr-2">
                     <subscribe-button
-                            is-subscribed="{{ Auth::user()->isSubscribedTo($thread) }}"
+                            subscribed="{{ Auth::user()->isSubscribedTo($thread) }}"
                             endpoint="{{ route('subscriptions.store', [$thread->getMorphClass(), $thread->getKey()]) }}">
                     </subscribe-button>
                 </div>

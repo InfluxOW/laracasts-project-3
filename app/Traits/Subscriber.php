@@ -29,7 +29,7 @@ trait Subscriber
     public function isSubscribedTo($model)
     {
         return $this->subscriptions()->whereHasMorph('subscribable', get_class($model), function (Builder $query) use ($model) {
-            return $query->where('subscribable_id', $model->id);
+            return $query->where('subscribable_id', $model->getKey())->where('subscribable_type', $model->getMorphClass());
         })->exists();
     }
 

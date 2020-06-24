@@ -5,7 +5,12 @@
 
 <script>
     export default {
-        props: ['isSubscribed', 'endpoint'],
+        props: ['subscribed', 'endpoint'],
+        data() {
+            return {
+                isSubscribed: this.subscribed
+            }
+        },
         methods: {
             subscribe() {
                 axios.post(this.endpoint).then(flash('You have been subscribed to post!', 'success'));

@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div v-if="notifications.length > 0">
-            <div :class="item.typeObject" role="alert" :key="item.id" v-for="item in notifications">
+            <div :class="item.typeObject" role="alert" :key="item.id" v-for="item in notifications" class="mr-2 mb-2 shadow-lg">
                 <span v-if="displayIcons" :class="item.iconObject"></span> <span v-html="item.message"></span>
             </div>
         </div>

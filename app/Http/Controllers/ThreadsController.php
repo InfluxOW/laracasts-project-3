@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Http\Requests\ThreadsRequest;
+use App\Inspections\Spam;
 use App\Sorts\CountsByPeriod;
 use App\Sorts\CountsByPeriodSort;
 use App\Thread;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -55,13 +57,21 @@ class ThreadsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ThreadsRequest $request)
+    public function store(ThreadsRequest $request, Spam $spam)
     {
         $this->authorize(Thread::class);
-        $thread = $request->user()->threads()->create($request->validated());
+        try {
+            $spam->detect($request->body);
+            $spam->detect($request->title);
+            $thread = $request->user()->threads()->create($request->validated());
 
-        flash('Thread has been created!')->success();
-        return redirect()->route('threads.show', [$thread->channel, $thread]);
+            flash('Thread has been created!')->success();
+            return redirect()->route('threads.show', [$thread->channel, $thread]);
+        } catch (ValidationException $e) {
+            flash($e->getMessage())->error();
+            return redirect()->route('threads.index');
+        }
+
     }
 
     /**

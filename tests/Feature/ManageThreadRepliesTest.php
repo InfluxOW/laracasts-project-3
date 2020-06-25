@@ -23,8 +23,7 @@ class ManageThreadRepliesTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_add_replies()
     {
-        $this->followingRedirects()
-            ->actingAs($this->thread->user)
+        $this->actingAs($this->thread->user)
             ->post(route('threads.replies.store', [$this->thread->channel, $this->thread]), $this->reply);
         $this->assertDatabaseHas('replies', $this->reply);
     }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Http\Requests\ThreadRepliesRequest;
+use App\Inspections\Spam;
 use App\Reply;
 use App\Thread;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class ThreadRepliesController extends Controller
@@ -34,19 +36,21 @@ class ThreadRepliesController extends Controller
      * @param ThreadRepliesRequest $request
      * @param $channel
      * @param Thread $thread
+     * @param Spam $spam
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function store(ThreadRepliesRequest $request, $channel, Thread $thread)
+    public function store(ThreadRepliesRequest $request, $channel, Thread $thread, Spam $spam)
     {
         $this->authorize(Reply::class);
-        $reply = $thread->addReply($request->validated(), $request->user());
+        try {
+            $spam->detect($request->body);
+            $reply = $thread->addReply($request->validated(), $request->user());
 
-        if ($request->wantsJson()) {
             return $reply->load('user')->loadCount('favorites');
+        } catch (ValidationException $e) {
+            return ['message' => $e->getMessage()];
         }
-
-        return redirect()->route('threads.show', [$channel, $thread]);
     }
 
     public function show(Reply $reply)
@@ -59,11 +63,16 @@ class ThreadRepliesController extends Controller
         //
     }
 
-    public function update(ThreadRepliesRequest $request, Reply $reply)
+    public function update(ThreadRepliesRequest $request, Reply $reply, Spam $spam)
     {
         $this->authorize($reply);
 
-        $reply->update($request->validated());
+        try {
+            $spam->detect($request->body);
+            $reply->update($request->validated());
+        } catch (ValidationException $e) {
+            return ['message' => $e->getMessage()];
+        }
     }
 
     public function destroy(Request $request, Reply $reply)

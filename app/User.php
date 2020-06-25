@@ -107,4 +107,17 @@ class User extends Authenticatable
         $key = $this->visitedThreadCacheKey($thread);
         Cache::forever($key, $view->viewed_at);
     }
+
+    public function canPost($latestPostData, $userPostsFrequency)
+    {
+        return $latestPostData->diffInSeconds() > $userPostsFrequency;
+    }
+
+    public function getLastPublicationDate()
+    {
+        $lastThreadDate = $this->threads_count > 0 ? $this->threads->last()->created_at : null;
+        $lastReplyDate = $this->replies_count > 0 ? $lastReplyDate = $this->replies->last()->created_at : null;
+
+        return max($lastReplyDate, $lastThreadDate);
+    }
 }

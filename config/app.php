@@ -234,5 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'spam_detection' => [
+        'user_can_post_once_in' => env('POSTS_FREQUENCY', 180)
+    ]
 ];

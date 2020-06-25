@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\SpamFree;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ThreadRepliesRequest extends FormRequest
@@ -24,7 +25,7 @@ class ThreadRepliesRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', 'string', 'min:3', 'max:3000']
+            'body' => ['required', 'string', 'min:3', 'max:3000', new SpamFree()]
         ];
     }
 }

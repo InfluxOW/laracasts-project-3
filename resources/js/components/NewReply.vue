@@ -25,7 +25,7 @@
             addReply() {
                 axios.post(location.pathname + '/replies', { body: this.body })
                     .catch(error => {
-                        flash(error.response.data, 'error');
+                        flash(error.response.data.errors.body.toString(), 'error');
                     })
                     .then(({data}) => {
                         this.body = '';

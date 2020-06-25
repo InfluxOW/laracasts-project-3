@@ -7,7 +7,7 @@
             <h2 class="tracking-widest text-xs font-medium text-gray-500 mb-1 uppercase">
                 <a href="{{ route('threads.filter', $thread->channel) }}" class="outline-none focus:outline-none">{{ $thread->channel->name }}</a>
             </h2>
-            <h1 class="sm:text-2xl text-xl font-medium text-gray-900 mb-3">
+            <h1 class="sm:text-2xl text-xl {{ Auth::check() && $thread->hasUpdatesFor(Auth::user()) ? 'font-bold text-blue-500 text-opacity-75' : 'font-medium text-gray-900' }} mb-3">
                 <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
                     {{ $thread->title }}
                 </a>

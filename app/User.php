@@ -3,8 +3,10 @@
 namespace App;
 
 use App\Traits\Subscriber;
+use CyrildeWit\EloquentViewable\View;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cache;
 use Overtrue\LaravelFavorite\Traits\Favoriter;
 use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
@@ -66,6 +68,11 @@ class User extends Authenticatable
         return $this->hasMany(Reply::class);
     }
 
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
+
     //
 
     public function getAvatarAttribute()
@@ -86,5 +93,18 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->admin;
+    }
+
+    public function visitedThreadCacheKey($thread)
+    {
+        return "user.{$this->id}.viewed.thread.{$thread->id}";
+    }
+
+    public function read($thread)
+    {
+        $view = views($thread)->record();
+        $this->views()->save($view);
+        $key = $this->visitedThreadCacheKey($thread);
+        Cache::forever($key, $view->viewed_at);
     }
 }

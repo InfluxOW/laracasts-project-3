@@ -7,6 +7,7 @@ use App\Channel;
 use App\Thread;
 use App\User;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
 class ThreadTest extends TestCase

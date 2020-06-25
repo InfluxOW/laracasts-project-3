@@ -11,6 +11,7 @@ use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -123,5 +124,13 @@ class Thread extends Model implements Viewable
     public function getLink(): string
     {
         return route('threads.show', [$this->channel, $this]);
+    }
+
+    public function hasUpdatesFor($user)
+    {
+        $key = $user->visitedThreadCacheKey($this);
+        $lastView = Cache::get($key);
+
+        return isset($lastView) && $this->updated_at > $lastView;
     }
 }

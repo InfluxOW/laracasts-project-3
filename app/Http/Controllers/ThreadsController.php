@@ -8,6 +8,7 @@ use App\Sorts\CountsByPeriod;
 use App\Sorts\CountsByPeriodSort;
 use App\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -64,13 +65,16 @@ class ThreadsController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param string $channelSlug
      * @param Thread $thread
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(string $channelSlug, Thread $thread)
+    public function show(Request $request, string $channelSlug, Thread $thread)
     {
-        views($thread)->record();
+        if ($request->user()) {
+            $request->user()->read($thread);
+        }
 
         return view('threads.show', compact('thread'));
     }

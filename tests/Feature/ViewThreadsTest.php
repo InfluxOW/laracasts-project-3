@@ -63,36 +63,36 @@ class ViewThreadsTest extends TestCase
         $threadTwo = factory(Thread::class)->create();
         $threadThree = factory(Thread::class)->create();
 
-        for ($i = 0; $i < 10; $i++) {
-            $this->get(route('threads.show', [$threadOne->channel, $threadOne]));
+        for ($i = 0; $i < 3; $i++) {
+            $this->actingAs($threadOne->user)->get(route('threads.show', [$threadOne->channel, $threadOne]));
         }
-        for ($i = 0; $i < 5; $i++) {
-            $this->get(route('threads.show', [$threadTwo->channel, $threadTwo]));
+        for ($i = 0; $i < 1; $i++) {
+            $this->actingAs($threadTwo->user)->get(route('threads.show', [$threadTwo->channel, $threadTwo]));
         }
-        for ($i = 0; $i < 15; $i++) {
-            $this->get(route('threads.show', [$threadThree->channel, $threadThree]));
+        for ($i = 0; $i < 2; $i++) {
+            $this->actingAs($threadThree->user)->get(route('threads.show', [$threadThree->channel, $threadThree]));
         }
 
         $response = $this->getJson(route('threads.index', ['sort' => '-views']))->json();
         $views = array_column($response['data'], 'views_count');
-        $this->assertEquals([15, 10, 5], $views);
+        $this->assertEquals([3, 2, 1], $views);
     }
 
     /** @test */
     public function a_user_can_sort_threads_by_comments_count()
     {
         $threadOne = $this->thread;
-        factory(Reply::class, 5)->create(['thread_id' => $threadOne->id]);
+        factory(Reply::class, 2)->create(['thread_id' => $threadOne->id]);
 
         $threadTwo = factory(Thread::class)->create();
-        factory(Reply::class, 15)->create(['thread_id' => $threadTwo->id]);
+        factory(Reply::class, 3)->create(['thread_id' => $threadTwo->id]);
 
         $threadThree = factory(Thread::class)->create();
-        factory(Reply::class, 10)->create(['thread_id' => $threadThree->id]);
+        factory(Reply::class, 1)->create(['thread_id' => $threadThree->id]);
 
         $response = $this->getJson(route('threads.index', ['sort' => '-replies']))->json();
         $replies = array_column($response['data'], 'replies_count');
-        $this->assertEquals([15, 10, 5], $replies);
+        $this->assertEquals([3, 2, 1], $replies);
     }
 
     /** @test */

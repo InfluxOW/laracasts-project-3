@@ -5,8 +5,9 @@ namespace App\Policies;
 use App\Reply;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
-class ThreadReplyPolicy
+class ReplyPolicy
 {
     use HandlesAuthorization;
 
@@ -41,6 +42,14 @@ class ThreadReplyPolicy
      */
     public function create(User $user)
     {
+        $latestPostData = $user->getLastPublicationDate();
+        if ($latestPostData) {
+            $userPostsFrequency = config('app.spam_detection.user_can_post_once_in');
+            return  $user->canPost($latestPostData, $userPostsFrequency) ?
+                Response::allow()
+                : Response::deny("You can post only once in {$userPostsFrequency} seconds.");
+        }
+
         return true;
     }
 

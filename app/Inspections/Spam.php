@@ -11,8 +11,7 @@ class Spam
      */
     protected $inspections = [
         InvalidKeywords::class,
-        KeyHeldDown::class,
-        PostedTooOften::class,
+        KeyHeldDown::class
     ];
 
     /**

@@ -49,7 +49,7 @@ class ThreadRepliesController extends Controller
 
             return $reply->load('user')->loadCount('favorites');
         } catch (ValidationException $e) {
-            return ['message' => $e->getMessage()];
+            return response($e->getMessage(), 422);
         }
     }
 
@@ -71,7 +71,7 @@ class ThreadRepliesController extends Controller
             $spam->detect($request->body);
             $reply->update($request->validated());
         } catch (ValidationException $e) {
-            return ['message' => $e->getMessage()];
+            return response($e->getMessage(), 422);
         }
     }
 

@@ -24,6 +24,9 @@
         methods: {
             addReply() {
                 axios.post(location.pathname + '/replies', { body: this.body })
+                    .catch(error => {
+                        flash(error.response.data, 'error');
+                    })
                     .then(({data}) => {
                         this.body = '';
                         flash('Reply has been posted!', 'success');

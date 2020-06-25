@@ -33,7 +33,7 @@
                     <slot name="honeypot"></slot>
 
                     <button @click="update" class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2">Update</button>
-                    <button @click="editing = false" class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2">Cancel</button>
+                    <button @click="editing = false; body = this.data.body" class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2">Cancel</button>
                 </div>
 
                 <div v-if="! editing">
@@ -80,11 +80,18 @@
         },
         methods: {
             update() {
-                axios.patch('/replies/' + this.data.id, {
-                    body: this.body
-                });
-                this.editing = false;
-                flash('Reply has been updated!', 'success');
+                axios.patch(
+                    '/replies/' + this.data.id, {
+                        body: this.body
+                    })
+                    .catch(error => {
+                        flash(error.response.data, 'error');
+                        this.body = this.data.body;
+                    })
+                    .then(({data}) => {
+                        this.editing = false;
+                        flash('Reply has been updated!', 'success');
+                    });
             },
             destroy() {
                 axios.delete('/replies/' + this.data.id);

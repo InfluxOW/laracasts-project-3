@@ -11,6 +11,7 @@
                         <div class="w-full px-4 z-50">
 
                             {!! Form::open(['url' => route('threads.store')]) !!}
+                            @honeypot
 
                             @include('threads._form')
 

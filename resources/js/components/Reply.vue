@@ -30,6 +30,7 @@
                     <div class="pr-8">
                         <textarea class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" v-model="body"></textarea>
                     </div>
+                    <slot name="honeypot"></slot>
 
                     <button @click="update" class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2">Update</button>
                     <button @click="editing = false" class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2">Cancel</button>

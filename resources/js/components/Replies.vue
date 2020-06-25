@@ -2,13 +2,21 @@
     <div>
         <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
         <div v-for="(reply, index) in items" :key="reply.id">
-            <reply :data="reply" @deleted="remove(index)"></reply>
+            <reply :data="reply" @deleted="remove(index)">
+                <template v-slot:honeypot>
+                    <slot name="honeypot"></slot>
+                </template>
+            </reply>
         </div>
         <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
 
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 
-        <new-reply @created="add"></new-reply>
+        <new-reply @created="add">
+            <template v-slot:honeypot>
+                <slot name="honeypot"></slot>
+            </template>
+        </new-reply>
     </div>
 </template>
 

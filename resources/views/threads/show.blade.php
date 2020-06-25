@@ -65,7 +65,11 @@
         @endif
 
         <div class="container">
-            <replies></replies>
+            <replies>
+                <template v-slot:honeypot>
+                    @honeypot
+                </template>
+            </replies>
         </div>
     </div>
 </thread>

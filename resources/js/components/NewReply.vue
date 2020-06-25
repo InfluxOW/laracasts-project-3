@@ -3,6 +3,7 @@
         <div class="border border-gray-300 rounded-lg p-4 bg-page">
             <textarea class="w-full" name="body" placeholder="Enter your comment..." rows="3" v-model="body"></textarea>
         </div>
+        <slot name="honeypot"></slot>
 
         <button type="submit" class="button-new mt-2" @click="addReply">Submit</button>
     </div>

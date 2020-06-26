@@ -19,11 +19,9 @@ class NotifyMentionedUsers
      */
     public function handle(ReplyCreated $event)
     {
-        foreach ($event->reply->mentionedUsers() as $username) {
-            $user = User::whereUsername($username)->first();
-            if ($user) {
-                $user->notify(new YouWereMentioned($event->reply));
-            }
-        }
+        $users = User::whereIn('username', $event->reply->mentionedUsers())->get();
+        $users->each(function ($user) use ($event) {
+            $user->notify(new YouWereMentioned($event->reply));
+        });
     }
 }

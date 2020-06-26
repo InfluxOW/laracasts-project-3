@@ -23,4 +23,16 @@ class MentionUsersTest extends TestCase
             ->post(route('threads.replies.store', [$thread->channel, $thread]), $reply);
         $this->assertCount(1, $jane->notifications);
     }
+
+    /** @test */
+    public function it_fetches_all_usernames_of_mentioned_users_starting_with_the_given_characters()
+    {
+        $jane = factory(User::class)->create(['username' => 'jane']);
+        $john = factory(User::class)->create(['username' => 'john']);
+        $igor = factory(User::class)->create(['username' => 'igor']);
+
+        $response = $this->getJson(route('api.users.index', ['username' => 'john']))->json();
+
+        $this->assertCount(1, $response);
+    }
 }

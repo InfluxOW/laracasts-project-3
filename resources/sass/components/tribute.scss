@@ -1,0 +1,42 @@
+.tribute-container {
+    @apply absolute top-0 left-0 h-auto overflow-auto block;
+    max-height: 300px;
+    max-width: 500px;
+    z-index: 999999;
+
+    ul {
+        @apply rounded mx-0 my-2 list-none p-0 bg-gray-200 border border-gray-400;
+    }
+
+    li:first-child {
+        &.highlight {
+            @apply rounded rounded-b-none;
+        }
+    }
+
+    li:last-child {
+        &.highlight {
+            @apply rounded rounded-t-none;
+        }
+    }
+
+    li {
+        @apply p-2 cursor-pointer;
+
+        &.highlight {
+            @apply bg-gray-400;
+        }
+
+        span {
+            @apply font-bold;
+        }
+
+        &.no-match {
+            @apply cursor-default;
+        }
+    }
+
+    .menu-highlighted {
+        @apply font-bold;
+    }
+}

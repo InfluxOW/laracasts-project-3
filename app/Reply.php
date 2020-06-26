@@ -62,4 +62,13 @@ class Reply extends Model
         preg_match_all("/\B\@([\w\-]+)/", $this->body, $matches);
         return $matches[1];
     }
+
+    public function setBodyAttribute($body)
+    {
+        $this->attributes['body'] = preg_replace(
+            "/\B\@([\w\-]+)/",
+            '<a href="/profiles/$1" class="text-blue-500 hover:text-opacity-75">$0</a>',
+            $body
+        );
+    }
 }

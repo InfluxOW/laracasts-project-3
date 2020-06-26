@@ -39,7 +39,7 @@
                 </div>
 
                 <div v-if="! editing">
-                    <div class="text-sm my-2" v-text="body"></div>
+                    <div class="text-sm my-2" v-html="body"></div>
                     <div v-if="canUpdate">
                         <div class="mt-4">
                             <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="editing = true">Edit</button>

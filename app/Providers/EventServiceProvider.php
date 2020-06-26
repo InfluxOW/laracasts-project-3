@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Events\ReplyCreated;
 use App\Listeners\CreateFavoritesActivity;
+use App\Listeners\NotifyMentionedUsers;
 use App\Listeners\NotifyThreadSubscribers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -29,7 +30,8 @@ class EventServiceProvider extends ServiceProvider
             CreateFavoritesActivity::class
         ],
         ReplyCreated::class => [
-            NotifyThreadSubscribers::class
+            NotifyThreadSubscribers::class,
+            NotifyMentionedUsers::class
         ]
     ];
 

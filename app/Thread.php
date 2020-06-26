@@ -91,8 +91,6 @@ class Thread extends Model implements Viewable
         $reply = $user->replies()->make($reply);
         $this->replies()->save($reply);
 
-        event(new ReplyCreated($reply));
-
         return $reply;
     }
 

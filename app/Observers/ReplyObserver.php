@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Events\ReplyCreated;
 use App\Reply;
 
 class ReplyObserver
@@ -14,7 +15,7 @@ class ReplyObserver
      */
     public function created(Reply $reply)
     {
-        //
+        event(new ReplyCreated($reply));
     }
 
     /**

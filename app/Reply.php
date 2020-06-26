@@ -56,4 +56,10 @@ class Reply extends Model
     {
         return Auth::check() && $this->isFavoritedBy(Auth::user());
     }
+
+    public function mentionedUsers()
+    {
+        preg_match_all("/\B\@([\w\-]+)/", $this->body, $matches);
+        return $matches[1];
+    }
 }

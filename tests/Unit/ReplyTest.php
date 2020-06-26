@@ -31,4 +31,11 @@ class ReplyTest extends TestCase
     {
         $this->assertInstanceOf(Thread::class, $this->reply->thread);
     }
+
+    /** @test */
+    public function it_can_detect_all_mentioned_users_in_the_body()
+    {
+        $reply = factory(Reply::class)->create(['body' => '@jane and @pyotr, hello!']);
+        $this->assertEquals(['jane', 'pyotr'], $reply->mentionedUsers());
+    }
 }

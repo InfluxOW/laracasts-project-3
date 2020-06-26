@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ThreadRepliesRequest;
+use App\Notifications\YouWereMentioned;
 use App\Reply;
 use App\Thread;
+use App\User;
 use Illuminate\Http\Request;
 
 class ThreadRepliesController extends Controller
@@ -40,6 +42,12 @@ class ThreadRepliesController extends Controller
     {
         $this->authorize(Reply::class);
         $reply = $thread->addReply($request->validated(), $request->user());
+        preg_match_all("/\B\@([\w\-]+)/", $reply->body, $matches);
+        $usernames = $matches[1];
+        foreach ($usernames as $username) {
+            $user = User::whereUsername($username)->firstOrFail();
+            $user->notify(new YouWereMentioned($reply));
+        }
 
         return $reply->load('user')->loadCount('favorites');
     }

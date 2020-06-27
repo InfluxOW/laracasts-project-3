@@ -46,3 +46,8 @@ Route::get('/profiles/{user:username}/notifications', 'NotificationsController@i
 Route::delete('/profiles/{user:username}/notifications/{notification}', 'NotificationsController@destroy')->name('notifications.destroy');
 
 Auth::routes();
+
+Route::name('api.')->namespace('Api')->group( function () {
+    Route::get('users', 'UsersController@index')->name('users.index');
+    Route::post('users/{user:username}/avatar', 'UserAvatarsController@store')->name('avatars.store');
+});

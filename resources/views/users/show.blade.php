@@ -36,7 +36,7 @@
                                 </div>
                                 <div>
                                     {!! Form::open(['url' => route('api.avatars.store', $user), 'files' => true]) !!}
-                                        {{ Form::file('avatar') }}
+                                        {{ Form::file('avatar', ['class' => 'p-2 w-32 filepond', 'id' => 'avatar']) }}
                                     	{!! Form::button('Submit', ['type' => 'submit']) !!}
                                     {!! Form::close() !!}
                                 </div>
@@ -120,5 +120,37 @@
             let x = document.getElementById("user-actions");
             x.classList.contains('hidden') ? x.classList.remove('hidden') : x.classList.add('hidden');
         }
+    </script>
+    <script>
+        let url = "{{ route('api.avatars.store', $user) }}";
+        FilePond.setOptions({
+            server: {
+                process: {
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    timeout: 7000,
+                }
+            }
+        });
+        FilePond.create(
+            document.querySelector('input[id="avatar"]'),
+            {
+                labelIdle: `Drag & Drop your avatar or <span class="filepond--label-action">Browse</span>`,
+                imagePreviewHeight: 200,
+                imageCropAspectRatio: '1:1',
+                imageResizeTargetWidth: 200,
+                imageResizeTargetHeight: 200,
+                stylePanelLayout: 'compact circle',
+                styleButtonRemoveItemPosition: 'bottom center',
+                styleButtonProcessItemPosition: 'bottom center',
+                styleLoadIndicatorPosition: 'bottom center',
+                styleProgressIndicatorPosition: 'bottom center',
+                maxFiles: 1,
+                maxFileSize: '1MB',
+                acceptedFileTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/svg']
+            }
+        );
     </script>
 @endpush

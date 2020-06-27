@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedSort;
@@ -25,5 +26,14 @@ class ProfilesController extends Controller
             ->appends(request()->query());
 
         return view('users.show', compact('user', 'actions'));
+    }
+
+    public function update(UserProfileRequest $request, User $user)
+    {
+        $this->authorize($user);
+
+        $user->update($request->validated());
+
+        return redirect()->route('profiles.show', $user);
     }
 }

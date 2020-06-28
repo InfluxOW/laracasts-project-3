@@ -47,7 +47,7 @@ Route::delete('/profiles/{user:username}/notifications/{notification}', 'Notific
 
 Auth::routes();
 
-Route::name('api.')->namespace('Api')->group( function () {
+Route::name('api.')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{user:username}/avatar', 'UserAvatarsController@store')->name('avatars.store');
 });

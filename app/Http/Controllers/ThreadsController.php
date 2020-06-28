@@ -62,7 +62,6 @@ class ThreadsController extends Controller
 
         flash('Thread has been created!')->success();
         return redirect()->route('threads.show', [$thread->channel, $thread]);
-
     }
 
     /**

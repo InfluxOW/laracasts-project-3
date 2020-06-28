@@ -21,7 +21,7 @@ window.events = new Vue();
  * @param  String message Our alert message
  * @param  String type    The type of alert we want to show
  */
-window.flash = function(message, type) {
+window.flash = function (message, type) {
     window.events.$emit('flash', message, type);
 };
 

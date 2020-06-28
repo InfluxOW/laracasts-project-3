@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class AvatarUploadTest extends TestCase
 {
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
 

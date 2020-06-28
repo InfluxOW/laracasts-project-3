@@ -19,7 +19,7 @@ class NotifyThreadSubscribers
     {
         $event->reply->thread->subscriptions
             ->where('user_id', '!=', $event->reply->user->id)
-            ->each( function ($subscription) use ($event) {
+            ->each(function ($subscription) use ($event) {
                 $subscription->user->notify(new ThreadWasUpdated($event->reply));
             });
     }

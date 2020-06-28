@@ -123,6 +123,5 @@ class ViewThreadsTest extends TestCase
 
         $this->assertCount(15, $response['data']);
         $this->assertEquals(20, $response['total']);
-
     }
 }

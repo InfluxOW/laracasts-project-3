@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Sorts\ViewsCountSort;
 use App\Traits\Subscribable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -65,7 +64,7 @@ class Thread extends Model
 
     public function getViewsCountAttribute()
     {
-        return $this->visit()->count();
+        return isset($this->id) ? $this->visit()->count() : 0;
     }
 
     public function visit()

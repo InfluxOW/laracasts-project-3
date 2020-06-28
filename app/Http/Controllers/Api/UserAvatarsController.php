@@ -17,14 +17,19 @@ class UserAvatarsController extends Controller
 
     public function store(UserAvatarRequest $request)
     {
-        $this->authorize('update', $request->user());
+        $user = $request->user();
+        $this->authorize('update', $user);
+
+        if ($user->avatar_path) {
+            Storage::disk('s3')->delete(parse_url($user->avatar_path, PHP_URL_PATH));
+        }
 
         $folder = 'avatars';
         $file = $request->file('avatar');
         $path = Storage::disk('s3')->put($folder, $file, 'public');
         $url = Storage::disk('s3')->url($path);
 
-        $request->user()->update(['avatar_path' => $url]);
+        $user->update(['avatar_path' => $url]);
 
         return $url;
     }

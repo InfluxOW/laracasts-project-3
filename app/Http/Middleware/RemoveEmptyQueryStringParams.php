@@ -16,20 +16,14 @@ class RemoveEmptyQueryStringParams
      */
     public function handle(Request $request, Closure $next)
     {
-        $query  = collect($request->query());
-        $queryContainsOnlyNotNullValues = $query->every(function ($value) {
-            return ! is_null($value);
-        });
-
-        if (! $queryContainsOnlyNotNullValues) {
-            $queryWithNoEmptyValues = $query->filter(function ($value) {
-                return ! is_null($value);
-            })->toArray();
-            $url = $request->fullUrlWithQuery($queryWithNoEmptyValues);
-
-            return redirect($url);
+        $queryString  = $request->getQueryString();
+        if ($queryString) {
+            $query = preg_replace('/[^=&]+=(?:&|$)/', '', $queryString);
+            $url = "{$request->url()}?{$query}";
+            if ($queryString !== $query) {
+                return redirect($url);
+            }
         }
-
         return $next($request);
     }
 }

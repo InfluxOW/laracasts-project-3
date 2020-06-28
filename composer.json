@@ -10,8 +10,8 @@
     "require": {
         "php": "^7.2.5",
         "ext-json": "*",
+        "awssat/laravel-visits": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.7",
-        "cyrildewit/eloquent-viewable": "^5.2",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -24,6 +24,7 @@
         "overtrue/laravel-favorite": "^2.0",
         "predis/predis": "^1.1",
         "spatie/laravel-activitylog": "^3.14",
+        "spatie/laravel-collection-macros": "^7.0",
         "spatie/laravel-honeypot": "^2.2",
         "spatie/laravel-query-builder": "^2.8"
     },

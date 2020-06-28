@@ -54,6 +54,7 @@ class ThreadObserver
 
     public function deleted(Thread $thread)
     {
+        visits($thread)->reset();
         $thread->favorites->each->delete();
         $thread->subscriptions->each->delete();
         $thread->activities->each->delete();

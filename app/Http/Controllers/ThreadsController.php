@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
-use App\Helpers\Trending;
 use App\Http\Requests\ThreadsRequest;
 use App\Thread;
 use Illuminate\Http\Request;
@@ -18,25 +17,19 @@ class ThreadsController extends Controller
 
     /**
      * @param Channel|null $channel
-     * @param Trending $trending
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Trending $trending, Channel $channel = null)
+    public function index(Channel $channel = null)
     {
         $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
 
-        $threads = Thread::buildQuery($query)
-            ->paginate(12)
-            ->appends(request()->query());
+        $threads = Thread::buildIndexQuery($query);
 
         if (request()->wantsJson()) {
             return $threads;
         }
 
-        return view('threads.index', [
-            'threads' => $threads,
-            'trending' => $trending->get()
-        ]);
+        return view('threads.index', compact('threads'));
     }
 
     /**
@@ -67,16 +60,13 @@ class ThreadsController extends Controller
      * @param Request $request
      * @param string $channelSlug
      * @param Thread $thread
-     * @param Trending $trending
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, string $channelSlug, Thread $thread, Trending $trending)
+    public function show(Request $request, string $channelSlug, Thread $thread)
     {
         if ($request->user()) {
             $request->user()->read($thread);
         }
-
-        $trending->push($thread);
 
         return view('threads.show', compact('thread'));
     }

@@ -2,34 +2,29 @@
 
 namespace App;
 
-use App\Events\ReplyCreated;
-use App\Notifications\ThreadWasUpdated;
+use App\Sorts\ViewsCountSort;
 use App\Traits\Subscribable;
 use Carbon\Carbon;
-use CyrildeWit\EloquentViewable\Contracts\Viewable;
-use CyrildeWit\EloquentViewable\InteractsWithViews;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class Thread extends Model implements Viewable
+class Thread extends Model
 {
-    use InteractsWithViews;
     use Favoriteable;
     use LogsActivity;
     use Subscribable;
 
+    protected $appends = ['views_count'];
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at'];
     protected $with = ['channel', 'user', 'favorites'];
-    public const COUNTABLES = ['replies', 'views', 'favorites'];
-    // views
-    protected $removeViewsOnDelete = true;
+    protected $withCount = ['favorites', 'replies'];
     // logs
     protected static $logAttributes = ['body', 'title'];
     protected static $logName = 'threads_log';
@@ -37,24 +32,6 @@ class Thread extends Model implements Viewable
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
     protected static $recordEvents = ['created', 'updated'];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope("countablesCount", function ($builder) {
-//            if (is_null(request()->sort_from_date)) {
-                $builder->withCount(Thread::COUNTABLES);
-//            } else {
-//                foreach (Thread::COUNTABLES as $property) {
-//                    $builder->withCount([$property => function ($query) {
-//                        $sortFromDate = Carbon::createFromDate(request()->sort_from_date);
-//                        $query->where('created_at', '>=', $sortFromDate);
-//                    }]);
-//                }
-//            }
-        });
-    }
 
     //Relations
 
@@ -86,6 +63,16 @@ class Thread extends Model implements Viewable
         return $this->channel->threads->where('id', '<>', $this->id)->random($recomendationsAmount);
     }
 
+    public function getViewsCountAttribute()
+    {
+        return $this->visit()->count();
+    }
+
+    public function visit()
+    {
+        return visits($this);
+    }
+
     public function addReply($reply, $user)
     {
         $reply = $user->replies()->make($reply);
@@ -99,9 +86,9 @@ class Thread extends Model implements Viewable
         return $query->where('created_at', '>=', Carbon::parse($date));
     }
 
-    public static function buildQuery($query)
+    public static function buildIndexQuery($query)
     {
-        return QueryBuilder::for($query)
+        $threadsQuery = QueryBuilder::for($query)
             ->allowedFilters([
                 'user.username',
                 AllowedFilter::scope('created_after'),
@@ -112,6 +99,14 @@ class Thread extends Model implements Viewable
                 AllowedSort::field('favorites', 'favorites_count'),
             ])
             ->latest();
+
+        $sortQuery = request()->query('sort');
+        if (Str::contains($sortQuery, 'views')) {
+            $sort = Str::startsWith($sortQuery, '-') ? 'sortByDesc' : 'sortBy';
+            $threadsQuery = $threadsQuery->get()->$sort('views_count');
+        }
+
+        return $threadsQuery->paginate(12)->appends(request()->query());
     }
 
     public function getLinkAttribute()

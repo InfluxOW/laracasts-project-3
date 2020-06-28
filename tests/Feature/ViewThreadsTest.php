@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Reply;
 use App\Thread;
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class ViewThreadsTest extends TestCase
@@ -15,6 +16,9 @@ class ViewThreadsTest extends TestCase
         parent::setUp();
 
         $this->thread = factory(Thread::class)->create();
+        Config::set('visits.remember_ip', 0);
+        Config::set('visits.ignore_crawlers', false);
+        visits(Thread::class)->reset();
     }
 
     /** @test */

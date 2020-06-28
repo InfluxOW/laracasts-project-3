@@ -9,6 +9,7 @@ use App\Sorts\CountsByPeriodSort;
 use App\Thread;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ThreadsController extends Controller
 {
@@ -34,7 +35,9 @@ class ThreadsController extends Controller
             return $threads;
         }
 
-        return view('threads.index', compact('threads'));
+        $trending = array_map('json_decode', Redis::zrevrange('trending_threads', 0, 2, 'WITHSCORES'));
+
+        return view('threads.index', compact('threads', 'trending'));
     }
 
     /**
@@ -73,6 +76,11 @@ class ThreadsController extends Controller
         if ($request->user()) {
             $request->user()->read($thread);
         }
+
+        Redis::zincrby('trending_threads', 1, json_encode([
+            'title' => $thread->title,
+            'link' => $thread->link
+        ]));
 
         return view('threads.show', compact('thread'));
     }

@@ -47,7 +47,6 @@ class CreateViewsTable extends Migration
             $table->text('visitor')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->string('collection')->nullable();
             $table->timestamp('viewed_at')->useCurrent();
         });
     }

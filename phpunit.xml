@@ -31,5 +31,6 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
         <server name="HONEYPOT_ENABLED" value="false"/>
         <server name="POSTS_FREQUENCY" value="0"/>
+        <env name="REDIS_CLIENT" value="mock"/>
     </php>
 </phpunit>

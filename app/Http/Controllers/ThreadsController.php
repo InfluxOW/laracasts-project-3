@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Helpers\Trending;
 use App\Http\Requests\ThreadsRequest;
-use App\Sorts\CountsByPeriod;
-use App\Sorts\CountsByPeriodSort;
 use App\Thread;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class ThreadsController extends Controller
 {
@@ -21,9 +18,10 @@ class ThreadsController extends Controller
 
     /**
      * @param Channel|null $channel
+     * @param Trending $trending
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Channel $channel = null)
+    public function index(Trending $trending, Channel $channel = null)
     {
         $query = $channel ? Thread::where('channel_id', $channel->id) : Thread::query();
 
@@ -35,9 +33,10 @@ class ThreadsController extends Controller
             return $threads;
         }
 
-        $trending = array_map('json_decode', Redis::zrevrange('trending_threads', 0, 2, 'WITHSCORES'));
-
-        return view('threads.index', compact('threads', 'trending'));
+        return view('threads.index', [
+            'threads' => $threads,
+            'trending' => $trending->get()
+        ]);
     }
 
     /**
@@ -68,18 +67,16 @@ class ThreadsController extends Controller
      * @param Request $request
      * @param string $channelSlug
      * @param Thread $thread
+     * @param Trending $trending
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show(Request $request, string $channelSlug, Thread $thread)
+    public function show(Request $request, string $channelSlug, Thread $thread, Trending $trending)
     {
         if ($request->user()) {
             $request->user()->read($thread);
         }
 
-        Redis::zincrby('trending_threads', 1, json_encode([
-            'title' => $thread->title,
-            'link' => $thread->link
-        ]));
+        $trending->push($thread);
 
         return view('threads.show', compact('thread'));
     }

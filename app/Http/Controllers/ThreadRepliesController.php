@@ -12,6 +12,7 @@ class ThreadRepliesController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('store', 'destroy', 'update');
+        $this->middleware('verified')->only('store');
     }
 
     /**

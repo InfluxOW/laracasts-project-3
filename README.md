@@ -8,3 +8,5 @@
 1. Add `php` and `nodejs` builpacks.
 2. Add Heroku Postgres addon.
 3. Set all necessary `.env` keys. Set `NPM_CONFIG_PRODUCTION` as `false`.
+
+## If you want users to confirm their emails then in `RegisterController's` `create` method remove `email_verified_at` string. 

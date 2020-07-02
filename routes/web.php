@@ -45,7 +45,7 @@ Route::delete('/subscriptions/{subscribableType}/{subscribableId}', 'Subscriptio
 Route::get('/profiles/{user:username}/notifications', 'NotificationsController@index')->name('notifications.index');
 Route::delete('/profiles/{user:username}/notifications/{notification}', 'NotificationsController@destroy')->name('notifications.destroy');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::name('api.')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');

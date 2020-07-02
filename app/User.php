@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\Subscriber;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cache;
@@ -11,7 +12,7 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable
+class User extends Authenticatable  implements MustVerifyEmail
 {
     use Notifiable;
     use Favoriter;
@@ -25,7 +26,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'avatar_path', 'location', 'job', 'university', 'description'
+        'name', 'email', 'password', 'username', 'avatar_path', 'location', 'job', 'university', 'description', 'email_verified_at'
     ];
 
     /**

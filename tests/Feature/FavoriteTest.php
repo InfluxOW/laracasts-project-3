@@ -9,61 +9,61 @@ use Tests\TestCase;
 
 class FavoriteTest extends TestCase
 {
+    protected $thread;
+    protected $reply;
+    protected $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->reply = factory(Reply::class)->create();
+        $this->thread = factory(Thread::class)->create();
+        $this->user = factory(User::class)->create();
+    }
+
     /** @test */
     public function a_guest_can_not_favorite_anything()
     {
-        $reply = factory(Reply::class)->create();
-        $this->post(route('favorites.store', ['reply', $reply->id]))
+        $this->post(route('favorites.store', ['reply', $this->reply->id]))
             ->assertRedirect(route('login'));
     }
 
     /** @test */
     public function an_authenticated_user_can_favorite_any_reply()
     {
-        $reply = factory(Reply::class)->create();
-        $user = factory(User::class)->create();
+        $this->actingAs($this->user)->post(route('favorites.store', ['reply', $this->reply->id]));
+        $this->assertTrue($this->reply->isFavoritedBy($this->user));
 
-        $this->actingAs($user)->post(route('favorites.store', ['reply', $reply->id]));
-        $this->assertTrue($reply->isFavoritedBy($user));
-
-        $this->actingAs($user)->delete(route('favorites.destroy', ['reply', $reply->id]));
-        $this->assertFalse($reply->isFavoritedBy($user));
+        $this->actingAs($this->user)->delete(route('favorites.destroy', ['reply', $this->reply->id]));
+        $this->assertFalse($this->reply->isFavoritedBy($this->user));
     }
 
     /** @test */
     public function an_authenticated_user_can_unfavorite_any_reply()
     {
-        $reply = factory(Reply::class)->create();
-        $user = factory(User::class)->create();
+        $this->user->favorite($this->reply);
 
-        $user->favorite($reply);
-
-        $this->actingAs($user)->delete(route('favorites.destroy', ['reply', $reply->id]));
-        $this->assertFalse($reply->isFavoritedBy($user));
+        $this->actingAs($this->user)->delete(route('favorites.destroy', ['reply', $this->reply->id]));
+        $this->assertFalse($this->reply->isFavoritedBy($this->user));
     }
 
     /** @test */
     public function an_authenticated_user_can_favorite_any_thread()
     {
-        $thread = factory(Thread::class)->create();
-        $user = factory(User::class)->create();
+        $this->actingAs($this->user)->post(route('favorites.store', ['thread', $this->thread->id]));
+        $this->assertTrue($this->thread->isFavoritedBy($this->user));
 
-        $this->actingAs($user)->post(route('favorites.store', ['thread', $thread->id]));
-        $this->assertTrue($thread->isFavoritedBy($user));
-
-        $this->actingAs($user)->delete(route('favorites.destroy', ['thread', $thread->id]));
-        $this->assertFalse($thread->isFavoritedBy($user));
+        $this->actingAs($this->user)->delete(route('favorites.destroy', ['thread', $this->thread->id]));
+        $this->assertFalse($this->thread->isFavoritedBy($this->user));
     }
 
     /** @test */
     public function an_authenticated_user_can_unfavorite_any_thread()
     {
-        $thread = factory(Thread::class)->create();
-        $user = factory(User::class)->create();
+        $this->user->favorite($this->thread);
 
-        $user->favorite($thread);
-
-        $this->actingAs($user)->delete(route('favorites.destroy', ['thread', $thread->id]));
-        $this->assertFalse($thread->isFavoritedBy($user));
+        $this->actingAs($this->user)->delete(route('favorites.destroy', ['thread', $this->thread->id]));
+        $this->assertFalse($this->thread->isFavoritedBy($this->user));
     }
 }

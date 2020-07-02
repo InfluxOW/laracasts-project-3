@@ -118,6 +118,13 @@ class Thread extends Model
         return route('threads.show', [$this->channel, $this]);
     }
 
+    public function setSlugAttribute($value)
+    {
+        $slug = slugify("{$value}_" . now()->format('Y-m-d H:i'));
+
+        $this->attributes['slug'] = $slug;
+    }
+
     public function hasUpdatesFor($user)
     {
         $key = $user->visitedThreadCacheKey($this);

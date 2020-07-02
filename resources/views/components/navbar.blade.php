@@ -46,7 +46,7 @@
                         <template v-slot:items>
                             @foreach ($channels as $channel)
                                 <a href="{{ route('threads.filter', $channel) }}"
-                                   class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-400">
+                                   class="text-sm p-2 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-400">
                                     {{ $channel->slug }}
                                 </a>
                             @endforeach

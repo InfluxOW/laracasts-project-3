@@ -15,7 +15,7 @@ class ThreadObserver
     public function created(Thread $thread)
     {
         $thread->disableLogging();
-        $thread->update(['slug' => slugify($thread->title)]);
+        $thread->update(['slug' => $thread->title]);
         $thread->enableLogging();
     }
 

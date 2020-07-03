@@ -2,6 +2,7 @@
 
 @section('body')
     <div id="app" class="h-screen antialiased leading-none">
+        <vue-confirm-dialog></vue-confirm-dialog>
         @yield('navbar')
 
         <div class="mx-auto">

@@ -29,6 +29,13 @@ class ReplyObserver
         //
     }
 
+    public function deleting(Reply $reply)
+    {
+        if ($reply->isBest()) {
+            $reply->thread->update(['best_reply_id' => null]);
+        }
+    }
+
     /**
      * Handle the reply "deleted" event.
      *

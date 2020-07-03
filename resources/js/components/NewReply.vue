@@ -18,11 +18,6 @@
                 body: ''
             };
         },
-        computed: {
-            signedIn() {
-                return window.app.signedIn;
-            }
-        },
         mounted: function () {
             let tribute = new Tribute({
                 // column to search against in the object (accepts function or string)

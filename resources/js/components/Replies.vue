@@ -2,7 +2,7 @@
     <div>
         <hr class="my-6 border-2 opacity-75" v-if="items.length > 0">
         <div v-for="(reply, index) in items" :key="reply.id">
-            <reply :data="reply" @deleted="remove(index)">
+            <reply :reply="reply" @deleted="remove(index)">
                 <template v-slot:honeypot>
                     <slot name="honeypot"></slot>
                 </template>

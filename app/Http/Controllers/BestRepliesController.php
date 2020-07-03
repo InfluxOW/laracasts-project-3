@@ -21,9 +21,4 @@ class BestRepliesController extends Controller
         $this->authorize('update', $reply->thread);
         $reply->markAsBest();
     }
-
-    public function destroy(Reply $reply)
-    {
-
-    }
 }

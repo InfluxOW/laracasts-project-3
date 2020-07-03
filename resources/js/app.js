@@ -1,13 +1,7 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-
-Vue.prototype.authorize = function (handler) {
-    // Additional admin privileges here.
-    let user = window.app.user;
-
-    return user ? handler(user) : false;
-};
+import VueConfirmDialog from 'vue-confirm-dialog'
 
 /**
  * Our Vuejs event handler which we will be using for flash messaging
@@ -25,6 +19,8 @@ window.flash = function (message, type) {
     window.events.$emit('flash', message, type);
 };
 
+Vue.use(VueConfirmDialog);
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);

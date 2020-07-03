@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 window._ = require('lodash');
 
 /**
@@ -37,3 +39,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+let authorizations = require('./authorizations');
+Vue.prototype.signedIn = window.app.signedIn;
+Vue.prototype.authorize = function (...params) {
+    if (! window.app.signedIn) return false;
+
+    if (typeof params[0] === 'string') {
+        return authorizations[params[0]](params[1]);
+    }
+
+    return params[0](window.app.user);
+};

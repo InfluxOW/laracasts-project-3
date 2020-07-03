@@ -38,4 +38,14 @@ class ReplyTest extends TestCase
         $reply = factory(Reply::class)->create(['body' => '@jane and @pyotr, hello!']);
         $this->assertEquals(['jane', 'pyotr'], $reply->mentionedUsers());
     }
+
+    /** @test */
+    public function it_knows_if_it_is_the_best_reply()
+    {
+        $this->assertFalse($this->reply->isBest());
+
+        $this->reply->markAsBest();
+
+        $this->assertTrue($this->reply->isBest());
+    }
 }

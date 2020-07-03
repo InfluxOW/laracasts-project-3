@@ -18,6 +18,8 @@ class CreateThreadsTable extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->text('body');
+            $table->unsignedInteger('best_reply_id')->index()->nullable();
+            $table->foreign('best_reply_id')->references('id')->on('replies');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('channel_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

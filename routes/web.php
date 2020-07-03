@@ -47,6 +47,8 @@ Route::delete('/profiles/{user:username}/notifications/{notification}', 'Notific
 
 Auth::routes(['verify' => true]);
 
+Route::post('replies/{reply}/best', 'BestRepliesController@store')->name('best-reply.store');
+
 Route::name('api.')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{user:username}/avatar', 'UserAvatarsController@store')->name('avatars.store');

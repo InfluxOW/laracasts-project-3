@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-2 font-sans py-2 bg-white rounded-lg border border-gray-300" :id="id">
+    <div class="mb-2 font-sans py-2 rounded-lg" :class="isBest ? 'bg-green-200 border border-green-500' : 'bg-white border border-gray-300'" :id="id">
         <div class="flex py-2">
             <div class="w-1/8 mr-1">
                 <img :src="data.user.avatar" alt="" class="h-12 w-12 rounded-full mx-2">
@@ -14,7 +14,8 @@
                         <span class="text-gray-700">·</span>
                         <span class="text-gray-700"><a :href="data.link" class="text-black hover:text-opacity-50">#</a></span>
                     </div>
-                    <div class="mr-2">
+                    <div class="mr-2 flex items-center">
+                        <button @click="markReplyAsBest" v-show="! isBest" class="button-new mr-2">Best Reply?</button>
                         <favorite :model="data" type="reply" :is-favorited="data.isFavorited" v-if="signedIn"></favorite>
                         <span class="inline-flex items-center leading-none text-sm" v-else>
                             <svg
@@ -67,6 +68,7 @@
                 editing: false,
                 body: this.data.body,
                 id: 'reply-' + this.data.id,
+                isBest: false,
             };
         },
         computed: {
@@ -100,6 +102,9 @@
                 $(this.$el).fadeOut(2000, () => {
                     flash('Reply has been deleted!', 'success');
                 });
+            },
+            markReplyAsBest() {
+                this.isBest = true;
             }
         }
     }

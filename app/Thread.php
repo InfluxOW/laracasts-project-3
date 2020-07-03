@@ -21,7 +21,7 @@ class Thread extends Model
     use Subscribable;
 
     protected $appends = ['views_count'];
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id'];
     protected $with = ['channel', 'user', 'favorites'];
     protected $withCount = ['favorites', 'replies'];
     // logs
@@ -116,6 +116,11 @@ class Thread extends Model
     public function getLink(): string
     {
         return route('threads.show', [$this->channel, $this]);
+    }
+
+    public function bestReply()
+    {
+        return $this->replies()->where('id', $this->best_reply_id);
     }
 
     public function setSlugAttribute($value)

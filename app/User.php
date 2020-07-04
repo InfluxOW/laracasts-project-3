@@ -45,6 +45,7 @@ class User extends Authenticatable  implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
 
     protected $withCount = ['threads', 'replies'];
@@ -83,11 +84,6 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function getBanner()
     {
         return $this->banner->url ?? $this->banner_url ?? "https://picsum.photos/seed/{$this->username}/1836/500";
-    }
-
-    public function isAdmin()
-    {
-        return $this->admin;
     }
 
     public function visitedThreadCacheKey($thread)

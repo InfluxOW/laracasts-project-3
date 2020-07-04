@@ -40,6 +40,10 @@ class ThreadRepliesController extends Controller
     public function store(ThreadRepliesRequest $request, $channel, Thread $thread)
     {
         $this->authorize(Reply::class);
+        if ($thread->closed) {
+            return response('Thread is closed', 422);
+        }
+
         $reply = $thread->addReply($request->validated(), $request->user());
 
         return $reply->load('user')->loadCount('favorites');

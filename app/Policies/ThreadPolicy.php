@@ -91,4 +91,9 @@ class ThreadPolicy
     {
         return false;
     }
+
+    public function close(User $user, Thread $thread)
+    {
+        return $user->is_admin;
+    }
 }

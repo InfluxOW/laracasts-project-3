@@ -13,6 +13,7 @@ $factory->define(Thread::class, function (Faker $faker) {
         'user_id' => factory(User::class),
         'title' => $faker->sentence(),
         'body' => $faker->paragraph(10),
-        'created_at' => $faker->dateTimeBetween('-3 months')
+        'created_at' => $faker->dateTimeBetween('-3 months'),
+        'closed' => false
     ];
 });

@@ -71,4 +71,12 @@ class ThreadTest extends TestCase
         $user->unsubscribeFrom($this->thread);
         $this->assertCount(0, $user->subscriptions);
     }
+
+    /** @test */
+    public function a_thread_can_be_closed()
+    {
+        $this->assertFalse($this->thread->closed);
+        $this->thread->close();
+        $this->assertTrue($this->thread->closed);
+    }
 }

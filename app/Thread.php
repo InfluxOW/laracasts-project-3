@@ -21,9 +21,12 @@ class Thread extends Model
     use Subscribable;
 
     protected $appends = ['views_count'];
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed'];
     protected $with = ['channel', 'user', 'favorites'];
     protected $withCount = ['favorites', 'replies'];
+    protected $casts = [
+        'closed' => 'boolean'
+    ];
     // logs
     protected static $logAttributes = ['body', 'title'];
     protected static $logName = 'threads_log';
@@ -136,5 +139,10 @@ class Thread extends Model
         $lastView = Cache::get($key);
 
         return isset($lastView) && $this->updated_at > $lastView;
+    }
+
+    public function close()
+    {
+        $this->update(['closed' => true]);
     }
 }

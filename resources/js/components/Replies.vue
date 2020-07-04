@@ -12,7 +12,10 @@
 
         <paginator :dataSet="dataSet" @changed="fetch"></paginator>
 
-        <new-reply @created="add">
+        <p v-if="$parent.closed" class="text-center text-red-700 border border-red-500 bg-red-300 p-4 ">
+            Commenting is disabled by the administrator.
+        </p>
+        <new-reply @created="add" v-else>
             <template v-slot:honeypot>
                 <slot name="honeypot"></slot>
             </template>

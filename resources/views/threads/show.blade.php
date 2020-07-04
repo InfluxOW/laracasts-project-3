@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<thread inline-template>
+<thread inline-template :thread="{{ $thread }}">
     <div>
         <!--Title-->
         <div class="text-center pt-4 md:pt-8 bg-white bg-opacity-25 container max-w-6xl">
@@ -15,7 +15,10 @@
         </div>
 
         <div class="container max-w-6xl flex justify-end mt-2">
-                @auth
+            @auth
+                @if (Auth::user()->is_admin)
+                    <button class="button-dropdown-red mr-2" @click="closeThread" v-show="{{ ! $thread->closed }}">Close Thread</button>
+                @endif
                 <div class="mr-2">
                     <subscribe-button
                             subscribed="{{ Auth::user()->isSubscribedTo($thread) }}"

@@ -27,7 +27,8 @@ class ThreadsRequest extends FormRequest
         return [
             'body' => ['required', 'string', 'min:100', 'max:10000', new SpamFree()],
             'title' => ['required', 'string', 'min:3', 'max:200', new SpamFree()],
-            'channel_id' => ['required', 'exists:channels,id']
+            'channel_id' => ['required', 'exists:channels,id'],
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }

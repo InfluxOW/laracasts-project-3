@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -14,13 +15,17 @@ class RegistrationTest extends TestCase
     public function a_confirmation_email_is_sent_upon_registration()
     {
         Event::fake();
+        NoCaptcha::shouldReceive('verifyResponse')
+            ->once()
+            ->andReturn(true);
 
         $this->post(route('register'), [
             'name' => 'John',
             'username' => 'john',
             'email' => 'johndoe@test.com',
             'password' => 'passwordtest',
-            'password_confirmation' => 'passwordtest'
+            'password_confirmation' => 'passwordtest',
+            'g-recaptcha-response' => '1'
         ]);
 
         Event::assertDispatched(Registered::class);

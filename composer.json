@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2.5",
         "ext-json": "*",
+        "anhskohbo/no-captcha": "^3.2",
         "awssat/laravel-visits": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.7",
         "fideloper/proxy": "^4.2",

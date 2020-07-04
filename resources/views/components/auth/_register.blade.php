@@ -94,6 +94,9 @@
             />
         </div>
 
+        {!! NoCaptcha::display() !!}
+        <x-error name="g-recaptcha-response" classes="mt-2"/>
+
         <div class="text-center mt-6">
             <button
                 class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"

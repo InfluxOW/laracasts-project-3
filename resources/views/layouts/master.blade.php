@@ -34,5 +34,7 @@
 
 @stack('scripts')
 
+{!! NoCaptcha::renderJs() !!}
+
 </body>
 </html>

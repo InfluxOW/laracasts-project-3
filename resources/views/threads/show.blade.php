@@ -14,27 +14,33 @@
             <h1 class="font-bold break-normal text-3xl md:text-5xl">{{ $thread->title }}</h1>
         </div>
 
-        <div class="container max-w-6xl flex justify-end mt-2">
-            @auth
-                @if (Auth::user()->is_admin)
-                    <button class="button-dropdown-red mr-2" @click="closeThread" v-show="{{ ! $thread->closed }}">Close Thread</button>
-                @endif
-                <div class="mr-2">
-                    <subscribe-button
+        <div class="container max-w-6xl flex justify-between mt-2">
+            <div>
+                @auth
+                    @if (Auth::user()->is_admin)
+                        <button class="button-dropdown-red mr-2" @click="closeThread" v-show="{{ ! $thread->closed }}">Close Thread</button>
+                    @endif
+                @endauth
+            </div>
+            <div class="inline-flex">
+                @auth
+                    <div class="mr-2">
+                        <subscribe-button
                             subscribed="{{ Auth::user()->isSubscribedTo($thread) }}"
                             endpoint="{{ route('subscriptions.store', [$thread->getMorphClass(), $thread->getKey()]) }}">
-                    </subscribe-button>
-                </div>
-            @endauth
+                        </subscribe-button>
+                    </div>
+                @endauth
 
-            @can('delete', $thread)
-                <a
-                    href="{{ route('threads.destroy', $thread) }}"
-                    data-confirm="Are you sure?"
-                    data-method="delete"
-                    rel="nofollow"
-                    class="button-dropdown-red">Delete</a>
-            @endcan
+                @can('delete', $thread)
+                    <a
+                        href="{{ route('threads.destroy', $thread) }}"
+                        data-confirm="Are you sure?"
+                        data-method="delete"
+                        rel="nofollow"
+                        class="button-dropdown-red">Delete</a>
+                @endcan
+            </div>
         </div>
 
         <!--image-->

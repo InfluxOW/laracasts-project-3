@@ -14,7 +14,7 @@
         <x-error name="body" classes="mb-4"/>
 
         {!! Form::label('channel_id', 'Channel', ['class' => 'text-default font-light text-xs opacity-75']) !!}
-        <div class="relative">
+        <div class="relative mb-4">
             {!! Form::select('channel_id',
                 $channels->pluck('slug', 'id'),
                 $thread->channel->id ?? null,
@@ -29,6 +29,9 @@
             </div>
         </div>
         <x-error name="channel_id" classes="mt-4 mb-2"/>
+
+        {!! NoCaptcha::display() !!}
+        <x-error name="g-recaptcha-response" classes="mt-4 mb-2"/>
 
         {!! Form::button('Submit', ['type' => 'submit', 'class' => 'button-dropdown-gray mt-4 w-full']) !!}
     </div>

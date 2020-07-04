@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
 use App\User;
 use App\Reply;
 use App\Thread;
@@ -19,15 +20,19 @@ class ManageThreadsTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
-        $this->thread = factory(Thread::class)->raw(['user_id' => $this->user->id]);
+        $this->thread = factory(Thread::class)->raw(['user_id' => $this->user->id, 'g-recaptcha-response' => '1']);
     }
 
     /** @test */
     public function an_authenticated_user_can_create_new_forum_threads()
     {
+        NoCaptcha::shouldReceive('verifyResponse')
+            ->once()
+            ->andReturn(true);
+
         $this->actingAs($this->user)
             ->post(route('threads.store'), $this->thread);
-        $this->assertDatabaseHas('threads', Arr::except($this->thread, 'created_at'));
+        $this->assertDatabaseHas('threads', Arr::except($this->thread, ['created_at','g-recaptcha-response']));
     }
 
     /** @test */
@@ -69,6 +74,18 @@ class ManageThreadsTest extends TestCase
         $this->actingAs($this->user)
             ->post(route('threads.store'), $attributes)
             ->assertSessionHasErrors('channel_id');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_valid_recaptcha_response()
+    {
+        $attributes = factory(Thread::class)->raw(['g-recaptcha-response' => 'test']);
+        NoCaptcha::shouldReceive('verifyResponse')
+            ->once();
+
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $attributes)
+            ->assertSessionHasErrors('g-recaptcha-response');
     }
 
     /** @test */

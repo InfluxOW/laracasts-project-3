@@ -77,9 +77,10 @@ class ThreadsController extends Controller
         //
     }
 
-    public function update(Request $request, Thread $thread)
+    public function update(ThreadsRequest $request, Thread $thread)
     {
-        //
+        $this->authorize($thread);
+        $thread->update($request->validated());
     }
 
     public function destroy(Thread $thread)

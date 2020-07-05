@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\SpamFree;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ThreadsRequest extends FormRequest
 {
@@ -27,8 +28,8 @@ class ThreadsRequest extends FormRequest
         return [
             'body' => ['required', 'string', 'min:100', 'max:10000', new SpamFree()],
             'title' => ['required', 'string', 'min:3', 'max:200', new SpamFree()],
-            'channel_id' => ['required', 'exists:channels,id'],
-            'g-recaptcha-response' => 'required|captcha'
+            'channel_id' => [Rule::requiredIf($this->isMethod('POST')), 'exists:channels,id'],
+            'g-recaptcha-response' => [Rule::requiredIf($this->isMethod('POST')), 'captcha']
         ];
     }
 }

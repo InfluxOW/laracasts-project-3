@@ -85,13 +85,13 @@
                     '/replies/' + this.reply.id, {
                         body: this.body
                     })
-                    .catch(error => {
-                        flash(error.response.data.errors.body.toString(), 'error');
-                        this.body = this.reply.body;
-                    })
                     .then(({data}) => {
                         this.editing = false;
                         flash('Reply has been updated!', 'success');
+                    })
+                    .catch(error => {
+                        flash(error.response.data.errors.body.toString(), 'error');
+                        this.body = this.reply.body;
                     });
             },
             destroy() {

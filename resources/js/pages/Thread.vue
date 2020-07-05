@@ -3,12 +3,19 @@
     import SubscribeButton from "../components/SubscribeButton";
 
     export default {
-        props: ['thread'],
+        props: ['thread', 'data-body'],
         components: {Replies, SubscribeButton},
         data() {
             return {
                 closed: this.thread.closed,
+                title: this.thread.title,
+                body: this.dataBody,
+                form: {},
+                editing: false
             };
+        },
+        created () {
+            this.resetForm();
         },
         methods: {
             closeThread() {
@@ -31,6 +38,29 @@
                         }
                     }
                 )
+            },
+            update () {
+                let uri = `/threads/${this.thread.id}`;
+                axios.patch(uri, this.form)
+                    .then(({data}) => {
+                        this.editing = false;
+                        this.title = this.form.title;
+                        this.body = this.form.body;
+                        flash('Thread has been updated', 'success');
+                    })
+                    .catch(error => {
+                        let errors = error.response.data.errors;
+                        Object.keys(errors).forEach(function callback(error) {
+                            flash(errors[error].toString(), 'error');
+                        });
+                    });
+            },
+            resetForm () {
+                this.form = {
+                    title: this.thread.title,
+                    body: this.thread.body
+                };
+                this.editing = false;
             }
         }
     }

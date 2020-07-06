@@ -53,5 +53,5 @@ Auth::routes(['verify' => true]);
 
 Route::name('api.')->namespace('Api')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
-    Route::post('users/{user:username}/avatar', 'UserAvatarsController@store')->name('avatars.store');
+    Route::post('users/{user:username}/{filename}/{folder}', 'UserImagesController@store')->name('user.images.store');
 });

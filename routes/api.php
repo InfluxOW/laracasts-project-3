@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 //Route::name('api.')->namespace('Api')->group( function () {
 //    Route::get('users', 'UsersController@index')->name('users.index');
-//    Route::post('users/{user:username}/avatar', 'UserAvatarsController@store')->name('avatars.store');
+//    Route::post('users/{user:username}/avatar', 'UserImagesController@store')->name('avatars.store');
 //});

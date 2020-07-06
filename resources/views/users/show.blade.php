@@ -112,7 +112,7 @@
                             <div class="flex flex-wrap justify-center">
                                 <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                     <div class="relative">
-                                        <file-uploader url="{{ route('api.avatars.store', $user) }}" inline-template>
+                                        <file-uploader url="{{ route('api.user.images.store', [$user, 'avatar', 'avatars']) }}" inline-template>
                                             <file-pond
                                                 name="avatar"
                                                 :server="{

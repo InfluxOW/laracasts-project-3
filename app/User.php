@@ -26,7 +26,7 @@ class User extends Authenticatable  implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'avatar_path', 'location', 'job', 'university', 'description', 'email_verified_at'
+        'name', 'email', 'password', 'username', 'avatar', 'location', 'job', 'university', 'description', 'email_verified_at'
     ];
 
     /**
@@ -81,9 +81,14 @@ class User extends Authenticatable  implements MustVerifyEmail
         return $this->avatar_path ?? "https://api.adorable.io/avatars/200/{$this->username}";
     }
 
+    public function setAvatarAttribute($value)
+    {
+        $this->attributes['avatar_path'] = $value;
+    }
+
     public function getBanner()
     {
-        return $this->banner->url ?? $this->banner_url ?? "https://picsum.photos/seed/{$this->username}/1836/500";
+        return $this->banner_path ?? "https://picsum.photos/seed/{$this->username}/1836/500";
     }
 
     public function visitedThreadCacheKey($thread)

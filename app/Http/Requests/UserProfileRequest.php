@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserProfileRequest extends FormRequest
 {
@@ -25,11 +26,12 @@ class UserProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
-            'username' => ['required', 'string', 'max:255', 'min:3', 'alpha_dash', 'unique:users'],
+            'username' => ['required', 'string', 'max:255', 'min:3', 'alpha_dash', Rule::unique('users')->ignore($this->user)],
             'location' => ['nullable', 'string', 'max:200'],
             'job' => ['nullable', 'string', 'max:200'],
             'university' => ['nullable', 'string', 'max:200'],
             'description' => ['nullable', 'string', 'max:5000'],
+            'avatar' => ['nullable', 'string', 'url']
         ];
     }
 }

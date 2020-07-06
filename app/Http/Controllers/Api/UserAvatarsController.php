@@ -29,8 +29,6 @@ class UserAvatarsController extends Controller
         $path = Storage::disk('s3')->put($folder, $file, 'public');
         $url = Storage::disk('s3')->url($path);
 
-        $user->update(['avatar_path' => $url]);
-
         return $url;
     }
 }

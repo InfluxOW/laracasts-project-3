@@ -24,6 +24,7 @@ Vue.use(VueConfirmDialog);
 Vue.use(InstantSearch);
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.component('instant-search', require('./components/InstantSearch.vue').default);
+Vue.component('file-uploader', require('./components/FileUploader.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('dropdown', require('./components/Dropdown.vue').default);
 Vue.component('favorite', require('./components/Favorite.vue').default);

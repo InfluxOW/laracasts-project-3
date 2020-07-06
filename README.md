@@ -10,3 +10,4 @@
 3. Set all necessary `.env` keys. Set `NPM_CONFIG_PRODUCTION` as `false`.
 
 ## If you want users to confirm their emails then in `RegisterController's` `create` method remove `email_verified_at` string. 
+## Known bugs: file uploading isn't working with Debugbar enabled.

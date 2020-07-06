@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <profile inline-template url="{{ route('api.avatars.store', $user) }}">
+    <profile inline-template>
         <main class="profile-page">
             <section class="relative block" style="height: 500px;">
                 <div
@@ -107,37 +107,40 @@
                     </div>
 
                     <div v-if="editing" class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                        {!! Form::open(['url' => route('profiles.update', $user), 'method' => 'PATCH', 'id' => 'user-form']) !!}
                         <div class="px-6">
                             <div class="flex flex-wrap justify-center">
                                 <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                     <div class="relative">
-                                        <file-pond
-                                            name="avatar"
-                                            :server="{
-                                                  url: url,
-                                                  process: {
-                                                    headers: {
-                                                      'X-CSRF-TOKEN': csrfToken
-                                                    }
-                                                  }
-                                                }"
-                                            label-idle="Upload your avatar..."
-                                            image-preview-height="200"
-                                            image-crop-aspect-ratio="1:1"
-                                            image-resize-target-width="200"
-                                            image-resize-target-height="200"
-                                            style-panel-layout="compact circle"
-                                            style-button-remove-item-position="bottom center"
-                                            style-button-process-item-position="bottom center"
-                                            style-load-indicator-position="bottom center"
-                                            style-progress-indicator-position="bottom center"
-                                            max-files="1"
-                                            max-file-size="1MB"
-                                            accepted-file-types="image/png, image/jpeg, image/jpg, image/gif, image/svg"
-                                            class="h-auto align-middle border-none absolute -m-24 -ml-24"
-                                            style="width: 200px"
-                                        >
-                                        </file-pond>
+                                        <file-uploader url="{{ route('api.avatars.store', $user) }}" inline-template>
+                                            <file-pond
+                                                name="avatar"
+                                                :server="{
+                                                      url: url,
+                                                      process: {
+                                                        headers: {
+                                                          'X-CSRF-TOKEN': csrfToken
+                                                        }
+                                                      }
+                                                    }"
+                                                label-idle="Upload your avatar..."
+                                                image-preview-height="200"
+                                                image-crop-aspect-ratio="1:1"
+                                                image-resize-target-width="200"
+                                                image-resize-target-height="200"
+                                                style-panel-layout="compact circle"
+                                                style-button-remove-item-position="bottom center"
+                                                style-button-process-item-position="bottom center"
+                                                style-load-indicator-position="bottom center"
+                                                style-progress-indicator-position="bottom center"
+                                                max-files="1"
+                                                max-file-size="1MB"
+                                                accepted-file-types="image/png, image/jpeg, image/jpg, image/gif, image/svg"
+                                                class="h-auto align-middle border-none absolute -m-24 -ml-24"
+                                                style="width: 200px"
+                                            >
+                                            </file-pond>
+                                        </file-uploader>
                                     </div>
                                 </div>
                                 <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -163,8 +166,7 @@
                                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
                                 </div>
                             </div>
-                            <div>
-                                {!! Form::open(['url' => route('profiles.update', $user), 'method' => 'PATCH', 'class' => 'border border-gray-500 p-10 m-10 rounded-lg bg-gray-200', 'id' => 'user-form']) !!}
+                            <div class="border border-gray-500 p-10 m-10 rounded-lg bg-gray-200">
                                 <div class="text-center mb-2">
                                     <div class="mb-2">
                                         {!! Form::text('name', $user->name, ['placeholder' => 'Name...', 'class' => 'text-4xl font-semibold leading-normal text-gray-800 text-center p-1 m-1 rounded-lg border border-gray-500 focus:shadow-outline']) !!}
@@ -189,9 +191,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {!! Form::close() !!}
                             </div>
                         </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </section>

@@ -9,11 +9,10 @@ class SearchController extends Controller
 {
     public function show(Request $request)
     {
-        $search = $request->q;
-
-        $threads = Thread::search($search)->paginate(20);
-
         if ($request->expectsJson()) {
+            $search = $request->q;
+            $threads = Thread::search($search)->paginate(20);
+
             return $threads;
         }
 

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('body')
-    <div id="app">
+    <div id="app" class="h-screen antialiased leading-none">
         <x-navbar dark="true" background="bg-white bg-opacity-25" dropdownButtonClass="button-dropdown-dark" navStyles="top-0 absolute"/>
 
         <main>

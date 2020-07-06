@@ -43,8 +43,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 let authorizations = require('./authorizations');
 Vue.prototype.signedIn = window.app.signedIn;
 Vue.prototype.authorize = function (...params) {
-    if (! window.app.signedIn) return false;
-    if (window.app.user.is_admin) return true;
+    if (! window.app.signedIn) {
+        return false;
+    }
+    if (window.app.user.is_admin) {
+        return true;
+    }
 
     if (typeof params[0] === 'string') {
         return authorizations[params[0]](params[1]);

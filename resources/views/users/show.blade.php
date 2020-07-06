@@ -107,7 +107,6 @@
                     </div>
 
                     <div v-if="editing" class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                        {!! Form::open(['url' => route('profiles.update', $user), 'method' => 'PATCH', 'id' => 'user-form']) !!}
                         <div class="px-6">
                             <div class="flex flex-wrap justify-center">
                                 <div class="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
@@ -192,6 +191,7 @@
                                         >
                                         </file-pond>
                                     </file-uploader>
+                                    {!! Form::open(['url' => route('profiles.update', $user), 'method' => 'PATCH', 'id' => 'user-form']) !!}
                                     <div class="mb-2">
                                         {!! Form::text('name', $user->name, ['placeholder' => 'Name...', 'class' => 'text-4xl font-semibold leading-normal text-gray-800 text-center p-1 m-1 rounded-lg border border-gray-500 focus:shadow-outline']) !!}
                                     </div>
@@ -215,9 +215,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                {!! Form::close() !!}
                             </div>
                         </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
             </section>

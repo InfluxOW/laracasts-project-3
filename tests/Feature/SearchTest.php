@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class SearchTest extends TestCase
 {
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
         Config::set('scout.driver', 'algolia');
@@ -27,7 +27,7 @@ class SearchTest extends TestCase
         do {
             sleep(0.25);
             $results = $this->getJson("/threads/search?q={$search}")->json()['data'];
-        } while(empty($results));
+        } while (empty($results));
 
         $this->assertCount(2, $results);
 

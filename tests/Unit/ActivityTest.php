@@ -12,7 +12,7 @@ use Spatie\Activitylog\Models\Activity;
 
 class ActivityTest extends TestCase
 {
-    protected function setUp():void
+    protected function setUp(): void
     {
         parent::setUp();
         Config::set('activitylog.enabled', true);

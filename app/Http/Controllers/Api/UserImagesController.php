@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserAvatarRequest;
+use App\Http\Requests\UserImagesRequest;
 use App\Services\UploadService;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,12 +20,15 @@ class UserImagesController extends Controller
         $this->uploadService = $uploadService;
     }
 
-    public function store(UserAvatarRequest $request, User $user, $filename, $folder)
+    public function store(UserImagesRequest $request, User $user, $filename, $folder)
     {
         $this->authorize('update', $user);
+        $dbColumn = "{$filename}_path";
 
-        $this->uploadService->remove($user->avatar_path);
+        $this->uploadService->remove($user->$dbColumn);
+        $url = $this->uploadService->upload($request->file($filename), $folder);
+        $user->update([$dbColumn => $url]);
 
-        return $this->uploadService->upload($request->file($filename), $folder);
+        return $url;
     }
 }

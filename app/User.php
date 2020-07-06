@@ -12,7 +12,7 @@ use Spatie\Activitylog\Models\Activity;
 use Spatie\Activitylog\Traits\CausesActivity;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable  implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     use Favoriter;
@@ -26,7 +26,7 @@ class User extends Authenticatable  implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'avatar', 'banner', 'location', 'job', 'university', 'description', 'email_verified_at'
+        'name', 'email', 'password', 'username', 'avatar_path', 'banner_path', 'location', 'job', 'university', 'description', 'email_verified_at'
     ];
 
     /**
@@ -79,16 +79,6 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function getAvatar()
     {
         return $this->avatar_path ?? "https://api.adorable.io/avatars/200/{$this->username}";
-    }
-
-    public function setAvatarAttribute($value)
-    {
-        $this->attributes['avatar_path'] = $value;
-    }
-
-    public function setBannerAttribute($value)
-    {
-        $this->attributes['banner_path'] = $value;
     }
 
     public function getBanner()

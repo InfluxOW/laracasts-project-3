@@ -75,4 +75,3 @@ return [
     'global_ignore' => ['country'],
 
 ];
-

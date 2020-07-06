@@ -30,9 +30,7 @@ class UserProfileRequest extends FormRequest
             'location' => ['nullable', 'string', 'max:200'],
             'job' => ['nullable', 'string', 'max:200'],
             'university' => ['nullable', 'string', 'max:200'],
-            'description' => ['nullable', 'string', 'max:5000'],
-            'avatar' => ['nullable', 'string', 'url'],
-            'banner' => ['nullable', 'string', 'url']
+            'description' => ['nullable', 'string', 'max:5000']
         ];
     }
 }

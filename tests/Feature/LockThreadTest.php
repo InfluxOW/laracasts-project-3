@@ -10,8 +10,8 @@ use Tests\TestCase;
 
 class LockThreadTest extends TestCase
 {
-    protected  $thread;
-    protected function setUp():void
+    protected $thread;
+    protected function setUp(): void
     {
         parent::setUp();
 

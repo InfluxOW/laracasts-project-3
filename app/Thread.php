@@ -161,5 +161,4 @@ class Thread extends Model
             'channel.name' => $this->channel->name
         ];
     }
-
 }

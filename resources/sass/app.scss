@@ -14,3 +14,7 @@
 //Filepond
 @import '~filepond/dist/filepond.css';
 @import '~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
+.wrapper {
+    min-height: 100%;
+}

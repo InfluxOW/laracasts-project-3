@@ -1,7 +1,6 @@
 <footer class="w-full {{ $styles ?? '' }}">
     <div class="container mx-auto {{ $background ?? '' }}">
-        <div
-            class="flex flex-wrap items-center md:justify-between justify-center">
+        <div class="flex flex-wrap items-center md:justify-between justify-center">
             <div class="w-full md:w-4/12">
                 <div class="text-sm {{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} font-semibold py-1">
                     Copyright © 2020

@@ -5,7 +5,7 @@
         <vue-confirm-dialog></vue-confirm-dialog>
         @yield('navbar')
 
-        <div class="mx-auto">
+        <div class="mx-auto wrapper">
             @yield('content')
         </div>
 

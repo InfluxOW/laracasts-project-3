@@ -47,7 +47,7 @@ class Reply extends Model
     public function getLink(): string
     {
 //    $commentableResourceName = str_plural(strtolower(class_basename($comment->commentable_type)));
-        $threadUrl = route('threads.show', [$this->thread->channel, $this->thread]);
+        $threadUrl = route('threads.show', [$this->thread->channel, $this->thread], false);
         $replyUrl = "{$threadUrl}#reply-{$this->id}";
         return $replyUrl;
     }

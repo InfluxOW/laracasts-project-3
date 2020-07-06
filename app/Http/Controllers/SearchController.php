@@ -17,6 +17,6 @@ class SearchController extends Controller
             return $threads;
         }
 
-        return view('threads.index', compact('threads'));
+        return view('search.threads');
     }
 }

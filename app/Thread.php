@@ -120,7 +120,7 @@ class Thread extends Model
 
     public function getLink(): string
     {
-        return route('threads.show', [$this->channel, $this]);
+        return route('threads.show', [$this->channel, $this], false);
     }
 
     public function bestReply()
@@ -147,4 +147,19 @@ class Thread extends Model
     {
         $this->update(['closed' => true]);
     }
+
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'body' => $this->body,
+            'views_count' => $this->views_count,
+            'replies_count' => $this->replies_count,
+            'favorites_count' => $this->favorites_count,
+            'link' => $this->link,
+            'channel.id' => $this->channel->id,
+            'channel.name' => $this->channel->name
+        ];
+    }
+
 }

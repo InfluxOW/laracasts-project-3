@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::view('/about', 'about')->name('about');
 /* Threads */
+Route::get('threads/search', 'SearchController@show')->name('threads.search');
 Route::get('threads', 'ThreadsController@index')->name('threads.index')->middleware('clean_query_string');
 Route::get('threads/create', 'ThreadsController@create')->name('threads.create');
 Route::get('threads/{channel:slug}', 'ThreadsController@index')->name('threads.filter')->middleware('clean_query_string');

@@ -6,11 +6,18 @@ use App\Channel;
 use App\Reply;
 use App\Thread;
 use App\User;
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 use Spatie\Activitylog\Models\Activity;
 
 class ActivityTest extends TestCase
 {
+    protected function setUp():void
+    {
+        parent::setUp();
+        Config::set('activitylog.enabled', true);
+    }
+
     /** @test */
     public function it_records_activity_when_a_thread_is_created()
     {

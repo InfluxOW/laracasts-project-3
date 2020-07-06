@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -19,6 +20,7 @@ class Thread extends Model
     use Favoriteable;
     use LogsActivity;
     use Subscribable;
+    use Searchable;
 
     protected $appends = ['views_count'];
     protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed'];

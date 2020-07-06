@@ -31,5 +31,7 @@
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="HONEYPOT_ENABLED" value="false"/>
         <env name="POSTS_FREQUENCY" value="0"/>
+        <env name="SCOUT_DRIVER" value="null"/>
+        <env name="ACTIVITY_LOGGER_ENABLED" value="false"/>
     </php>
 </phpunit>

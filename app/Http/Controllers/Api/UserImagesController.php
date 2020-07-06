@@ -22,7 +22,7 @@ class UserImagesController extends Controller
 
     public function store(UserAvatarRequest $request, User $user, $filename, $folder)
     {
-        $this->authorize('update', $request->user());
+        $this->authorize('update', $user);
 
         $this->uploadService->remove($user->avatar_path);
 

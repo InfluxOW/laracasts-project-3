@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserAvatarRequest extends FormRequest
 {
@@ -24,7 +25,8 @@ class UserAvatarRequest extends FormRequest
     public function rules()
     {
         return [
-            'avatar' => ['required', 'image', 'mimes:jpeg,jpg,png,gif,svg', 'max:1024', 'dimensions:ratio=1/1']
+            'avatar' => [Rule::requiredIf(empty($this->banner)), 'image', 'mimes:jpeg,jpg,png,gif,svg', 'max:1024', 'dimensions:ratio=1/1'],
+            'banner' => [Rule::requiredIf(empty($this->avatar)), 'image', 'mimes:jpeg,jpg,png,gif,svg', 'max:2048'],
         ];
     }
 }

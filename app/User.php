@@ -26,7 +26,7 @@ class User extends Authenticatable  implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username', 'avatar', 'location', 'job', 'university', 'description', 'email_verified_at'
+        'name', 'email', 'password', 'username', 'avatar', 'banner', 'location', 'job', 'university', 'description', 'email_verified_at'
     ];
 
     /**
@@ -84,6 +84,11 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function setAvatarAttribute($value)
     {
         $this->attributes['avatar_path'] = $value;
+    }
+
+    public function setBannerAttribute($value)
+    {
+        $this->attributes['banner_path'] = $value;
     }
 
     public function getBanner()

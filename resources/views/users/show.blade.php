@@ -168,6 +168,30 @@
                             </div>
                             <div class="border border-gray-500 p-10 m-10 rounded-lg bg-gray-200">
                                 <div class="text-center mb-2">
+                                    <file-uploader url="{{ route('api.user.images.store', [$user, 'banner', 'banners']) }}" inline-template>
+                                        <file-pond
+                                            name="banner"
+                                            :server="{
+                                                      url: url,
+                                                      process: {
+                                                        headers: {
+                                                          'X-CSRF-TOKEN': csrfToken
+                                                        }
+                                                      }
+                                                    }"
+                                            label-idle="Upload your banner..."
+                                            image-preview-height="300"
+                                            style-panel-layout="compact"
+                                            image-validate-size-min-width="1000"
+                                            image-validate-size-max-width="2000"
+                                            image-validate-size-min-height="300"
+                                            image-validate-size-max-height="600"
+                                            max-files="1"
+                                            max-file-size="2MB"
+                                            accepted-file-types="image/png, image/jpeg, image/jpg, image/gif, image/svg"
+                                        >
+                                        </file-pond>
+                                    </file-uploader>
                                     <div class="mb-2">
                                         {!! Form::text('name', $user->name, ['placeholder' => 'Name...', 'class' => 'text-4xl font-semibold leading-normal text-gray-800 text-center p-1 m-1 rounded-lg border border-gray-500 focus:shadow-outline']) !!}
                                     </div>

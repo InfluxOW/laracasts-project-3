@@ -30,7 +30,7 @@ class ProfilesController extends Controller
 
     public function update(UserProfileRequest $request, User $user)
     {
-        $this->authorize($request->user());
+        $this->authorize($user);
 
         $user->update($request->validated());
 

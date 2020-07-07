@@ -24,11 +24,11 @@
 
 .wysiwyg {
     pre {
-        @apply p-2 border-2 border-red-400 bg-gray-700 text-white font-bold tracking-widest font-mono text-sm rounded;
+        @apply p-2 border-2 border-red-400 bg-gray-700 text-white tracking-widest font-mono text-sm rounded my-2;
     }
 
     blockquote {
-        @apply p-2 border-l-2 border-gray-300 text-gray-500 text-sm;
+        @apply px-2 my-2 border-l-2 border-gray-300 text-gray-500 text-sm;
     }
 
     ul {
@@ -41,6 +41,14 @@
 
     h1 {
         @apply text-2xl;
+    }
+
+    a {
+        @apply text-blue-500;
+
+        &:hover {
+            @apply text-opacity-75;
+        }
     }
 }
 

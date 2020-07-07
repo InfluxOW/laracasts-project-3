@@ -4,7 +4,6 @@ import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog'
 import InstantSearch from 'vue-instantsearch';
 import TurbolinksAdapter from 'vue-turbolinks';
-import Trix from 'trix';
 
 /**
  * Our Vuejs event handler which we will be using for flash messaging

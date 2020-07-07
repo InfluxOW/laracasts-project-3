@@ -30,7 +30,7 @@
                 <div v-if="editing">
                     <form @submit.prevent="update">
                         <div class="pr-8">
-                            <textarea class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" v-model="body" required></textarea>
+                            <wysiwyg name="body" :value="body" v-model="body" class="text-left border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full"></wysiwyg>
                         </div>
                         <slot name="honeypot"></slot>
 
@@ -40,7 +40,7 @@
                 </div>
 
                 <div v-if="! editing">
-                    <div class="text-sm my-2" v-html="body"></div>
+                    <div class="text-sm my-2 wysiwyg w-11/12" v-html="body"></div>
                     <div v-if="authorize('owns', reply)">
                         <div class="mt-4">
                             <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="editing = true">Edit</button>

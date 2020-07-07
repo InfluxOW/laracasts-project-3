@@ -51,7 +51,7 @@ Route::delete('/profiles/{user:username}/notifications/{notification}', 'Notific
 
 Auth::routes(['verify' => true]);
 
-Route::name('api.')->namespace('Api')->group(function () {
+Route::name('api.')->namespace('Api')->prefix('api/')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{user:username}/{filename}/{folder}', 'UserImagesController@store')->name('user.images.store');
 });

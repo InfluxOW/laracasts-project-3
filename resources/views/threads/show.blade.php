@@ -78,16 +78,13 @@
             @endif
         </div>
         <div v-if="editing" class="text-center pt-4 md:pt-8 bg-white container max-w-6xl border rounded-lg p-4 pb-2">
-            <div>
+            <div class="mb-2">
                 <input class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" type="text"
                        v-model="form.title" placeholder="Title..."
                 >
-{{--                <textarea--}}
-{{--                    class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full"--}}
-{{--                    rows="5" v-model="form.body" placeholder="Body..."></textarea>--}}
-                <wysiwyg name="body" v-model="form.body"></wysiwyg>
+                <wysiwyg name="body" :value="form.body" v-model="form.body" class="text-left"></wysiwyg>
             </div>
-            <div class="inline-flex mb-2">
+            <div class="inline-flex my-2">
                 <button
                     class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2"
                     @click="update"

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<thread inline-template :thread="{{ $thread }}" data-body="{!! nl2br(e($thread->body)) !!}">
+<thread inline-template :thread="{{ $thread }}">
     <div>
         <div v-if="! editing">
             <!--Title-->
@@ -54,12 +54,11 @@
             <!--Container-->
             <div class="container max-w-5xl mx-auto -mt-32 mb-4">
                 <div class="mx-0 sm:mx-6">
-                    <div
-                        class="bg-white rounded w-full p-4 md:p-8 text-xl md:text-2xl text-gray-800 leading-normal text-center"
+                    <div class="bg-white rounded w-full p-4 md:p-8 text-base md:text-xltext-gray-800 leading-normal"
                         style="font-family:Georgia,serif;">
 
                         <!--Post Content-->
-                        <p v-html="body"></p>
+                        <p v-html="body" class="wysiwyg"></p>
                     </div>
                 </div>
             </div>
@@ -83,9 +82,10 @@
                 <input class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" type="text"
                        v-model="form.title" placeholder="Title..."
                 >
-                <textarea
-                    class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full"
-                    rows="5" v-model="form.body" placeholder="Body..."></textarea>
+{{--                <textarea--}}
+{{--                    class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full"--}}
+{{--                    rows="5" v-model="form.body" placeholder="Body..."></textarea>--}}
+                <wysiwyg name="body" v-model="form.body"></wysiwyg>
             </div>
             <div class="inline-flex mb-2">
                 <button

@@ -10,6 +10,25 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Scripts -->
+    <script>
+        window.app = {!! json_encode([
+            'signedIn' => Auth::check(),
+            'user' => Auth::user(),
+        ]) !!}
+    </script>
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    @stack('scripts')
+
+    <script>
+        document.addEventListener("turbolinks:load", function() {
+            $('div[role="alert"]').delay(3000).fadeOut(1000);
+        })
+    </script>
+
+    {!! NoCaptcha::renderJs() !!}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
 
@@ -18,23 +37,6 @@
 <body style="background-image: url( {{asset('storage/patterns/email-pattern.png')}} );">
 
 @yield('body')
-<!-- Scripts -->
-<script>
-    window.app = {!! json_encode([
-            'signedIn' => Auth::check(),
-            'user' => Auth::user(),
-        ]) !!}
-</script>
-
-<script src="{{ asset('js/app.js') }}"></script>
-
-<script>
-    $('div[role="alert"]').delay(3000).fadeOut(1000);
-</script>
-
-@stack('scripts')
-
-{!! NoCaptcha::renderJs() !!}
 
 </body>
 </html>

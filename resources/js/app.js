@@ -3,6 +3,7 @@ require('./bootstrap');
 import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog'
 import InstantSearch from 'vue-instantsearch';
+import Trix from 'trix';
 
 /**
  * Our Vuejs event handler which we will be using for flash messaging
@@ -23,6 +24,7 @@ window.flash = function (message, type) {
 Vue.use(VueConfirmDialog);
 Vue.use(InstantSearch);
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
+Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
 Vue.component('instant-search', require('./components/InstantSearch.vue').default);
 Vue.component('file-uploader', require('./components/FileUploader.vue').default);
 Vue.component('flash', require('./components/Flash.vue').default);

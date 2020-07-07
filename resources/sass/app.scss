@@ -14,8 +14,33 @@
 //Filepond
 @import '~filepond/dist/filepond.css';
 @import '~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+//Trix
+@import '~trix/dist/trix.css';
 
 .wrapper {
     @apply -mb-4;
     min-height: 95%;
 }
+
+.wysiwyg {
+    pre {
+        @apply p-2 border-2 border-red-400 bg-gray-700 text-white font-bold tracking-widest font-mono text-sm rounded;
+    }
+
+    blockquote {
+        @apply p-2 border-l-2 border-gray-300 text-gray-500 text-sm;
+    }
+
+    ul {
+        @apply list-disc ml-4 my-2 text-sm;
+    }
+
+    ol {
+        @apply list-decimal ml-4 my-2 text-sm;
+    }
+
+    h1 {
+        @apply text-2xl;
+    }
+}
+

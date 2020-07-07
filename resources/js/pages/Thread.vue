@@ -3,13 +3,13 @@
     import SubscribeButton from "../components/SubscribeButton";
 
     export default {
-        props: ['thread', 'data-body'],
+        props: ['thread'],
         components: {Replies, SubscribeButton},
         data() {
             return {
                 closed: this.thread.closed,
                 title: this.thread.title,
-                body: this.dataBody,
+                body: this.thread.body,
                 form: {},
                 editing: false
             };

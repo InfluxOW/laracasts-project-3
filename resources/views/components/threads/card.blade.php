@@ -12,7 +12,9 @@
                     {{ $thread->title }}
                 </a>
             </h1>
-            <p class="leading-relaxed mb-3">{!! nl2br(e(Str::limit($thread->body, 200))) !!}</p>
+            <div class="mb-3 wysiwyg">
+                {!! Str::limit(strip_tags($thread->body), 200) !!}
+            </div>
 
             <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full pb-8">
                     <span

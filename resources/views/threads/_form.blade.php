@@ -1,5 +1,5 @@
 <div class="flex flex-wrap justify-center">
-    <div class="w-full max-w-md border border-gray-300 p-4 rounded-lg shadow-xl bg-page">
+    <div class="w-full border border-gray-300 p-4 rounded-lg shadow-xl bg-page">
         <div
             class="font-header text-center text-xl text-gray-800 mb-4 border-b border-gray-300 -m-4 p-2 bg-gray-100 rounded-lg rounded-b-none tracking-widest">
             Create a New Thread
@@ -10,8 +10,9 @@
         <x-error name="title" classes="mb-4"/>
 
         {!! Form::label('body', 'Body', ['class' => 'text-default font-light text-xs opacity-75']) !!}
-        {!! Form::textarea('body', $thread->body ?? '', ['class' => 'border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full', 'rows' => '3']) !!}
-        <x-error name="body" classes="mb-4"/>
+{{--        {!! Form::textarea('body', $thread->body ?? '', ['class' => 'border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full', 'rows' => '3']) !!}--}}
+        <wysiwyg name="body"></wysiwyg>
+        <x-error name="body" classes="mb-4 mt-2"/>
 
         {!! Form::label('channel_id', 'Channel', ['class' => 'text-default font-light text-xs opacity-75']) !!}
         <div class="relative mb-4">

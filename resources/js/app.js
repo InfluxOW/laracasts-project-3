@@ -3,6 +3,7 @@ require('./bootstrap');
 import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog'
 import InstantSearch from 'vue-instantsearch';
+import TurbolinksAdapter from 'vue-turbolinks';
 import Trix from 'trix';
 
 /**
@@ -23,6 +24,7 @@ window.flash = function (message, type) {
 
 Vue.use(VueConfirmDialog);
 Vue.use(InstantSearch);
+Vue.use(TurbolinksAdapter);
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
 Vue.component('instant-search', require('./components/InstantSearch.vue').default);
@@ -35,8 +37,10 @@ Vue.component('thread', require('./pages/Thread.vue').default);
 Vue.component('profile', require('./pages/Profile.vue').default);
 Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
 
-const app = new Vue({
-    el: '#app',
+document.addEventListener('turbolinks:load', () => {
+    const app = new Vue({
+        el: '#app',
+    });
 });
 
 let Turbolinks = require("turbolinks");

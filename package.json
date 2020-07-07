@@ -49,7 +49,8 @@
         "vue-confirm-dialog": "^1.0.2",
         "vue-filepond": "^6.0.2",
         "vue-instantsearch": "^3.1.0",
-        "vue-server-renderer": "^2.6.11"
+        "vue-server-renderer": "^2.6.11",
+        "vue-turbolinks": "^2.1.0"
     },
     "engines": {
         "node": "13.14.x",

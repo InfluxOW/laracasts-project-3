@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<thread inline-template :thread="{{ $thread }}">
+<thread inline-template :thread="{{ $thread }}" v-cloak>
     <div>
         <div v-if="! editing">
             <!--Title-->

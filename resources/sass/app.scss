@@ -19,7 +19,7 @@
 
 .wrapper {
     @apply -mb-4;
-    min-height: 95%;
+    min-height: 89%;
 }
 
 .wysiwyg {
@@ -44,3 +44,6 @@
     }
 }
 
+[v-cloak] {
+    display: none !important;
+}

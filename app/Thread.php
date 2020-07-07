@@ -14,6 +14,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
+use Stevebauman\Purify\Facades\Purify;
 
 class Thread extends Model
 {
@@ -65,6 +66,11 @@ class Thread extends Model
     {
         $recomendationsAmount = min(3, $this->channel->threads_count - 1);
         return $this->channel->threads->where('id', '<>', $this->id)->random($recomendationsAmount);
+    }
+
+    public function getBodyAttribute($body)
+    {
+        return Purify::clean($body);
     }
 
     public function getViewsCountAttribute()

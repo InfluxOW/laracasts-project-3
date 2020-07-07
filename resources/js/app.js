@@ -24,6 +24,7 @@ window.flash = function (message, type) {
 Vue.use(VueConfirmDialog);
 Vue.use(InstantSearch);
 Vue.use(TurbolinksAdapter);
+
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
 Vue.component('instant-search', require('./components/InstantSearch.vue').default);

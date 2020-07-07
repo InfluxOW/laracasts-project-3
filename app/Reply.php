@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Stevebauman\Purify\Facades\Purify;
 
 class Reply extends Model
 {
@@ -61,6 +62,11 @@ class Reply extends Model
     {
         preg_match_all("/\B\@([\w\-]+)/", $this->body, $matches);
         return $matches[1];
+    }
+
+    public function getBodyAttribute($body)
+    {
+        return Purify::clean($body);
     }
 
     public function setBodyAttribute($body)

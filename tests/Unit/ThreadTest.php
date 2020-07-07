@@ -79,4 +79,11 @@ class ThreadTest extends TestCase
         $this->thread->close();
         $this->assertTrue($this->thread->closed);
     }
+
+    /** @test */
+    public function a_thread_body_is_sanitized_automatically()
+    {
+        $thread = factory(Thread::class)->make(['body' => "<script>alert('bad')</script><h1>Test</h1>"]);
+        $this->assertEquals($thread->body, "<h1>Test</h1>");
+    }
 }

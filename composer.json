@@ -27,7 +27,8 @@
         "spatie/laravel-activitylog": "^3.14",
         "spatie/laravel-collection-macros": "^7.0",
         "spatie/laravel-honeypot": "^2.2",
-        "spatie/laravel-query-builder": "^2.8"
+        "spatie/laravel-query-builder": "^2.8",
+        "stevebauman/purify": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.3",

@@ -18,17 +18,10 @@
         ]) !!}
     </script>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer async></script>
 
     @stack('scripts')
 
-    <script>
-        document.addEventListener("turbolinks:load", function() {
-            $('div[role="alert"]').delay(3000).fadeOut(1000);
-        })
-    </script>
-
-    {!! NoCaptcha::renderJs() !!}
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
 
@@ -37,6 +30,11 @@
 <body style="background-image: url( {{asset('storage/patterns/email-pattern.png')}} );">
 
 @yield('body')
+
+{!! NoCaptcha::renderJs() !!}
+<script>
+    $('div[role="alert"]').delay(3000).fadeOut(1000);
+</script>
 
 </body>
 </html>

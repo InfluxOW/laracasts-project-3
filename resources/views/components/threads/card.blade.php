@@ -13,7 +13,7 @@
                 </a>
             </h1>
             <div class="mb-3 wysiwyg">
-                {!! Str::limit(strip_tags($thread->body), 200) !!}
+                {!! Str::limit($thread->body, 300) !!}
             </div>
 
             <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full pb-8">

@@ -42,12 +42,7 @@ class Reply extends Model
 
     public function getLinkAttribute()
     {
-        return $this->getLink();
-    }
-
-    public function getLink(): string
-    {
-//    $commentableResourceName = str_plural(strtolower(class_basename($comment->commentable_type)));
+        //    $commentableResourceName = str_plural(strtolower(class_basename($comment->commentable_type)));
         $threadUrl = route('threads.show', [$this->thread->channel, $this->thread], false);
         $replyUrl = "{$threadUrl}#reply-{$this->id}";
         return $replyUrl;
@@ -81,11 +76,6 @@ class Reply extends Model
     public function isBest()
     {
         return $this->thread->best_reply_id == $this->id;
-    }
-
-    public function getIsBestAttribute()
-    {
-        return $this->isBest();
     }
 
     public function markAsBest()

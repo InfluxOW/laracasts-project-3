@@ -5,6 +5,31 @@
             Create a New Thread
         </div>
 
+        <file-uploader url="{{ route('uploads.store', ['image', 'threads']) }}" inline-template>
+            <file-pond
+                name="image"
+                :server="{
+                  url: url,
+                  process: {
+                    headers: {
+                      'X-CSRF-TOKEN': csrfToken
+                    }
+                  }
+                }"
+                label-idle="Upload your image..."
+                image-preview-height="300"
+                style-panel-layout="compact"
+                image-validate-size-min-width="720"
+                image-validate-size-max-width="1920"
+                image-validate-size-min-height="400"
+                image-validate-size-max-height="1080"
+                max-files="1"
+                max-file-size="2MB"
+                accepted-file-types="image/png, image/jpeg, image/jpg, image/gif, image/svg"
+            >
+            </file-pond>
+        </file-uploader>
+
         {!! Form::label('title', 'Title', ['class' => 'text-default font-light text-xs opacity-75']) !!}
         {!! Form::text('title', $thread->title ?? '', ['class' => 'border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full']) !!}
         <x-error name="title" classes="mb-4"/>

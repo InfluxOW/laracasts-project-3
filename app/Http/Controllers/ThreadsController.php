@@ -72,11 +72,6 @@ class ThreadsController extends Controller
         return view('threads.show', compact('thread'));
     }
 
-    public function edit(Thread $thread)
-    {
-        //
-    }
-
     public function update(ThreadsRequest $request, Thread $thread)
     {
         $this->authorize($thread);

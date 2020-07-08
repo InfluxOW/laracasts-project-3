@@ -46,10 +46,10 @@
                     @endcan
                 </div>
             </div>
-
             <!--image-->
             <div class="container w-full max-w-6xl mx-auto bg-cover mt-2 mb-4 rounded"
-                 style="background-image:url({{ $thread->getImage() }}); height: 75vh;"></div>
+                 :style="{ backgroundImage: `url('${form.image}')` }"
+                 style="height: 75vh;"></div>
 
             <!--Container-->
             <div class="container max-w-5xl mx-auto -mt-32 mb-4">
@@ -79,6 +79,33 @@
         </div>
         <div v-if="editing" class="text-center pt-4 md:pt-8 bg-white container max-w-6xl border rounded-lg p-4 pb-2">
             <div class="mb-2">
+                <file-uploader url="{{ route('uploads.store', ['image', 'threads']) }}" inline-template>
+                    <file-pond
+                        ref="pond"
+                        name="image"
+                        :server="{
+                          url: url,
+                          process: {
+                            headers: {
+                              'X-CSRF-TOKEN': csrfToken
+                            },
+
+                            onload: (response) => { $parent.form.image = response.match('\\b(https?:\\/\\/\\S+(?:png|jpe?g|gif))\\b')[0] }
+                          }
+                        }"
+                        label-idle="Upload your image..."
+                        image-preview-height="300"
+                        style-panel-layout="compact"
+                        image-validate-size-min-width="720"
+                        image-validate-size-max-width="1920"
+                        image-validate-size-min-height="400"
+                        image-validate-size-max-height="1080"
+                        max-files="1"
+                        max-file-size="2MB"
+                        accepted-file-types="image/png, image/jpeg, image/jpg, image/gif, image/svg"
+                    >
+                    </file-pond>
+                </file-uploader>
                 <input class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" type="text"
                        v-model="form.title" placeholder="Title..."
                 >

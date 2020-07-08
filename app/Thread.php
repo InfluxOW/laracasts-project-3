@@ -24,7 +24,7 @@ class Thread extends Model
     use Searchable;
 
     protected $appends = ['views_count'];
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed', 'image'];
     protected $with = ['channel', 'user', 'favorites'];
     protected $withCount = ['favorites', 'replies'];
     protected $casts = [
@@ -57,9 +57,9 @@ class Thread extends Model
 
     // Helpers
 
-    public function getImage()
+    public function getImageAttribute($image)
     {
-        return $this->image->url ?? "https://picsum.photos/seed/{$this->slug}/720/400";
+        return $image ?? "https://picsum.photos/seed/{$this->slug}/720/400";
     }
 
     public function getRecomendationsAttribute()
@@ -120,11 +120,6 @@ class Thread extends Model
     }
 
     public function getLinkAttribute()
-    {
-        return $this->getLink();
-    }
-
-    public function getLink(): string
     {
         return route('threads.show', [$this->channel, $this], false);
     }

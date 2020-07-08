@@ -10,6 +10,7 @@
                 closed: this.thread.closed,
                 title: this.thread.title,
                 body: this.thread.body,
+                image: this.thread.image,
                 form: {},
                 editing: false
             };
@@ -46,6 +47,7 @@
                         this.editing = false;
                         this.title = this.form.title;
                         this.body = this.form.body;
+                        this.image = this.form.image;
                         flash('Thread has been updated', 'success');
                     })
                     .catch(error => {
@@ -58,7 +60,8 @@
             resetForm () {
                 this.form = {
                     title: this.thread.title,
-                    body: this.thread.body
+                    body: this.thread.body,
+                    image: this.thread.image
                 };
                 this.editing = false;
             }

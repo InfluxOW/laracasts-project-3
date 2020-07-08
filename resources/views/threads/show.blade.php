@@ -76,8 +76,17 @@
                     </div>
                 </div>
             @endif
+
+            <div class="container">
+                <replies>
+                    <template v-slot:honeypot>
+                        @honeypot
+                    </template>
+                </replies>
+            </div>
         </div>
-        <div v-if="editing" class="text-center pt-4 md:pt-8 bg-white container max-w-6xl border rounded-lg p-4 pb-2">
+
+        <div v-if="editing" class="pt-4 md:pt-8 bg-white container max-w-6xl border rounded-lg p-4 pb-2 mt-12">
             <div class="mb-2">
                 <file-uploader url="{{ route('uploads.store', ['image', 'threads']) }}" inline-template>
                     <file-pond
@@ -106,12 +115,16 @@
                     >
                     </file-pond>
                 </file-uploader>
+
+                <label for="title" class="text-default font-light text-xs opacity-75">Title</label>
                 <input class="border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full" type="text"
                        v-model="form.title" placeholder="Title..."
                 >
-                <wysiwyg name="body" :value="form.body" v-model="form.body" class="text-left"></wysiwyg>
+
+                <label for="body" class="text-default font-light text-xs opacity-75">Body</label>
+                <wysiwyg name="body" :value="form.body" v-model="form.body" class="mt-2 mb-4"></wysiwyg>
             </div>
-            <div class="inline-flex my-2">
+            <div class="inline-flex my-2 text-center justify-center w-full">
                 <button
                     class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2"
                     @click="update"
@@ -125,14 +138,6 @@
                     Cancel
                 </button>
             </div>
-        </div>
-
-        <div class="container">
-            <replies>
-                <template v-slot:honeypot>
-                    @honeypot
-                </template>
-            </replies>
         </div>
     </div>
 </thread>

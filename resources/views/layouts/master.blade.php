@@ -33,7 +33,9 @@
 
 {!! NoCaptcha::renderJs() !!}
 <script>
-    $('div[role="alert"]').delay(3000).fadeOut(1000);
+    jQuery(document).on('turbolinks:load', function () {
+        $('div[role="alert"]').delay(3000).fadeOut(1000);
+    });
 </script>
 
 </body>

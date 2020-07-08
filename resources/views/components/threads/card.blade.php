@@ -1,5 +1,6 @@
 <div class="p-4 lg:w-1/3">
-    <div class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+    <div class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110
+        {{ Auth::check() && $thread->hasUpdatesFor(Auth::user()) ? 'border-2 border-blue-500 border-opacity-50' : '' }}">
         <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
             <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->image }}" alt="{{ "thread-{$thread->slug}-image" }}">
         </a>
@@ -7,7 +8,7 @@
             <h2 class="tracking-widest text-xs font-medium text-gray-500 mb-1 uppercase">
                 <a href="{{ route('threads.filter', $thread->channel) }}" class="outline-none focus:outline-none">{{ $thread->channel->name }}</a>
             </h2>
-            <h1 class="sm:text-2xl text-xl {{ Auth::check() && $thread->hasUpdatesFor(Auth::user()) ? 'font-bold text-blue-500 text-opacity-75' : 'font-medium text-gray-900' }} mb-3">
+            <h1 class="sm:text-2xl text-xl font-medium text-gray-900 mb-3">
                 <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
                     {{ $thread->title }}
                 </a>

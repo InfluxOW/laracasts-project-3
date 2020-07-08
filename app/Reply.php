@@ -78,6 +78,11 @@ class Reply extends Model
         return $this->thread->best_reply_id == $this->id;
     }
 
+    public function getIsBestAttribute()
+    {
+        return $this->isBest();
+    }
+
     public function markAsBest()
     {
         $this->thread->update(['best_reply_id' => $this->id]);

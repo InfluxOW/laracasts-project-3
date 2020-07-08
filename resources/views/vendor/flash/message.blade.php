@@ -1,5 +1,5 @@
 @foreach (session('flash_notification', collect())->toArray() as $message)
-    <div class="{{ "alert-{$message['level']}" }} mr-2 mb-2 shadow-lg" role="alert">
+    <div class="{{ "alert-{$message['level']}" }} mr-2 mb-2 shadow-lg" role="alert" id="alert">
         <div class="block">{{ $message['message'] }}</div>
         @if ($message['important'])
             <button type="button" class="close ml-2" data-dismiss="alert" aria-label="Close" onclick="$(this).parent().remove();">

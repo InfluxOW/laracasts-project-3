@@ -20,7 +20,7 @@
                                         <img
                                             alt="..."
                                             src="{{ $user->getAvatar() }}"
-                                            class="shadow-lg rounded-full h-auto align-middle border-none absolute -m-24 -ml-24 max-w-sm"
+                                            class="shadow-lg rounded-full h-48 align-middle border-none absolute -m-24 -ml-24 max-w-sm"
                                         />
                                     </div>
                                 </div>

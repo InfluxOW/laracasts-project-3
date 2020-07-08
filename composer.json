@@ -19,6 +19,7 @@
         "laracasts/flash": "^3.1",
         "laravel/framework": "^7.0",
         "laravel/scout": "^8.0",
+        "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravelcollective/html": "^6.1",
         "league/flysystem-aws-s3-v3": "^1.0",

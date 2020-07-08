@@ -57,3 +57,6 @@ Route::name('api.')->namespace('Api')->prefix('api/')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{user:username}/{filename}/{folder}', 'UserImagesController@store')->name('user.images.store');
 });
+/* Socialite */
+Route::get('login/{provider}', 'Auth\SocialiteController@redirectToProvider')->name('socialite.login');
+Route::get('login/{provider}/callback','Auth\SocialiteController@handleProviderCallback')->name('socialite.callback');

@@ -21,7 +21,7 @@ class ManageThreadsTest extends TestCase
         parent::setUp();
 
         $this->user = factory(User::class)->create();
-        $this->thread = factory(Thread::class)->raw(['user_id' => $this->user->id, 'g-recaptcha-response' => '1']);
+        $this->thread = factory(Thread::class)->raw(['user_id' => $this->user->id, 'g-recaptcha-response' => '1', 'image' => 'http://someurl.com/image.jpg']);
     }
 
     /** @test */

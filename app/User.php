@@ -51,11 +51,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $withCount = ['threads', 'replies'];
     protected $appends = ['avatar'];
     // logs
-    protected static $logAttributes = ['name', 'username', 'email'];
+    protected static $logAttributes = ['name', 'username', 'job', 'university', 'description', 'location'];
     protected static $logName = 'users_log';
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
-    protected static $recordEvents = ['created', 'updated', 'deleted'];
+    protected static $recordEvents = ['updated'];
 
     //Relations
 

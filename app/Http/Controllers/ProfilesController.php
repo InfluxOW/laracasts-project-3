@@ -34,6 +34,7 @@ class ProfilesController extends Controller
 
         $user->update($request->validated());
 
+        flash('Your profile has been updated')->success();
         return redirect()->route('profiles.show', $user);
     }
 }

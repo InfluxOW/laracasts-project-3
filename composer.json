@@ -21,6 +21,7 @@
         "laravel/scout": "^8.0",
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
+        "laravel/ui": "^2.1",
         "laravelcollective/html": "^6.1",
         "league/flysystem-aws-s3-v3": "^1.0",
         "overtrue/laravel-favorite": "^2.0",

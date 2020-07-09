@@ -17,7 +17,7 @@ class UploadsController extends Controller
         $this->uploadService = $uploadService;
     }
 
-    public function store(UploadsRequest $request, User $user, $filename, $folder)
+    public function store(UploadsRequest $request, $filename, $folder)
     {
         return $this->uploadService->upload($request->file($filename), $folder);
     }

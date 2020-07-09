@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Http\Requests\ThreadsRequest;
+use App\Services\UploadService;
 use App\Thread;
 use Illuminate\Http\Request;
 
@@ -72,9 +73,14 @@ class ThreadsController extends Controller
         return view('threads.show', compact('thread'));
     }
 
-    public function update(ThreadsRequest $request, Thread $thread)
+    public function update(ThreadsRequest $request, UploadService $uploadService, Thread $thread)
     {
         $this->authorize($thread);
+
+        if ($thread->image !== $request->image) {
+            $uploadService->remove($thread->image);
+        }
+
         $thread->update($request->validated());
     }
 

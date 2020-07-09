@@ -20,8 +20,6 @@ class CreateThreadsTable extends Migration
             $table->text('body');
             $table->string('image', 250)->nullable();
             $table->boolean('closed')->default(false);
-            $table->unsignedInteger('best_reply_id')->index()->nullable();
-            $table->foreign('best_reply_id')->references('id')->on('replies');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('channel_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

@@ -21,7 +21,7 @@
                         fugit iste suscipit reiciendis, accusamus ipsum quae.</p>
 
                     <div class="flex items-end justify-center">
-                        <img src="{{ asset('storage/images/me.png') }}" alt="" width="200px">
+                        <img src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/images/me.png" alt="" width="200px">
                     </div>
                 </div>
             </section>
@@ -46,7 +46,7 @@
                             <div class="max-w-xs w-full">
                                 <div
                                     class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
-                                    <img class="object-cover" src="{{ asset('storage/images/tweety.png') }}" alt="">
+                                    <img class="object-cover" src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/images/tweety.png" alt="">
                                 </div>
 
                                 <a href="http://influx-tweety.herokuapp.com/"
@@ -62,7 +62,7 @@
                             <div class="max-w-xs w-full">
                                 <div
                                     class="flex items-center justify-center h-56 bg-white border-b-8 border-teal-400 rounded-md overflow-hidden">
-                                    <img class="object-cover" src="{{ asset('storage/images/task_manager.png') }}"
+                                    <img class="object-cover" src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/images/task_manager.png"
                                          alt="">
                                 </div>
 
@@ -79,7 +79,7 @@
                             <div class="max-w-xs w-full">
                                 <div
                                     class="flex items-center justify-center h-56 bg-white border-b-8 border-blue-400 rounded-md overflow-hidden">
-                                    <img class="object-cover" src="{{ asset('storage/images/birdboard.png') }}" alt="">
+                                    <img class="object-cover" src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/images/birdboard.png" alt="">
                                 </div>
 
                                 <a href="http://influx-birdboard.herokuapp.com/"

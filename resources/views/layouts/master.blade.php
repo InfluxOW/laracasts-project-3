@@ -27,7 +27,7 @@
 
     @stack('styles')
 </head>
-<body style="background-image: url( {{asset('storage/patterns/email-pattern.png')}} );">
+<body style="background-image: url(https://laracasts-project-3.s3.eu-west-3.amazonaws.com/patterns/email-pattern.png);">
 
 @yield('body')
 

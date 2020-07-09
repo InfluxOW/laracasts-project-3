@@ -15,7 +15,7 @@
                 <img
                     alt="..."
                     class="w-5 mr-1"
-                    src="{{ asset('/storage/icons/github.svg') }}"
+                    src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/icons/github.svg"
                 />
                 Github
             </a>
@@ -27,7 +27,7 @@
                 <img
                     alt="..."
                     class="w-5 mr-1"
-                    src="{{ asset('/storage/icons/google.svg') }}"
+                    src="https://laracasts-project-3.s3.eu-west-3.amazonaws.com/icons/google.svg"
                 />Google
             </a>
         </div>

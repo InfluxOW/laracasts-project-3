@@ -5,5 +5,5 @@
 @endsection
 
 @section('bg-image')
-    {{ asset("storage/images/bg_lines_5.jpg") }}
+    https://laracasts-project-3.s3.eu-west-3.amazonaws.com/images/bg_lines_5.jpg
 @endsection

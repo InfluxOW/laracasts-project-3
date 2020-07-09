@@ -66,9 +66,9 @@ class SocialiteController extends Controller
     protected function getUserData($user)
     {
         return [
-            "{$this->provider}_id" => $user->getId(),
+            "{$this->provider}_id" => (int) $user->getId(),
             'name' => $user->getName(),
-            'username' => $user->getNickname(),
+            'username' => $user->getNickname() ?? slugify($user->getName()),
             'email_verified_at' => now(),
             'password' => Hash::make(random_bytes(10)),
             'email' => $user->getEmail(),

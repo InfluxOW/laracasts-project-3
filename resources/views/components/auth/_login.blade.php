@@ -19,9 +19,9 @@
                 />
                 Github
             </a>
-            <button
+            <a
                 class="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-lg inline-flex items-center font-bold text-xs"
-                type="button"
+                href="{{ route('socialite.login', 'google') }}"
                 style="transition: all 0.15s ease 0s;"
             >
                 <img
@@ -29,7 +29,7 @@
                     class="w-5 mr-1"
                     src="{{ asset('/storage/icons/google.svg') }}"
                 />Google
-            </button>
+            </a>
         </div>
         <hr class="mt-6 border-b-1 border-gray-400"/>
     </div>

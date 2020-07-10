@@ -41,4 +41,4 @@ jobs:
           debug: true
 
       - name: Import threads to Algolia search index
-        run: php artisan scout:import 'App\Threads'
+        run: php artisan scout:import 'App\Thread'

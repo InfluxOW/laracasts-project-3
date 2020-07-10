@@ -77,7 +77,7 @@ class ThreadsController extends Controller
     {
         $this->authorize($thread);
 
-        if ($thread->image !== $request->image) {
+        if ($thread->image !== $request->image && ! is_null($thread->image)) {
             $uploadService->remove($thread->image);
         }
 

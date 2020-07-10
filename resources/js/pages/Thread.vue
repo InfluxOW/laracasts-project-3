@@ -10,10 +10,14 @@
                 closed: this.thread.closed,
                 title: this.thread.title,
                 body: this.thread.body,
-                image: this.thread.image,
                 form: {},
                 editing: false
             };
+        },
+        computed: {
+            image() {
+                return (this.thread.image === null) ? `https://picsum.photos/seed/${this.thread.slug}/720/400` : this.thread.image;
+            }
         },
         created () {
             this.resetForm();
@@ -61,7 +65,7 @@
                 this.form = {
                     title: this.thread.title,
                     body: this.thread.body,
-                    image: this.thread.image
+                    image: this.image
                 };
                 this.editing = false;
             }

@@ -57,9 +57,9 @@ class Thread extends Model
 
     // Helpers
 
-    public function getImageAttribute($image)
+    public function getImage()
     {
-        return $image ?? "https://picsum.photos/seed/{$this->slug}/720/400";
+        return $this->image ?? "https://picsum.photos/seed/{$this->slug}/720/400";
     }
 
     public function getRecomendationsAttribute()

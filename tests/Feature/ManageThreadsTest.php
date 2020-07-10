@@ -47,9 +47,7 @@ class ManageThreadsTest extends TestCase
         $thread = factory(Thread::class)->create(['user_id' => $this->user->id]);
         $attributes = ['title' => 'New Title', 'body' => str_repeat('New Test Body', 10)];
 
-        $res = $this->actingAs($this->user)
-            ->patch(route('threads.update', $thread), $attributes);
-        dd($res);
+        $this->actingAs($this->user)->patch(route('threads.update', $thread), $attributes);
         $this->assertDatabaseHas('threads', $attributes);
     }
 

@@ -2,7 +2,7 @@
     <div class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110
         {{ Auth::check() && $thread->hasUpdatesFor(Auth::user()) ? 'border-2 border-blue-500 border-opacity-50' : '' }}">
         <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
-            <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->image }}" alt="{{ "thread-{$thread->slug}-image" }}">
+            <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->getImage() }}" alt="{{ "thread-{$thread->slug}-image" }}">
         </a>
         <div class="px-8 pb-16 pt-8">
             <h2 class="tracking-widest text-xs font-medium text-gray-500 mb-1 uppercase">

@@ -3,19 +3,16 @@
 namespace Tests\Feature;
 
 use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
-use App\User;
-use App\Reply;
 use App\Thread;
+use App\User;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Request;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ManageThreadsTest extends TestCase
 {
     protected $user;
     protected $thread;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -27,13 +24,10 @@ class ManageThreadsTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_create_new_forum_threads()
     {
-        NoCaptcha::shouldReceive('verifyResponse')
-            ->once()
-            ->andReturn(true);
-
+        $this->verifyCaptcha();
         $this->actingAs($this->user)
             ->post(route('threads.store'), $this->thread);
-        $this->assertDatabaseHas('threads', Arr::except($this->thread, ['created_at','g-recaptcha-response']));
+        $this->assertDatabaseHas('threads', Arr::except($this->thread, ['created_at', 'g-recaptcha-response']));
     }
 
     /** @test */
@@ -53,8 +47,9 @@ class ManageThreadsTest extends TestCase
         $thread = factory(Thread::class)->create(['user_id' => $this->user->id]);
         $attributes = ['title' => 'New Title', 'body' => str_repeat('New Test Body', 10)];
 
-        $this->actingAs($this->user)
+        $res = $this->actingAs($this->user)
             ->patch(route('threads.update', $thread), $attributes);
+        dd($res);
         $this->assertDatabaseHas('threads', $attributes);
     }
 
@@ -73,7 +68,7 @@ class ManageThreadsTest extends TestCase
         $this->assertDatabaseMissing('threads', $attributes);
     }
 
-        /** @test */
+    /** @test */
     public function a_thread_can_be_deleted_by_its_owner()
     {
         $thread = factory(Thread::class)->create();
@@ -102,42 +97,44 @@ class ManageThreadsTest extends TestCase
     /** @test */
     public function a_thread_requires_a_body()
     {
-        $attributes = factory(Thread::class)->raw(['body' => '']);
+        $this->verifyCaptcha();
+        $this->thread['body'] = '';
 
         $this->actingAs($this->user)
-            ->post(route('threads.store'), $attributes)
+            ->post(route('threads.store'), $this->thread)
             ->assertSessionHasErrors('body');
     }
 
     /** @test */
     public function a_thread_requires_a_title()
     {
-        $attributes = factory(Thread::class)->raw(['title' => '']);
+        $this->verifyCaptcha();
+        $this->thread['title'] = '';
 
         $this->actingAs($this->user)
-            ->post(route('threads.store'), $attributes)
+            ->post(route('threads.store'), $this->thread)
             ->assertSessionHasErrors('title');
     }
 
     /** @test */
     public function a_thread_requires_a_valid_channel()
     {
-        $attributes = factory(Thread::class)->raw(['channel_id' => '']);
+        $this->verifyCaptcha();
+        $this->thread['channel_id'] = '';
 
         $this->actingAs($this->user)
-            ->post(route('threads.store'), $attributes)
+            ->post(route('threads.store'), $this->thread)
             ->assertSessionHasErrors('channel_id');
     }
 
     /** @test */
     public function a_thread_requires_a_valid_recaptcha_response()
     {
-        $attributes = factory(Thread::class)->raw(['g-recaptcha-response' => 'test']);
         NoCaptcha::shouldReceive('verifyResponse')
             ->once();
 
         $this->actingAs($this->user)
-            ->post(route('threads.store'), $attributes)
+            ->post(route('threads.store'), $this->thread)
             ->assertSessionHasErrors('g-recaptcha-response');
     }
 }

@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static $logName = 'users_log';
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
-    protected static $recordEvents = ['updated'];
+    protected static $recordEvents = ['created', 'updated', 'deleted'];
 
     //Relations
 

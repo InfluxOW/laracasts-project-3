@@ -1,7 +1,7 @@
 <template>
     <div class="wysiwyg">
         <input id="trix" :value="value" type="hidden" :name="name">
-        <trix-editor input="trix" ref="trix" :placeholder="placeholder"></trix-editor>
+        <trix-editor input="trix" ref="trix" :placeholder="placeholder" class="outline-none focus:outline-none"></trix-editor>
     </div>
 </template>
 

@@ -7,6 +7,7 @@
 @import 'components/favorites';
 @import 'components/alerts';
 @import 'components/tribute';
+@import 'components/wysiwyg';
 //Fonts
 @import url('https://fonts.googleapis.com/css?family=Helvetica');
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -22,36 +23,15 @@
     min-height: 89%;
 }
 
-.wysiwyg {
-    pre {
-        @apply p-2 border-2 border-red-400 bg-gray-700 text-white tracking-widest font-mono text-sm rounded my-2;
-    }
-
-    blockquote {
-        @apply px-2 my-2 border-l-2 border-gray-300 text-gray-500 text-sm;
-    }
-
-    ul {
-        @apply list-disc ml-4 my-2 text-sm;
-    }
-
-    ol {
-        @apply list-decimal ml-4 my-2 text-sm;
-    }
-
-    h1 {
-        @apply text-2xl;
-    }
-
-    a {
-        @apply text-blue-500;
-
-        &:hover {
-            @apply text-opacity-75;
-        }
-    }
-}
-
 [v-cloak] {
     display: none !important;
+}
+
+button,
+a,
+input,
+textarea {
+    &:focus {
+        @apply outline-none;
+    }
 }

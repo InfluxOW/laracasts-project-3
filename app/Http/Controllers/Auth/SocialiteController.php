@@ -38,6 +38,7 @@ class SocialiteController extends Controller
         $user = $this->findOrCreateSocialiteUser($validator->validated());
         Auth::login($user, true);
 
+        flash('You are successfully signed in')->success();
         return redirect()->route('threads.index');
     }
 

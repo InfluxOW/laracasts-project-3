@@ -20,6 +20,11 @@ jobs:
       - name: PHP Security Checker
         uses: StephaneBour/actions-php-security-checker@1.0
 
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.1.0
+        with:
+          redis-version: 6
+
       - name: Setup project
         run: make setup
 
@@ -28,6 +33,8 @@ jobs:
         # Add Code Climate secret key
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_SECRET: ${{ secrets.ALGOLIA_SECRET }}
         with:
           coverageCommand: make test-coverage
           coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover

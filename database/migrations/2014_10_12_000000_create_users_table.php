@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username', 40)->unique();
             $table->string('email')->unique();
-            $table->integer('github_id')->unique()->nullable();
-            $table->integer('google_id')->unique()->nullable();
+            $table->bigInteger('github_id')->unique()->nullable();
+            $table->bigInteger('google_id')->unique()->nullable();
             $table->string('job', 200)->nullable();
             $table->string('university', 200)->nullable();
             $table->string('location', 200)->nullable();

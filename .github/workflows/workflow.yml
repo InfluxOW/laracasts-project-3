@@ -39,6 +39,3 @@ jobs:
           coverageCommand: make test-coverage
           coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
           debug: true
-
-      - name: Import threads to Algolia search index
-        run: php artisan scout:import 'App\Thread'

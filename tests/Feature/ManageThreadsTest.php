@@ -24,9 +24,13 @@ class ManageThreadsTest extends TestCase
     /** @test */
     public function an_authenticated_user_can_create_new_forum_threads()
     {
+        $this->be($this->user);
+
+        $this->get(route('threads.create'))
+            ->assertOk();
+
         $this->verifyCaptcha();
-        $this->actingAs($this->user)
-            ->post(route('threads.store'), $this->thread);
+        $this->post(route('threads.store'), $this->thread);
         $this->assertDatabaseHas('threads', Arr::except($this->thread, ['created_at', 'g-recaptcha-response']));
     }
 
@@ -134,5 +138,15 @@ class ManageThreadsTest extends TestCase
         $this->actingAs($this->user)
             ->post(route('threads.store'), $this->thread)
             ->assertSessionHasErrors('g-recaptcha-response');
+    }
+
+    /** @test */
+    public function a_thread_requires_a_valid_image()
+    {
+        $this->thread['image'] = '';
+
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $this->thread)
+            ->assertSessionHasErrors('image');
     }
 }

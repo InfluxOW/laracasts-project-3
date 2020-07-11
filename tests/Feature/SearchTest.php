@@ -3,10 +3,8 @@
 namespace Tests\Feature;
 
 use App\Thread;
-use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Config;
+use Sti3bas\ScoutArray\Facades\Search;
 use Tests\TestCase;
 
 class SearchTest extends TestCase
@@ -14,23 +12,24 @@ class SearchTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Config::set('scout.driver', 'algolia');
+        Config::set('scout.driver', 'array');
     }
 
     /** @test */
     public function a_user_can_search_threads()
     {
         $search = 'foobar';
-        factory(Thread::class, 2)->create();
-        factory(Thread::class, 2)->create(['body' => "We are looking for {$search}"]);
+        $threadThatShouldBeFound = factory(Thread::class)->create(['body' => "We are looking for {$search}"]);
+        $threadThatShouldNotBeFound = factory(Thread::class)->create();
 
-        do {
-            sleep(0.25);
-            $results = $this->getJson("/threads/search?q={$search}")->json()['data'];
-        } while (empty($results));
+        Search::fakeRecord($threadThatShouldBeFound, $threadThatShouldBeFound->toSearchableArray());
+        $results = $this->getJson("/threads/search?q={$search}")->json()['data'];
 
-        $this->assertCount(2, $results);
+        $this->assertCount(1, $results);
+        $this->assertEquals($threadThatShouldBeFound->body, $results[0]['body']);
+        $this->assertNotEquals($threadThatShouldNotBeFound->body, $results[0]['body']);
 
-        Thread::all()->unsearchable();
+        $this->get(route('threads.search'))
+            ->assertOk();
     }
 }

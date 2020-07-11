@@ -44,4 +44,22 @@ class ProfilesTest extends TestCase
         $this->get(route('profiles.show', $this->user))
             ->assertOk();
     }
+
+    /** @test */
+    public function a_user_can_update_his_profile()
+    {
+        $attributes = [
+          'name' => 'Test',
+          'username' => 'test',
+          'job' => 'test',
+          'university' => 'test',
+          'location' => 'test',
+          'description' => 'test'
+        ];
+
+        $this->actingAs($this->user)
+            ->patch(route('profiles.update', $this->user), $attributes)
+            ->assertRedirect();
+        $this->assertDatabaseHas('users', $attributes);
+    }
 }

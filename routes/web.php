@@ -30,7 +30,7 @@ Route::delete('threads/{thread}', 'ThreadsController@destroy')->name('threads.de
 Route::post('threads', 'ThreadsController@store')->name('threads.store');
 Route::post('threads/{thread}/close', 'ClosedThreadsController@store')->name('closed-thread.store');
 /* User Profiles */
-Route::resource('profiles', 'ProfilesController')->only('show', 'edit', 'update')->parameters([
+Route::resource('profiles', 'ProfilesController')->only('show', 'update')->parameters([
     'profiles' => 'user:username'
 ]);
 /* Thread Replies */

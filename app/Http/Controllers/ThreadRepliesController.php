@@ -25,11 +25,6 @@ class ThreadRepliesController extends Controller
         return $thread->replies()->oldest()->paginate(15);
     }
 
-    public function create()
-    {
-        //
-    }
-
     /**
      * @param ThreadRepliesRequest $request
      * @param $channel
@@ -47,16 +42,6 @@ class ThreadRepliesController extends Controller
         $reply = $thread->addReply($request->validated(), $request->user());
 
         return $reply->load('user')->loadCount('favorites');
-    }
-
-    public function show(Reply $reply)
-    {
-        //
-    }
-
-    public function edit(Reply $reply)
-    {
-        //
     }
 
     public function update(ThreadRepliesRequest $request, Reply $reply)

@@ -99,6 +99,18 @@
     }
 }
 
+.button-sm-dropdown-pink {
+    @apply .button-sm .text-pink-600 .bg-pink-200;
+
+    &:hover {
+        @apply .border-pink-500 .border-opacity-25 .bg-pink-100;
+    }
+
+    &:focus {
+        @apply .outline-none;
+    }
+}
+
 .button-dropdown-blue {
     @apply .button .text-white .bg-blue-300;
 

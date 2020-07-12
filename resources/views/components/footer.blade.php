@@ -17,14 +17,9 @@
                         >About</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="https://github.com/InfluxOW/laracasts-project-3/blob/master/License.md"
                            class="{{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-                        >Blog</a>
-                    </li>
-                    <li>
-                        <a href="#"
-                           class="{{ $dark == 'true' ? 'text-gray-800' : 'text-white' }} hover:text-gray-400 text-sm font-semibold block py-1 px-3"
-                        >MIT License</a>
+                        >License</a>
                     </li>
                 </ul>
             </div>

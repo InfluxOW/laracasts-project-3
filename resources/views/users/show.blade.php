@@ -24,7 +24,15 @@
                                         />
                                     </div>
                                 </div>
-                                <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                                <div class="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center flex items-center justify-end">
+                                    <div class="mr-4 p-3 text-center">
+                                            <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                                                {{ $user->reputation }} XP
+                                            </span>
+                                        <span class="text-sm text-gray-500">
+                                                Reputation
+                                            </span>
+                                    </div>
                                     <div class="py-6 px-3 mt-32 sm:mt-0">
                                         @can('update', $user)
                                             <button
@@ -41,22 +49,22 @@
                                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
                                     <div class="flex justify-center py-4 lg:pt-4 pt-8">
                                         <div class="mr-4 p-3 text-center">
-                                      <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                                          <a href="{{ route('threads.index', ['filter[user.username]' => $user->username]) }}">
-                                              {{ $user->threads_count }}
-                                          </a>
-                                      </span>
+                                            <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                                                <a href="{{ route('threads.index', ['filter[user.username]' => $user->username]) }}">
+                                                    {{ $user->threads_count }}
+                                                </a>
+                                            </span>
                                             <span class="text-sm text-gray-500">
-                                            Threads
-                                        </span>
+                                                Threads
+                                            </span>
                                         </div>
                                         <div class="mr-4 p-3 text-center">
-                                        <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                                            {{ $user->replies_count }}
-                                        </span>
+                                            <span class="text-xl font-bold block uppercase tracking-wide text-gray-700">
+                                                {{ $user->replies_count }}
+                                            </span>
                                             <span class="text-sm text-gray-500">
-                                            Comments
-                                        </span>
+                                                Comments
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

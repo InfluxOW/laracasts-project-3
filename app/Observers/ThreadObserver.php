@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Reputation;
 use App\Thread;
 
 class ThreadObserver
@@ -17,6 +18,8 @@ class ThreadObserver
         $thread->disableLogging();
         $thread->update(['slug' => $thread->title]);
         $thread->enableLogging();
+
+        Reputation::award($thread->user, Reputation::THREAD_WAS_PUBLISHED);
     }
 
     /**
@@ -58,6 +61,7 @@ class ThreadObserver
         $thread->favorites->each->delete();
         $thread->subscriptions->each->delete();
         $thread->activities->each->delete();
+        Reputation::reduce($thread->user, Reputation::THREAD_WAS_PUBLISHED);
     }
 
     /**

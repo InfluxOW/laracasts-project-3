@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\BestReplyCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Overtrue\LaravelFavorite\Traits\Favoriteable;
@@ -85,6 +86,7 @@ class Reply extends Model
 
     public function markAsBest()
     {
+        event(new BestReplyCreated($this));
         $this->thread->update(['best_reply_id' => $this->id]);
     }
 }

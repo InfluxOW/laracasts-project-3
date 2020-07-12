@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reputation;
 use Illuminate\Http\Request;
 use Overtrue\LaravelFavorite\Favorite;
 

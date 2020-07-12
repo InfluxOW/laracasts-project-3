@@ -55,6 +55,11 @@ class Thread extends Model
         return $this->hasMany(Reply::class);
     }
 
+    public function bestReply()
+    {
+        return $this->hasOne(Reply::class, 'id', 'best_reply_id');
+    }
+
     // Helpers
 
     public function getImage()
@@ -122,11 +127,6 @@ class Thread extends Model
     public function getLinkAttribute()
     {
         return route('threads.show', [$this->channel, $this], false);
-    }
-
-    public function bestReply()
-    {
-        return $this->replies()->where('id', $this->best_reply_id);
     }
 
     public function setSlugAttribute($value)

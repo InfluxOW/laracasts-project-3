@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Events\ReplyCreated;
 use App\Reply;
+use App\Reputation;
 
 class ReplyObserver
 {
@@ -16,6 +17,7 @@ class ReplyObserver
     public function created(Reply $reply)
     {
         event(new ReplyCreated($reply));
+        Reputation::award($reply->user, Reputation::REPLY_POSTED);
     }
 
     /**
@@ -46,6 +48,7 @@ class ReplyObserver
     {
         $reply->favorites->each->delete();
         $reply->activities->each->delete();
+        Reputation::reduce($reply->user, Reputation::REPLY_POSTED);
     }
 
     /**

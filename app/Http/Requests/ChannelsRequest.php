@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ChannelsRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class ChannelsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:channels|max:15',
+            'name' => ['required', Rule::unique('channels')->ignoreModel($this->channel), 'max:15'],
             'description' => 'nullable|max:200',
         ];
     }

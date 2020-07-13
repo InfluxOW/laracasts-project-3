@@ -20,7 +20,11 @@
                     @auth
                         @if (Auth::user()->is_admin)
                             <button class="button-dropdown-red mr-2" @click="closeThread"
-                                    v-show="{{ ! $thread->closed }}">Close Thread
+                                    v-show="{{ ! $thread->closed }}">
+                                Close Thread
+                            </button>
+                            <button class="mr-2" :class="classes()"
+                                    @click="togglePin" v-text="pinned ? 'Unpin' : 'Pin'">
                             </button>
                         @endif
                         <div class="mr-2">

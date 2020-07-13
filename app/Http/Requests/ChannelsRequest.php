@@ -25,7 +25,7 @@ class ChannelsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', Rule::unique('channels')->ignoreModel($this->channel), 'max:15'],
+            'name' => ['required', Rule::unique('channels')->ignore($this->channel), 'max:15'],
             'description' => 'nullable|max:200',
         ];
     }

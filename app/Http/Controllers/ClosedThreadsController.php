@@ -11,6 +11,8 @@ class ClosedThreadsController extends Controller
     {
         $this->authorize('close', $thread);
 
+        $thread->timestamps = false;
+
         $thread->close();
     }
 }

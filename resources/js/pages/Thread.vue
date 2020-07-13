@@ -9,6 +9,7 @@
             return {
                 closed: this.thread.closed,
                 title: this.thread.title,
+                pinned: this.thread.pinned,
                 body: this.thread.body,
                 form: {},
                 editing: false
@@ -79,6 +80,16 @@
                     image: this.image
                 };
                 this.editing = false;
+            },
+            togglePin () {
+                let uri = `/threads/${this.thread.id}/pin`;
+                axios[this.pinned ? 'delete' : 'post'](uri);
+                this.pinned = ! this.pinned;
+            },
+            classes () {
+                return [
+                    this.pinned ? 'button-dropdown-red' : 'button-dropdown-blue'
+                ];
             }
         }
     }

@@ -25,11 +25,12 @@ class Thread extends Model
     use Searchable;
 
     protected $appends = ['views_count'];
-    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed', 'image'];
+    protected $fillable = ['body', 'title', 'channel_id', 'user_id', 'slug', 'created_at', 'best_reply_id', 'closed', 'pinned', 'image'];
     protected $with = ['channel', 'user', 'favorites'];
     protected $withCount = ['favorites', 'replies'];
     protected $casts = [
-        'closed' => 'boolean'
+        'closed' => 'boolean',
+        'pinned' => 'boolean'
     ];
     // logs
     protected static $logAttributes = ['body', 'title'];
@@ -123,6 +124,7 @@ class Thread extends Model
                 AllowedSort::field('replies', 'replies_count'),
                 AllowedSort::field('favorites', 'favorites_count'),
             ])
+            ->orderBy('pinned', 'DESC')
             ->latest();
 
         $sortQuery = request()->query('sort');

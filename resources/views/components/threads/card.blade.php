@@ -1,6 +1,9 @@
 <div class="p-4 lg:w-1/3">
     <div class="{{ $classes ?? '' }} h-full bg-gray-200 rounded-lg overflow-hidden text-center relative transition duration-1000 ease-in-out transform hover:-translate-y-1 hover:scale-110
         {{ Auth::check() && $thread->hasUpdatesFor(Auth::user()) ? 'border-2 border-blue-500 border-opacity-50' : '' }}">
+        @if ($thread->pinned)
+            <img src="https://pngimg.com/uploads/pin/pin_PNG64.png" alt="" class="w-10 h-10 absolute top-0 right-0 mr-1">
+        @endif
         <a href="{{ route('threads.show', [$thread->channel, $thread]) }}" class="outline-none focus:outline-none">
             <img class="lg:h-48 md:h-36 w-full" src="{{ $thread->getImage() }}" alt="{{ "thread-{$thread->slug}-image" }}">
         </a>

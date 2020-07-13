@@ -6,6 +6,7 @@ use App\Traits\Subscribable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
@@ -101,12 +102,21 @@ class Thread extends Model
         return $query->where('created_at', '>=', Carbon::parse($date));
     }
 
+    public function scopeFavoritedByUser(Builder $query, $userSlug): Builder
+    {
+        $user = User::firstOrFail($userSlug);
+        return $query->whereHas('favorites', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        });
+    }
+
     public static function buildIndexQuery($query)
     {
         $threadsQuery = QueryBuilder::for($query)
             ->allowedFilters([
                 'user.username',
                 AllowedFilter::scope('created_after'),
+                AllowedFilter::scope('favorited_by_user'),
             ])
             ->allowedSorts([
                 AllowedSort::field('views', 'views_count'),

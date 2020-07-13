@@ -29,6 +29,11 @@
                                     My Threads
                                 </a>
 
+                                <a href="{{ route('threads.index', ['filter[favorited_by_user]' => Auth::user()->username]) }}"
+                                   class="text-sm py-2 px-4 font-normal block w-full break-words bg-transparent text-gray-800 hover:bg-gray-300">
+                                    Favorited Threads
+                                </a>
+
                                 <a href="{{ route('threads.create') }}"
                                    class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-300">
                                     New Thread

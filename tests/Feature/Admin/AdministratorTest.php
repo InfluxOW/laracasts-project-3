@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class AdministratorTest extends TestCase
 {
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 

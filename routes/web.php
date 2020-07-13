@@ -61,7 +61,7 @@ Route::name('api.')->namespace('Api')->prefix('api/')->group(function () {
 });
 /* Socialite */
 Route::get('login/{provider}', 'Auth\SocialiteController@redirectToProvider')->name('socialite.login');
-Route::get('login/{provider}/callback','Auth\SocialiteController@handleProviderCallback')->name('socialite.callback');
+Route::get('login/{provider}/callback', 'Auth\SocialiteController@handleProviderCallback')->name('socialite.callback');
 /* Admin dashboard */
 Route::name('admin.')->namespace('Admin')->prefix('admin/')->middleware('admin')->group(function () {
     Route::view('/', 'admin.dashboard')->name('dashboard');

@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class PinThreadsTest extends TestCase
 {
-    public function setUp():void
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -58,6 +58,7 @@ class PinThreadsTest extends TestCase
         $dataWithPinnedThread = $this->getJson(route('threads.index'))->json('data');
         $this->assertEquals(
             [0 => $ids[2], 1 => $ids[0], 2 => $ids[1]],
-            array_column($dataWithPinnedThread, 'id'));
+            array_column($dataWithPinnedThread, 'id')
+        );
     }
 }

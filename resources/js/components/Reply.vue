@@ -43,7 +43,9 @@
                 </div>
 
                 <div v-if="! editing">
-                    <div class="text-sm my-2 wysiwyg w-11/12" v-html="body"></div>
+                    <div class="text-sm my-2 wysiwyg w-11/12" ref="body">
+                        <highlight :content="body"></highlight>
+                    </div>
                     <div v-if="authorize('owns', reply)">
                         <div class="mt-4">
                             <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="editing = true">Edit</button>
@@ -81,6 +83,17 @@
             window.events.$on('best-reply-selected', id => {
                 this.isBest = (id === this.reply.id);
             });
+        },
+        mounted() {
+            this.highlight(this.$refs['body']);
+        },
+        watch: {
+            editing() {
+                if (this.editing) return;
+                this.$nextTick(() => {
+                    this.highlight(this.$refs['body']);
+                });
+            }
         },
         methods: {
             update() {

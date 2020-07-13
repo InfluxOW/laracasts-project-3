@@ -58,7 +58,9 @@
                         style="font-family:Georgia,serif;">
 
                         <!--Post Content-->
-                        <p v-html="body" class="wysiwyg"></p>
+                        <p ref="body" class="wysiwyg">
+                            <highlight :content="body"></highlight>
+                        </p>
                     </div>
                 </div>
             </div>

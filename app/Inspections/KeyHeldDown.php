@@ -14,7 +14,7 @@ class KeyHeldDown
      */
     public function detect($text)
     {
-        if (preg_match('/(.)\\1{4,}/', $text)) {
+        if (preg_match('/[^\s](.)\\1{4,}/', $text)) {
             throw new ValidationException("Your input contains spam.");
         }
     }

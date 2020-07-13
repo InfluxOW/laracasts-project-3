@@ -13,6 +13,6 @@
 <div class="ml-12">
     {{ ucwords($user->name) }} {{ $action->description }} {{ $action->subject_type }}
     <a href="{{ $action->subject->link }}" class="text-blue-500 hover:text-blue-300 italic">
-        {!! strip_tags($action->subject->body) !!}
+        {!! Str::limit(strip_tags($action->subject->body), 300) !!}
     </a>
 </div>

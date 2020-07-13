@@ -1,5 +1,5 @@
 <script>
-    import Replies from '../components/Replies.vue';
+    import Replies from '../components/Replies';
     import SubscribeButton from "../components/SubscribeButton";
 
     export default {
@@ -17,6 +17,17 @@
         computed: {
             image() {
                 return (this.thread.image === null) ? `https://picsum.photos/seed/${this.thread.slug}/720/400` : this.thread.image;
+            }
+        },
+        mounted () {
+            this.highlight(this.$refs['body']);
+        },
+        watch: {
+            editing() {
+                if (this.editing) return;
+                this.$nextTick(() => {
+                    this.highlight(this.$refs['body']);
+                });
             }
         },
         created () {

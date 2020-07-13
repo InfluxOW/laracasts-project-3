@@ -25,7 +25,7 @@ class ThreadRepliesRequest extends FormRequest
     public function rules()
     {
         return [
-            'body' => ['required', 'string', 'min:3', 'max:3000', new SpamFree()]
+            'body' => ['required', 'string', 'min:3', 'max:10000', new SpamFree()]
         ];
     }
 }

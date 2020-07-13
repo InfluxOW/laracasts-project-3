@@ -35,6 +35,7 @@
         "filepond-plugin-image-resize": "^2.0.5",
         "filepond-plugin-image-transform": "^3.7.3",
         "filepond-plugin-image-validate-size": "^1.2.3",
+        "highlight.js": "^10.1.1",
         "htmlhint": "^0.13.1",
         "instantsearch.css": "^7.4.2",
         "jquery": "^3.5.1",

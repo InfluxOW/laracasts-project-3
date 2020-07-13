@@ -6,7 +6,7 @@
     }
 
     pre {
-        @apply p-2 border-2 border-red-400 bg-gray-700 text-white tracking-widest font-mono text-sm rounded my-2;
+        @apply p-2 border text-sm border-gray-500 rounded my-2 whitespace-pre-wrap;
     }
 
     blockquote {

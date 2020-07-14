@@ -5,11 +5,11 @@
         <section class="text-gray-700">
             <div class="container py-4 mx-auto">
                 <div class="flex">
-                    <div class="w-1/4 flex flex-col p-4">
+                    <div class="w-1/5 flex flex-col p-4">
                         <a href="{{ route('admin.dashboard') }}" class="button-dropdown-blue">Dashboard</a>
                         <a href="{{ route('admin.channels.index') }}" class="button-dropdown-blue mt-2">Channels</a>
                     </div>
-                    <div class="w-3/4 rounded-lg border border-gray-500 bg-white">
+                    <div class="w-4/5 rounded-lg border border-gray-500 bg-white">
                         @yield('administration-content')
                     </div>
                 </div>

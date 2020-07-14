@@ -12,7 +12,9 @@ class ChannelsController extends Controller
 {
     public function index()
     {
-        return view('admin.channels.index');
+        $channelsIncludingArchived = Channel::withoutGlobalScopes()->orderBy('name', 'asc')->get();
+
+        return view('admin.channels.index', compact('channelsIncludingArchived'));
     }
 
     public function create()

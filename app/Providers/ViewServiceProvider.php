@@ -31,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(['components.threads.filtration'], ThreadsFiltration::class);
         View::composer('*', function ($view) {
             $channels = Cache::remember('channels', now()->addDay(), function () {
-                return Channel::orderBy('name', 'asc')->get();
+                return Channel::all();
             });
             $view->with('channels', $channels);
         });

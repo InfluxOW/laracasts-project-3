@@ -18,6 +18,9 @@
             {!! Form::textarea('description', null, ['class' => 'border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full']) !!}
             <x-error name="description" classes="mb-4 mt-2"/>
 
+            {!! Form::label('archived', 'Status', ['class' => 'text-default font-light text-xs opacity-75']) !!}
+            {!! Form::select('archived', ['0' => 'Active', '1' => 'Archived'] , null , ['class' => 'border border-gray-300 rounded-lg p-4 mt-2 mb-4 text-gray-700 rounded text-sm focus:shadow-outline w-full']) !!}
+
             {!! Form::button('Submit', ['type' => 'submit', 'class' => 'button-dropdown-gray mt-4 w-full']) !!}
             {!! Form::close() !!}
         </div>

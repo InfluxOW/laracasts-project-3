@@ -44,21 +44,24 @@ class ChannelAdministrationTest extends TestCase
         $this->get(route('admin.channels.create'))
             ->assertOk();
 
-        $attributes = ['name' => 'Test', 'description' => 'Test'];
+        $attributes = ['name' => 'Test', 'description' => 'Test', 'archived' => false];
         $this->post(route('admin.channels.store'), $attributes)
             ->assertRedirect();
         $this->assertDatabaseHas('channels', $attributes);
     }
 
     /** @test */
-    public function an_administrator_can_update_a_channel()
+    public function an_administrator_can_archive_a_channel()
     {
         $channel = factory(Channel::class)->create();
-        $attributes = ['name' => 'Test', 'description' => 'Test'];
+        $attributes = ['name' => 'Test', 'description' => 'Test', 'archived' => true];
+        $this->assertFalse($channel->archived);
+
         $this->actingAs($this->admin)
             ->patch(route('admin.channels.update', $channel), $attributes)
             ->assertRedirect();
         $this->assertDatabaseHas('channels', $attributes);
+        $this->assertTrue($channel->fresh()->archived);
     }
 
     /** @test */

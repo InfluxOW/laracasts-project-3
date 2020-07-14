@@ -29,7 +29,12 @@ class ThreadsRequest extends FormRequest
         return [
             'body' => ['required', 'string', 'min:100', 'max:10000', new SpamFree()],
             'title' => ['required', 'string', 'min:3', 'max:200', new SpamFree()],
-            'channel_id' => [Rule::requiredIf($this->isMethod('POST')), 'exists:channels,id'],
+            'channel_id' => [
+                Rule::requiredIf($this->isMethod('POST')),
+                Rule::exists('channels', 'id')->where(function ($query) {
+                    $query->where('archived', false);
+                })
+            ],
             'g-recaptcha-response' => [Rule::requiredIf($this->isMethod('POST')), 'captcha'],
             'image' => [Rule::requiredIf($this->isMethod('POST')), 'url']
         ];

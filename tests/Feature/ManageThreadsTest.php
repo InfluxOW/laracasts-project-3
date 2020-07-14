@@ -3,10 +3,12 @@
 namespace Tests\Feature;
 
 use Anhskohbo\NoCaptcha\Facades\NoCaptcha;
+use App\Channel;
 use App\Thread;
 use App\User;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
+use const Grpc\CHANNEL_CONNECTING;
 
 class ManageThreadsTest extends TestCase
 {
@@ -32,6 +34,25 @@ class ManageThreadsTest extends TestCase
         $this->verifyCaptcha();
         $this->post(route('threads.store'), $this->thread);
         $this->assertDatabaseHas('threads', Arr::except($this->thread, ['created_at', 'g-recaptcha-response']));
+    }
+
+    /** @test */
+    public function a_thread_can_not_be_created_in_archived_channel()
+    {
+        $channel = factory(Channel::class)->create(['archived' => true]);
+        $thread = factory(Thread::class)->raw([
+            'user_id' => $this->user->id,
+            'g-recaptcha-response' => '1',
+            'image' => 'http://someurl.com/image.jpg',
+            'channel_id' => $channel->id
+            ]);
+
+        $this->verifyCaptcha();
+        $this->actingAs($this->user)
+            ->post(route('threads.store'), $thread)
+            ->assertSessionHasErrors('channel_id');
+        $this->assertDatabaseMissing('channels', $channel->toArray());
+
     }
 
     /** @test */

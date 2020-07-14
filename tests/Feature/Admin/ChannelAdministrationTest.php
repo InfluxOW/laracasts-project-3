@@ -3,6 +3,7 @@
 namespace Tests\Feature\Admin;
 
 use App\Channel;
+use App\Thread;
 use App\User;
 use Tests\TestCase;
 

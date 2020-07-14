@@ -47,4 +47,15 @@ class ChannelTest extends TestCase
 
         $this->assertEquals($active->fresh(), Channel::all()->first());
     }
+
+    /** @test */
+    public function archiving_a_channel_should_not_influence_existing_threads()
+    {
+        $thread = factory(Thread::class)->create();
+        $link = $thread->link;
+        $thread->channel->archive();
+
+        $this->assertEquals($link, $thread->fresh()->link);
+
+    }
 }

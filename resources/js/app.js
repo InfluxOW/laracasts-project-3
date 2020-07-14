@@ -37,6 +37,7 @@ Vue.component('paginator', require('./components/Paginator.vue').default);
 Vue.component('thread', require('./pages/Thread.vue').default);
 Vue.component('profile', require('./pages/Profile.vue').default);
 Vue.component('user-notifications', require('./components/UserNotifications.vue').default);
+Vue.component('channels', require('./components/ChannelDropdown.vue').default);
 
 document.addEventListener('turbolinks:load', () => {
     const app = new Vue({

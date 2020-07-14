@@ -44,19 +44,26 @@
                 </li>
 
                 <li>
-                    <dropdown
-                        button_classes="{{ $dropdownButtonClass }} w-full"
-                        button_title="Channels"
-                    >
-                        <template v-slot:items>
-                            @foreach ($channels as $channel)
-                                <a href="{{ route('threads.filter', $channel) }}"
-                                   class="text-sm p-2 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-400">
-                                    {{ $channel->slug }}
-                                </a>
-                            @endforeach
-                        </template>
-                    </dropdown>
+                    <channels inline-template>
+                        <dropdown
+                            button_classes="{{ $dropdownButtonClass }} w-full"
+                            button_title="Channels"
+                        >
+                            <template v-slot:items>
+                                <div class="channel-list overflow-auto">
+                                    <div class="mb-2">
+                                        <input type="text"
+                                               class="border border-gray-500 rounded-lg text-xs p-2 w-full"
+                                               v-model="filter"
+                                               placeholder="Filter Channels..."/>
+                                    </div>
+                                    <a :href="'/threads/' + channel.slug" v-for="channel in filteredChannels" v-text="channel.name"
+                                       class="text-sm p-2 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800 hover:bg-gray-400">
+                                    </a>
+                                </div>
+                            </template>
+                        </dropdown>
+                    </channels>
                 </li>
             </ul>
 

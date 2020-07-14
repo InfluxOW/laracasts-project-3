@@ -58,6 +58,7 @@ Auth::routes(['verify' => true]);
 Route::name('api.')->namespace('Api')->prefix('api/')->group(function () {
     Route::get('users', 'UsersController@index')->name('users.index');
     Route::post('users/{user:username}/{filename}/{folder}', 'UserImagesController@store')->name('user.images.store');
+    Route::get('channels', 'ChannelsController@index')->name('channels.index');
 });
 /* Socialite */
 Route::get('login/{provider}', 'Auth\SocialiteController@redirectToProvider')->name('socialite.login');

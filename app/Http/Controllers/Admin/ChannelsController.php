@@ -12,9 +12,7 @@ class ChannelsController extends Controller
 {
     public function index()
     {
-        $channels = Channel::all();
-
-        return view('admin.channels.index', compact('channels'));
+        return view('admin.channels.index');
     }
 
     public function create()

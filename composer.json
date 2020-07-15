@@ -1,9 +1,9 @@
 {
     "name": "influx/boilerplate",
-    "type": "metapackage",
-    "description": "Laravel Boilerplate",
+    "type": "package",
+    "description": "Forum",
     "keywords": [
-        "boilerplate",
+        "project",
         "laravel"
     ],
     "license": "MIT",

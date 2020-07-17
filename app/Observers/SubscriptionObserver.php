@@ -23,17 +23,6 @@ class SubscriptionObserver
     }
 
     /**
-     * Handle the subscription "updated" event.
-     *
-     * @param  \App\Subscription  $subscription
-     * @return void
-     */
-    public function updated(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
      * Handle the subscription "deleted" event.
      *
      * @param  \App\Subscription  $subscription
@@ -47,27 +36,5 @@ class SubscriptionObserver
                 ->performedOn($subscription->subscribable)
                 ->log('unsubscribed from');
         }
-    }
-
-    /**
-     * Handle the subscription "restored" event.
-     *
-     * @param  \App\Subscription  $subscription
-     * @return void
-     */
-    public function restored(Subscription $subscription)
-    {
-        //
-    }
-
-    /**
-     * Handle the subscription "force deleted" event.
-     *
-     * @param  \App\Subscription  $subscription
-     * @return void
-     */
-    public function forceDeleted(Subscription $subscription)
-    {
-        //
     }
 }

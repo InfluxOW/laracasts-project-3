@@ -143,7 +143,7 @@ class Thread extends Model
 
     public function setSlugAttribute($value)
     {
-        $slug = slugify("{$value}_" . now()->format('Y-m-d H:i'));
+        $slug = slugify("{$value}_" . $this->created_at->format('Y-m-d H:i'));
 
         $this->attributes['slug'] = $slug;
     }

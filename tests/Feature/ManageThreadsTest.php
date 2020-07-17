@@ -77,6 +77,21 @@ class ManageThreadsTest extends TestCase
     }
 
     /** @test */
+    public function threads_slug_updates_according_to_the_title_update()
+    {
+        $thread = factory(Thread::class)->create(['user_id' => $this->user->id]);
+        $slug = slugify("{$thread->title}_" . $thread->created_at->format('Y-m-d H:i'));
+        $this->assertEquals($thread->slug, $slug);
+
+        $attributes = ['title' => 'New Title', 'body' => str_repeat('New Test Body', 10)];
+
+        $this->actingAs($this->user)->patch(route('threads.update', $thread), $attributes);
+        $updatedSlug = slugify("{$thread->title}_" . $thread->created_at->format('Y-m-d H:i'));
+
+        $this->assertEquals($thread->slug, $updatedSlug);
+    }
+
+    /** @test */
     public function a_thread_can_not_be_updated_by_unauthorized_users()
     {
         $thread = factory(Thread::class)->create();

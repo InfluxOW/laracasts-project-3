@@ -23,28 +23,6 @@ class ThreadObserver
     }
 
     /**
-     * Handle the thread "updated" event.
-     *
-     * @param  \App\Thread  $thread
-     * @return void
-     */
-    public function updated(Thread $thread)
-    {
-        //
-    }
-
-    /**
-     * Handle the thread "updating" event.
-     *
-     * @param  \App\Thread  $thread
-     * @return void
-     */
-    public function updating(Thread $thread)
-    {
-        //
-    }
-
-    /**
      * Handle the thread "deleting" event.
      *
      * @param  \App\Thread  $thread
@@ -62,27 +40,5 @@ class ThreadObserver
         $thread->subscriptions->each->delete();
         $thread->activities->each->delete();
         Reputation::reduce($thread->user, Reputation::THREAD_WAS_PUBLISHED);
-    }
-
-    /**
-     * Handle the thread "restored" event.
-     *
-     * @param  \App\Thread  $thread
-     * @return void
-     */
-    public function restored(Thread $thread)
-    {
-        //
-    }
-
-    /**
-     * Handle the thread "force deleted" event.
-     *
-     * @param  \App\Thread  $thread
-     * @return void
-     */
-    public function forceDeleted(Thread $thread)
-    {
-        //
     }
 }

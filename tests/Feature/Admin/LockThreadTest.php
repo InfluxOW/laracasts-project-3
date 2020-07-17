@@ -28,7 +28,7 @@ class LockThreadTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_not_lock_threads()
+    public function admins_can_lock_threads()
     {
         $this->actingAs($this->admin)->post(route('closed-thread.store', $this->thread))
             ->assertOk();

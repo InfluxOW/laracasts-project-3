@@ -43,10 +43,11 @@ class Reply extends Model
 
     public function getLinkAttribute()
     {
-        //    $commentableResourceName = str_plural(strtolower(class_basename($comment->commentable_type)));
         $threadUrl = route('threads.show', [$this->thread->channel, $this->thread], false);
-        $replyUrl = "{$threadUrl}#reply-{$this->id}";
-        return $replyUrl;
+        $repliesPerPage = 15;
+        $replyPosition = $this->thread->replies()->pluck('id')->search($this->id) + 1;
+        $page = $page = ceil($replyPosition / $repliesPerPage);
+        return "{$threadUrl}?page={$page}#reply-{$this->id}";
     }
 
     public function getIsFavoritedAttribute()

@@ -58,4 +58,16 @@ class ChannelTest extends TestCase
         $this->assertEquals($link, $thread->fresh()->link);
 
     }
+
+    /** @test */
+    public function it_slug_updates_according_to_the_name_update()
+    {
+        $slug = slugify($this->channel->name);
+        $this->assertEquals($this->channel->slug, $slug);
+
+        $this->channel->update(['name' => 'new name']);
+        $updatedSlug = slugify($this->channel->fresh()->name);
+
+        $this->assertEquals($this->channel->slug, $updatedSlug);
+    }
 }

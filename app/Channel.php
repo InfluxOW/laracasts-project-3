@@ -22,6 +22,11 @@ class Channel extends Model
         });
     }
 
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = slugify($value);
+    }
+
     //Relations
 
     public function threads()

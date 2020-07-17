@@ -82,6 +82,9 @@ class ThreadsController extends Controller
         }
 
         $thread->update($request->validated());
+        if ($request->title !== $thread->title) {
+            $thread->update(['slug' => $thread->title]);
+        }
     }
 
     public function destroy(Thread $thread)

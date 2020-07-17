@@ -1,6 +1,7 @@
 ![PHP CI](https://github.com/InfluxOW/laracasts-project-3/workflows/PHP%20CI/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a9017db863a4cdeec91f/maintainability)](https://codeclimate.com/github/InfluxOW/laracasts-project-3/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a9017db863a4cdeec91f/test_coverage)](https://codeclimate.com/github/InfluxOW/laracasts-project-3/test_coverage)
+[![codecov](https://codecov.io/gh/InfluxOW/laracasts-project-3/branch/master/graph/badge.svg)](https://codecov.io/gh/InfluxOW/laracasts-project-3)
+
 
 # Forum
 https://influx-forum.herokuapp.com/

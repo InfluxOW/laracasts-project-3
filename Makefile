@@ -1,7 +1,7 @@
 test:
 	php artisan test
 test-coverage:
-	composer phpunit tests -- --coverage-clover build/logs/clover.xml
+	php artisan test --coverage-clover build/logs/clover.xml
 install:
 	composer install
 lint:

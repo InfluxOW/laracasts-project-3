@@ -21,11 +21,11 @@ class Reply extends Model
     protected static $submitEmptyLogs = false;
     protected static $recordEvents = ['created', 'updated'];
     // logs
-    protected $fillable = ['body', 'thread_id', 'user_id', 'created_at'];
-    protected $with = ['user', 'favorites', 'thread.channel'];
+    protected $fillable = ['body', 'thread_id', 'user_id', 'created_at', 'parent_id'];
+    protected $with = ['user', 'favorites', 'thread.channel', 'parent'];
     protected $withCount = ['favorites'];
     protected $touches = ['thread'];
-    protected $appends = ['link', 'isFavorited', 'isBest'];
+    protected $appends = ['link', 'isFavorited', 'isBest', 'hasParent'];
 
     //Relations
 
@@ -89,5 +89,25 @@ class Reply extends Model
     {
         event(new BestReplyCreated($this));
         $this->thread->update(['best_reply_id' => $this->id]);
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(__CLASS__, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(__CLASS__, 'parent_id');
+    }
+
+    public function getHasParentAttribute()
+    {
+        return $this->hasParent();
+    }
+
+    public function hasParent()
+    {
+        return isset($this->parent);
     }
 }

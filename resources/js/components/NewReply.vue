@@ -3,6 +3,7 @@
         <div class="border border-gray-300 rounded-lg p-4 bg-page">
             <wysiwyg name="body" v-model="body" placeholder="Enter your comment..." :shouldClear="completed" id="body"></wysiwyg>
             <slot name="honeypot"></slot>
+            <input name="parent_id" type="hidden" :value="parent_id">
             <button type="submit" class="button-new mt-2" @click="addReply">Submit</button>
         </div>
     </div>
@@ -12,6 +13,7 @@
     import Tribute from "tributejs";
 
     export default {
+        props: ['parent_id'],
         data() {
             return {
                 body: '',
@@ -36,7 +38,7 @@
         },
         methods: {
             addReply() {
-                axios.post(location.pathname + '/replies', { body: this.body })
+                axios.post(location.pathname + '/replies', { body: this.body, parent_id: this.parent_id })
                     .catch(error => {
                         flash(error.response.data.message, 'error');
                     })

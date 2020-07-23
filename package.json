@@ -50,6 +50,7 @@
         "vue-confirm-dialog": "^1.0.2",
         "vue-filepond": "^6.0.2",
         "vue-instantsearch": "^3.1.0",
+        "vue-js-modal": "^2.0.0-rc.6",
         "vue-server-renderer": "^2.6.11",
         "vue-turbolinks": "^2.1.0"
     },

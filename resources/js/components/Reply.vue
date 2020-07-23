@@ -1,5 +1,14 @@
 <template>
     <div class="mb-2 font-sans py-2 rounded-lg" :class="isBest ? 'bg-green-200 border-2 border-green-500' : 'bg-white border border-gray-300'" :id="id">
+        <modal :name="'reply-modal-' + reply.id" height="auto" width="50%" classes="p-4">
+            <div
+                class="font-header text-center text-xl text-gray-800 mb-4 bg-gray-100 rounded-lg rounded-b-none tracking-widest">
+                Reply To The Comment
+                <a :href="reply.link" class="text-blue-500 hover:text-opacity-50">#</a>
+            </div>
+            <new-reply @created="hideReplyModal" :parent_id="reply.id"></new-reply>
+        </modal>
+
         <div class="flex py-2">
             <div class="w-1/8 mr-1 text-center">
                 <div class="flex justify-center">
@@ -16,6 +25,13 @@
                         <span class="text-gray-700" v-text="createdAt"></span>
                         <span class="text-gray-700">·</span>
                         <span class="text-gray-700"><a :href="reply.link" class="text-black hover:text-opacity-50">#</a></span>
+                        <span class="text-gray-700" v-if="reply.hasParent">·</span>
+                        <span v-if="reply.hasParent">
+                            <span class="text-red-800 text-sm">
+                                Reply To
+                            </span>
+                            <a :href="reply.parent.link" class="text-black hover:text-opacity-50">#</a>
+                        </span>
                     </div>
                     <div class="mr-2 flex items-center">
                         <button @click="markReplyAsBest" v-if="authorize('owns', reply.thread)" v-show="! isBest" class="button-new mr-2">Best Reply?</button>
@@ -44,16 +60,22 @@
 
                 <div v-if="! editing">
                     <div class="text-sm my-2 wysiwyg w-11/12" ref="body">
+                        <div v-if="reply.hasParent">
+                            <highlight :content="reply.parent.body" class="border border-gray-500 rounded-lg p-2 mb-2"></highlight>
+                        </div>
+
                         <highlight :content="body"></highlight>
                     </div>
-                    <div v-if="authorize('owns', reply)">
-                        <div class="mt-4">
-                            <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="editing = true">Edit</button>
+                    <div class="mt-4 flex items-center">
+                        <button class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="showReplyModal" v-show="! reply.thread.closed">Reply</button>
 
-                            <button
-                                @click="handleClick"
-                                class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75 mr-2">Delete</button>
-                        </div>
+                        <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2"
+                                @click="editing = true" v-show="authorize('owns', reply)">Edit</button>
+
+                        <button
+                            @click="handleClick"
+                            class="uppercase font-bold text-xs text-red-600 outline-none focus:outline-none hover:opacity-75 mr-2"
+                            v-show="authorize('owns', reply)">Delete</button>
                     </div>
                 </div>
             </div>
@@ -62,10 +84,12 @@
 </template>
 
 <script>
+    import NewReply from "./NewReply";
     var moment = require('moment');
 
     export default {
         props: ['reply'],
+        components: { NewReply },
         data() {
             return {
                 editing: false,
@@ -120,7 +144,7 @@
                 axios.post('/replies/' + this.reply.id + '/best');
                 window.events.$emit('best-reply-selected', this.reply.id);
             },
-            handleClick(){
+            handleClick() {
                 this.$confirm(
                     {
                         message: `Are you sure?`,
@@ -139,6 +163,13 @@
                         }
                     }
                 )
+            },
+            showReplyModal () {
+                this.$modal.show('reply-modal-' + this.reply.id);
+            },
+            hideReplyModal (data) {
+                this.$parent.add(data);
+                this.$modal.hide('reply-modal-' + this.reply.id);
             }
         }
     }

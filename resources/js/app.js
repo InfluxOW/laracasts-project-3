@@ -4,6 +4,7 @@ import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog'
 import InstantSearch from 'vue-instantsearch';
 import TurbolinksAdapter from 'vue-turbolinks';
+import VModal from 'vue-js-modal'
 
 /**
  * Our Vuejs event handler which we will be using for flash messaging
@@ -24,6 +25,7 @@ window.flash = function (message, type) {
 Vue.use(VueConfirmDialog);
 Vue.use(InstantSearch);
 Vue.use(TurbolinksAdapter);
+Vue.use(VModal);
 
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default);
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);

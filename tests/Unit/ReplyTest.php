@@ -55,4 +55,30 @@ class ReplyTest extends TestCase
         $reply = factory(Reply::class)->make(['body' => "<script>alert('bad')</script><h1>Test</h1>"]);
         $this->assertEquals($reply->body, "<h1>Test</h1>");
     }
+
+    /** @test */
+    public function it_has_replies()
+    {
+        factory(Reply::class, 5)->create(['parent_id' => $this->reply]);
+        $this->assertCount(5, $this->reply->replies);
+    }
+
+    /** @test */
+    public function it_has_parent()
+    {
+        $parent = $this->reply;
+        $reply = factory(Reply::class)->create(['parent_id' => $parent]);
+        $this->assertEquals($reply->parent, $parent->fresh());
+    }
+
+    /** @test */
+    public function it_knows_if_it_has_parent()
+    {
+        $reply = factory(Reply::class)->create();
+        $this->assertFalse($reply->hasParent());
+
+        $parent = $this->reply;
+        $reply->update(['parent_id' => $parent->id]);
+        $this->assertTrue($reply->fresh()->hasParent());
+    }
 }

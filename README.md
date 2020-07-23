@@ -1,4 +1,4 @@
-![PHP CI](https://github.com/InfluxOW/laracasts-project-3/workflows/PHP%20CI/badge.svg)
+![Main workflow](https://github.com/InfluxOW/laracasts-project-3/workflows/Main%20workflow/badge.svg?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a9017db863a4cdeec91f/maintainability)](https://codeclimate.com/github/InfluxOW/laracasts-project-3/maintainability)
 [![codecov](https://codecov.io/gh/InfluxOW/laracasts-project-3/branch/master/graph/badge.svg)](https://codecov.io/gh/InfluxOW/laracasts-project-3)
 

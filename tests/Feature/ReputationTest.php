@@ -2,12 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Events\UserEarnedReputation;
 use App\Reply;
 use App\Reputation;
 use App\Thread;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class ReputationTest extends TestCase
@@ -95,5 +97,18 @@ class ReputationTest extends TestCase
 
         $user->unfavorite($reply);
         $this->assertEquals(Reputation::REPLY_POSTED, $reply->user->reputation);
+    }
+
+    /** @test */
+    public function an_announcement_is_made_when_reputation_is_earned()
+    {
+        Event::fake();
+        Event::assertNotDispatched(UserEarnedReputation::class);
+
+        Reputation::award($user = factory(User::class)->create(), $points = 10);
+
+        Event::assertDispatched(UserEarnedReputation::class, function ($event) use ($user, $points) {
+            return $user->is($event->user) && $event->points === $points && $event->totalPoints === $points;
+        });
     }
 }

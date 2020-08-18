@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\UserEarnedReputation;
+
 class Reputation
 {
     public const THREAD_WAS_PUBLISHED = 10;
@@ -12,6 +14,8 @@ class Reputation
     public static function award(User $user, $points)
     {
         $user->increment('reputation', $points);
+
+        UserEarnedReputation::dispatch($user, $points, $user->reputation);
     }
 
     public static function reduce(User $user, $points)

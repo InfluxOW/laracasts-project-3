@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Achievement;
 use App\Http\Requests\UserProfileRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -24,8 +25,10 @@ class ProfilesController extends Controller
             ->latest()
             ->paginate(20)
             ->appends(request()->query());
+        $achievements = Achievement::all();
+        $awarded = $user->achievements;
 
-        return view('users.show', compact('user', 'actions'));
+        return view('users.show', compact('user', 'actions', 'achievements', 'awarded'));
     }
 
     public function update(UserProfileRequest $request, User $user)

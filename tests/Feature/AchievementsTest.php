@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Achievement;
 use App\Reputation;
 use App\User;
+use Carbon\Carbon;
 use Tests\TestCase;
 
 class AchievementsTest extends TestCase
@@ -25,6 +26,14 @@ class AchievementsTest extends TestCase
     {
         Reputation::award($user = factory(User::class)->create(), 1001);
 
+        $this->assertCount(1, $user->achievements);
+    }
+
+    /** @test */
+    public function an_achievement_is_unlocked_once_a_year_has_passed_since_user_registration()
+    {
+        $user = factory(User::class)->create();
+        Carbon::setTestNow(now()->subYear());
         $this->assertCount(1, $user->achievements);
     }
 }

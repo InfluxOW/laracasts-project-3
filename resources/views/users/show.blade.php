@@ -77,6 +77,16 @@
                                     <div class="text-lg font-semibold mb-1 text-gray-600">
                                         {{ "@{$user->username}" }}
                                     </div>
+                                    <div class="flex justify-center">
+                                        @foreach($achievements as $achievement)
+
+                                            <div class="p-2">
+                                                <img src="{{ $achievement->icon }}"
+                                                     alt="{{ $achievement->name }}"
+                                                     class="h-8 w-8 @if(! $awarded->contains($achievement)) filter-grayscale @endif">
+                                            </div>
+                                        @endforeach
+                                    </div>
                                     @if ($user->location)
                                         <div class="text-sm leading-normal mt-4 mb-2 text-gray-500 font-bold uppercase inline-flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="mr-2 w-6 h-6">

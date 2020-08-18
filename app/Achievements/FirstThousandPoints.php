@@ -8,7 +8,7 @@ class FirstThousandPoints extends AchievementType
 {
     public $name = 'First Thousand Points';
     public $description = 'Earned once you have 1000 reputation points.';
-    public $icon = 'first-thousand.svg';
+    public $icon = 'https://laracasts-project-3.s3.eu-west-3.amazonaws.com/achievements/first-thousand-points.png';
 
     public function qualifier(User $user): bool
     {

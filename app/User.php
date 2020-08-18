@@ -75,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function achievements()
     {
-        return $this->belongsToMany(Achievement::class, 'user_achievements');
+        return $this->belongsToMany(Achievement::class, 'user_achievements')->withTimestamps();
     }
 
     //

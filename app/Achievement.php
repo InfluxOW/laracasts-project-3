@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Achievement extends Model
 {
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'icon'];
 
     public function awardTo(User $user)
     {

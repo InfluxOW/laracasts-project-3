@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\BestReplyCreated;
 use App\Events\ReplyCreated;
+use App\Events\UserEarnedReputation;
+use App\Listeners\AwardAchievements;
 use App\Listeners\CreateFavoritesActivity;
 use App\Listeners\ManageReputation;
 use App\Listeners\NotifyMentionedUsers;
@@ -39,6 +41,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         BestReplyCreated::class => [
             ManageReputation::class
+        ],
+        UserEarnedReputation::class => [
+            AwardAchievements::class
         ]
     ];
 

@@ -10,14 +10,14 @@ class AchievementsTest extends TestCase
     /** @test */
     public function it_has_a_name()
     {
-        $achievement = factory(Achievement::class)->create(['name' => $name = 'Test Achievement']);
+        $achievement = factory(Achievement::class)->create(['name' => $name = 'Test AchievementType']);
         $this->assertEquals($name, $achievement->name);
     }
 
     /** @test */
     public function it_has_a_description()
     {
-        $achievement = factory(Achievement::class)->create(['description' => $description = 'Test Achievement']);
+        $achievement = factory(Achievement::class)->create(['description' => $description = 'Test AchievementType']);
         $this->assertEquals($description, $achievement->description);
     }
 

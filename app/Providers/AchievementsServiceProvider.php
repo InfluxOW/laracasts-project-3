@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Achievements\FirstThousandPoints;
+use App\Events\UserEarnedReputation;
+use App\Listeners\AwardAchievements;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AchievementsServiceProvider extends ServiceProvider
@@ -24,5 +27,10 @@ class AchievementsServiceProvider extends ServiceProvider
                     return new $achievement;
                 });
         });
+    }
+
+    public function boot()
+    {
+        Event::listen(UserEarnedReputation::class, AwardAchievements::class);
     }
 }

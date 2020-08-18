@@ -42,9 +42,6 @@ class EventServiceProvider extends ServiceProvider
         BestReplyCreated::class => [
             ManageReputation::class
         ],
-        UserEarnedReputation::class => [
-            AwardAchievements::class
-        ]
     ];
 
     /**

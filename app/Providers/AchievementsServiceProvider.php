@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Achievements\FirstBestReplyAwarded;
+use App\Achievements\FirstReplyCreated;
 use App\Achievements\FirstThousandPoints;
+use App\Achievements\FirstThreadCreated;
 use App\Achievements\OneYearMember;
 use App\Events\UserEarnedReputation;
 use App\Listeners\AwardAchievements;
@@ -13,7 +16,10 @@ class AchievementsServiceProvider extends ServiceProvider
 {
     protected $achievements = [
         FirstThousandPoints::class,
-        OneYearMember::class
+        OneYearMember::class,
+        FirstReplyCreated::class,
+        FirstThreadCreated::class,
+        FirstBestReplyAwarded::class
     ];
 
     /**

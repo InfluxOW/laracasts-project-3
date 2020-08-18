@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Achievement;
+use App\Reply;
 use App\Reputation;
+use App\Thread;
 use App\User;
 use Carbon\Carbon;
 use Tests\TestCase;
@@ -37,6 +39,34 @@ class AchievementsTest extends TestCase
 
         $this->artisan('achievements:sync');
         $this->assertCount(1, $user->achievements);
+    }
+
+    /** @test */
+    public function an_achievement_is_unlocked_after_first_user_post()
+    {
+        $user = factory(User::class)->create();
+        $thread = factory(Thread::class)->create(['user_id' => $user]);
+        $this->assertCount(1, $user->achievements);
+    }
+
+    /** @test */
+    public function an_achievement_is_unlocked_after_first_user_reply()
+    {
+        $user = factory(User::class)->create();
+        $thread = factory(Thread::class)->create();
+        $reply = factory(Reply::class)->create(['user_id' => $user, 'thread_id' => $thread]);
+        $this->assertCount(1, $user->achievements);
+    }
+
+    /** @test */
+    public function an_achievement_is_unlocked_after_first_best_reply_awarded()
+    {
+        $user = factory(User::class)->create();
+        $thread = factory(Thread::class)->create();
+        $reply = factory(Reply::class)->create(['user_id' => $user, 'thread_id' => $thread]);
+        $reply->markAsBest();
+        $this->artisan('achievements:sync');
+        $this->assertCount(2, $user->achievements);
     }
 
     /** @test */

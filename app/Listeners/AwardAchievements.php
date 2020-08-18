@@ -16,9 +16,6 @@ class AwardAchievements
      */
     public function handle(UserEarnedReputation $event)
     {
-        $achievements = app('achievements')
-            ->filter->qualifier($event->user)
-            ->map->modelKey();
-        $event->user->achievements()->sync($achievements);
+        $event->user->syncAchievements();
     }
 }

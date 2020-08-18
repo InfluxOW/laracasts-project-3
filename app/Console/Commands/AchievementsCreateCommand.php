@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class GenerateAchievementCommand extends Command
+class AchievementsCreateCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'make:achievement {name}';
+    protected $signature = 'achievements:create {name}';
 
     /**
      * The console command description.

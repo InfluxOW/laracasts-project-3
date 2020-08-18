@@ -107,6 +107,14 @@ class User extends Authenticatable implements MustVerifyEmail
         Cache::forever($key, now());
     }
 
+    public function syncAchievements()
+    {
+        $achievements = app('achievements')
+            ->filter->qualifier($this)
+            ->map->modelKey();
+        $this->achievements()->sync($achievements);
+    }
+
     public function canPost($latestPostData, $userPostsFrequency)
     {
         return $latestPostData->diffInSeconds() > $userPostsFrequency;

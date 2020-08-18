@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Achievements\FirstThousandPoints;
+use App\Achievements\OneYearMember;
 use App\Events\UserEarnedReputation;
 use App\Listeners\AwardAchievements;
 use Illuminate\Support\Facades\Event;
@@ -12,6 +13,7 @@ class AchievementsServiceProvider extends ServiceProvider
 {
     protected $achievements = [
         FirstThousandPoints::class,
+        OneYearMember::class
     ];
 
     /**

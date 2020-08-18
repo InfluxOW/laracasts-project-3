@@ -12,6 +12,6 @@ class OneYearMember extends AchievementType
 
     public function qualifier(User $user): bool
     {
-        return $user->created_at->greaterThanOrEqualTo(now()->subYear());
+        return $user->created_at->addYear()->lessThanOrEqualTo(now());
     }
 }

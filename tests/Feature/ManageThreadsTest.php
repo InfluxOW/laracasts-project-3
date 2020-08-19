@@ -8,7 +8,6 @@ use App\Thread;
 use App\User;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
-use const Grpc\CHANNEL_CONNECTING;
 
 class ManageThreadsTest extends TestCase
 {
@@ -52,7 +51,6 @@ class ManageThreadsTest extends TestCase
             ->post(route('threads.store'), $thread)
             ->assertSessionHasErrors('channel_id');
         $this->assertDatabaseMissing('channels', $channel->toArray());
-
     }
 
     /** @test */

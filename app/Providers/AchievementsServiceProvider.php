@@ -31,10 +31,10 @@ class AchievementsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('achievements', function () {
-            return Cache::rememberForever('achievements', function() {
-                return collect($this->achievements)->map(function($achievement) {
-                        return new $achievement;
-                    });
+            return Cache::rememberForever('achievements', function () {
+                return collect($this->achievements)->map(function ($achievement) {
+                        return new $achievement();
+                });
             });
         });
     }

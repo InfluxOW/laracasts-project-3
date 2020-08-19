@@ -1,19 +1,19 @@
 .alert {
-    @apply border px-4 py-3 rounded flex inline-flex items-center;
+  @apply border px-4 py-3 rounded flex inline-flex items-center;
 }
 
 .alert-success {
-    @apply alert bg-green-100 border-green-400 text-green-700;
+  @apply alert bg-green-100 border-green-400 text-green-700;
 }
 
 .alert-danger {
-    @apply alert bg-red-100 border-red-400 text-red-700;
+  @apply alert bg-red-100 border-red-400 text-red-700;
 }
 
 .alert-info {
-    @apply alert bg-blue-100 border-blue-400 text-blue-700;
+  @apply alert bg-blue-100 border-blue-400 text-blue-700;
 }
 
 .alert-warning {
-    @apply alert bg-orange-100  border-orange-400 text-orange-700;
+  @apply alert bg-orange-100  border-orange-400 text-orange-700;
 }

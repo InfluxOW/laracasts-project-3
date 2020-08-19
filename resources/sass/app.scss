@@ -22,19 +22,20 @@
 @import '~highlight.js/scss/atom-one-dark';
 
 .wrapper {
-    @apply -mb-4;
-    min-height: 89%;
+  @apply -mb-4;
+
+  min-height: 89%;
 }
 
 [v-cloak] {
-    display: none !important;
+  display: none !important;
 }
 
 button,
 a,
 input,
 textarea {
-    &:focus {
-        @apply outline-none;
-    }
+  &:focus {
+    @apply outline-none;
+  }
 }

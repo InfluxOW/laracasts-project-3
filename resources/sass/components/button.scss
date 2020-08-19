@@ -28,15 +28,15 @@
 }
 
 .button-sm {
-    @apply .uppercase .font-bold .text-xs .rounded .px-3 .py-1 .border .border-transparent .outline-none;
+  @apply .uppercase .font-bold .text-xs .rounded .px-3 .py-1 .border .border-transparent .outline-none;
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 
-    &:hover {
-        @apply .opacity-75;
-    }
+  &:hover {
+    @apply .opacity-75;
+  }
 }
 
 .button-dropdown-light {
@@ -64,61 +64,61 @@
 }
 
 .button-dropdown-gray {
-    @apply .button .text-gray-600 .border .border-transparent .bg-gray-300;
+  @apply .button .text-gray-600 .border .border-transparent .bg-gray-300;
 
-    &:hover {
-        @apply .border-gray-500 .border-opacity-25 .bg-gray-200;
-    }
+  &:hover {
+    @apply .border-gray-500 .border-opacity-25 .bg-gray-200;
+  }
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 }
 
 .button-dropdown-red {
-    @apply .button .text-red-600 .bg-red-200;
+  @apply .button .text-red-600 .bg-red-200;
 
-    &:hover {
-        @apply .border-red-500 .border-opacity-25 .bg-red-100;
-    }
+  &:hover {
+    @apply .border-red-500 .border-opacity-25 .bg-red-100;
+  }
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 }
 
 .button-dropdown-pink {
-    @apply .button .text-pink-600 .bg-pink-200;
+  @apply .button .text-pink-600 .bg-pink-200;
 
-    &:hover {
-        @apply .border-pink-500 .border-opacity-25 .bg-pink-100;
-    }
+  &:hover {
+    @apply .border-pink-500 .border-opacity-25 .bg-pink-100;
+  }
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 }
 
 .button-sm-dropdown-pink {
-    @apply .button-sm .text-pink-600 .bg-pink-200;
+  @apply .button-sm .text-pink-600 .bg-pink-200;
 
-    &:hover {
-        @apply .border-pink-500 .border-opacity-25 .bg-pink-100;
-    }
+  &:hover {
+    @apply .border-pink-500 .border-opacity-25 .bg-pink-100;
+  }
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 }
 
 .button-dropdown-blue {
-    @apply .button .text-white .bg-blue-300;
+  @apply .button .text-white .bg-blue-300;
 
-    &:hover {
-        @apply .border-blue-500 .border-opacity-25 .bg-blue-100 .text-blue-500;
-    }
+  &:hover {
+    @apply .border-blue-500 .border-opacity-25 .bg-blue-100 .text-blue-500;
+  }
 
-    &:focus {
-        @apply .outline-none;
-    }
+  &:focus {
+    @apply .outline-none;
+  }
 }

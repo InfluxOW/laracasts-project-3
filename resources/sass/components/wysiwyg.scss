@@ -1,35 +1,35 @@
 .wysiwyg {
+  @apply outline-none;
+
+  &:focus {
     @apply outline-none;
+  }
 
-    &:focus {
-        @apply outline-none;
+  pre {
+    @apply p-2 border text-sm border-gray-500 rounded my-2 whitespace-pre-wrap;
+  }
+
+  blockquote {
+    @apply px-2 my-2 border-l-2 border-gray-300 text-gray-500 text-sm;
+  }
+
+  ul {
+    @apply list-disc ml-4 my-2 text-sm;
+  }
+
+  ol {
+    @apply list-decimal ml-4 my-2 text-sm;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  a {
+    @apply text-blue-500;
+
+    &:hover {
+      @apply text-opacity-75;
     }
-
-    pre {
-        @apply p-2 border text-sm border-gray-500 rounded my-2 whitespace-pre-wrap;
-    }
-
-    blockquote {
-        @apply px-2 my-2 border-l-2 border-gray-300 text-gray-500 text-sm;
-    }
-
-    ul {
-        @apply list-disc ml-4 my-2 text-sm;
-    }
-
-    ol {
-        @apply list-decimal ml-4 my-2 text-sm;
-    }
-
-    h1 {
-        @apply text-2xl;
-    }
-
-    a {
-        @apply text-blue-500;
-
-        &:hover {
-            @apply text-opacity-75;
-        }
-    }
+  }
 }

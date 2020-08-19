@@ -56,7 +56,6 @@ class ChannelTest extends TestCase
         $thread->channel->archive();
 
         $this->assertEquals($link, $thread->fresh()->link);
-
     }
 
     /** @test */

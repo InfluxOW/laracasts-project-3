@@ -14,4 +14,9 @@ class OneYearMember extends AchievementType
     {
         return $user->created_at->addYear()->lessThanOrEqualTo(now());
     }
+
+    public function level()
+    {
+        return 'advanced';
+    }
 }

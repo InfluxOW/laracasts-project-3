@@ -15,12 +15,18 @@ abstract class AchievementType
             'name' => $this->name,
             'description' => $this->description,
             'icon' => $this->icon,
+            'level' => $this->level()
         ]);
     }
 
     public function modelKey()
     {
         return $this->model->getKey();
+    }
+
+    public function level()
+    {
+        return 'intermediate';
     }
 
     abstract public function qualifier(User $user): bool;

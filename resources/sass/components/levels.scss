@@ -1,0 +1,11 @@
+.is-beginner {
+    @apply border border-green-500 bg-green-200;
+}
+
+.is-intermediate {
+    @apply border border-blue-500 bg-blue-200;
+}
+
+.is-advanced {
+    @apply border border-red-500 bg-red-200;
+}

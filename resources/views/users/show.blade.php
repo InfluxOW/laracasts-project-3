@@ -79,7 +79,7 @@
                                                   placement: 'top',
                                                   modifiers: { offset: { offset: '0,10px' } }
                                                 }">
-                                                <div class="p-2 rounded-lg bg-gray-300 shadow-lg">
+                                                <div class="p-2 rounded-lg shadow-lg is-{{ $achievement->level }}">
                                                     <h3 class="font-semibold text-lg text-left mb-1">{{ $achievement->name }}</h3>
                                                     <p class="text-sm">{{ $achievement->description }}</p>
                                                 </div>

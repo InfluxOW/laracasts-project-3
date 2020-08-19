@@ -14,4 +14,9 @@ class FirstReplyCreated extends AchievementType
     {
         return $user->replies_count > 0;
     }
+
+    public function level()
+    {
+        return 'beginner';
+    }
 }

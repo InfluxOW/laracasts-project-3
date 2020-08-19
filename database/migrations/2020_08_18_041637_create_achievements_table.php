@@ -17,6 +17,7 @@ class CreateAchievementsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->enum('level', ['beginner', 'intermediate', 'advanced'])->default('intermediate');
             $table->string('icon');
             $table->timestamps();
         });

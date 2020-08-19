@@ -14,4 +14,9 @@ class FirstThousandPoints extends AchievementType
     {
         return $user->reputation >= 1000;
     }
+
+    public function level()
+    {
+        return 'advanced';
+    }
 }

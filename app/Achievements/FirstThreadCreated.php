@@ -14,4 +14,9 @@ class FirstThreadCreated extends AchievementType
     {
         return $user->threads_count > 0;
     }
+
+    public function level()
+    {
+        return 'beginner';
+    }
 }

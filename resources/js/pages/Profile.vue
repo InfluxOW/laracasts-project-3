@@ -1,8 +1,9 @@
 <script>
     import FileUploader from "../components/FileUploader";
+    import Popper from 'vue-popperjs';
 
     export default {
-        components: { FileUploader },
+        components: { FileUploader, 'popper': Popper },
         data() {
             return {
                 editing: false

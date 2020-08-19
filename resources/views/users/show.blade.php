@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <profile inline-template>
+    <profile inline-template v-cloak>
         <main class="profile-page">
             <section class="relative block" style="height: 500px;">
                 <div
@@ -71,21 +71,32 @@
                             </div>
                             <div>
                                 <div class="text-center mt-12">
+                                    <div class="flex justify-center mb-2">
+                                        @foreach($achievements as $achievement)
+                                            <popper
+                                                trigger="hover"
+                                                :options="{
+                                                  placement: 'top',
+                                                  modifiers: { offset: { offset: '0,10px' } }
+                                                }">
+                                                <div class="p-2 rounded-lg bg-gray-300 shadow-lg">
+                                                    <h3 class="font-semibold text-lg text-left mb-1">{{ $achievement->name }}</h3>
+                                                    <p class="text-sm">{{ $achievement->description }}</p>
+                                                </div>
+
+                                                <div class="p-2" :key="{{ $achievement->getKey() }}" slot="reference">
+                                                    <img src="{{ $achievement->icon }}"
+                                                         alt="{{ $achievement->name }}"
+                                                         class="h-8 w-8 @if(! $awarded->contains($achievement)) filter-grayscale @endif">
+                                                </div>
+                                            </popper>
+                                        @endforeach
+                                    </div>
                                     <h3 class="text-4xl font-semibold mb-1 text-gray-800">
                                         {{ $user->name }}
                                     </h3>
                                     <div class="text-lg font-semibold mb-1 text-gray-600">
                                         {{ "@{$user->username}" }}
-                                    </div>
-                                    <div class="flex justify-center">
-                                        @foreach($achievements as $achievement)
-
-                                            <div class="p-2">
-                                                <img src="{{ $achievement->icon }}"
-                                                     alt="{{ $achievement->name }}"
-                                                     class="h-8 w-8 @if(! $awarded->contains($achievement)) filter-grayscale @endif">
-                                            </div>
-                                        @endforeach
                                     </div>
                                     @if ($user->location)
                                         <div class="text-sm leading-normal mt-4 mb-2 text-gray-500 font-bold uppercase inline-flex items-center">

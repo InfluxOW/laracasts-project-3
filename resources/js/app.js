@@ -4,7 +4,7 @@ import Vue from 'vue';
 import VueConfirmDialog from 'vue-confirm-dialog'
 import InstantSearch from 'vue-instantsearch';
 import TurbolinksAdapter from 'vue-turbolinks';
-import VModal from 'vue-js-modal'
+import VModal from 'vue-js-modal';
 
 /**
  * Our Vuejs event handler which we will be using for flash messaging

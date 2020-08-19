@@ -9,6 +9,7 @@ use App\Achievements\FirstThreadCreated;
 use App\Achievements\OneYearMember;
 use App\Events\UserEarnedReputation;
 use App\Listeners\AwardAchievements;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,10 +31,11 @@ class AchievementsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('achievements', function () {
-            return collect($this->achievements)
-                ->map(function($achievement) {
-                    return new $achievement;
-                });
+            return Cache::rememberForever('achievements', function() {
+                return collect($this->achievements)->map(function($achievement) {
+                        return new $achievement;
+                    });
+            });
         });
     }
 

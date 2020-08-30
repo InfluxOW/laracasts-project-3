@@ -120,7 +120,7 @@ class Thread extends Model
                 AllowedFilter::scope('favorited_by_user'),
             ])
             ->allowedSorts([
-                AllowedSort::field('views', 'views_count'),
+                AllowedSort::field('views', 'id'), // just a random field to allow another sort
                 AllowedSort::field('replies', 'replies_count'),
                 AllowedSort::field('favorites', 'favorites_count'),
             ])

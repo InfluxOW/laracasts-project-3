@@ -66,7 +66,7 @@
 
                         <highlight :content="body"></highlight>
                     </div>
-                    <div class="mt-4 flex items-center">
+                    <div class="mt-4 flex items-center" v-show="signedIn">
                         <button class="uppercase font-bold text-xs text-gray-600 outline-none focus:outline-none hover:opacity-75 mr-2" @click="showReplyModal" v-show="! reply.thread.closed">Reply</button>
 
                         <button class="uppercase font-bold text-xs text-blue-600 outline-none focus:outline-none hover:opacity-75 mr-2"

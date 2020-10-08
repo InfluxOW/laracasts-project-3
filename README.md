@@ -2,9 +2,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/a9017db863a4cdeec91f/maintainability)](https://codeclimate.com/github/InfluxOW/laracasts-project-3/maintainability)
 [![codecov](https://codecov.io/gh/InfluxOW/laracasts-project-3/branch/master/graph/badge.svg)](https://codecov.io/gh/InfluxOW/laracasts-project-3)
 
-
 # Forum
 https://influx-forum.herokuapp.com/
+
+Huge Blog/Forum project inspired by [Laracasts.com](https://laracasts.com/series/lets-build-a-forum-with-laravel) series and some others.
 
 # Development Setup
 1. Run `make setup` to install dependencies, generate .env file, create SQLite database, apply migrations and etc.

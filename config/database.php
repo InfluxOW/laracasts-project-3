@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 
+$redisUrl = parse_url(getenv("REDIS_URL"));
+
 return [
 
     /*
@@ -136,16 +138,16 @@ return [
 
         'cache' => [
             'url' => env('REDIS_URL'),
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', '6379'),
+            'host' => env('REDIS_URL') ? $redisUrl["host"] : env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_URL') ? $redisUrl["pass"] : env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_URL') ? $redisUrl["port"] : env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
         'laravel-visits' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
+            'host' => env('REDIS_URL') ? $redisUrl["host"] : env('REDIS_HOST', '127.0.0.1'),
+            'password' => env('REDIS_URL') ? $redisUrl["pass"] : env('REDIS_PASSWORD', null),
+            'port' => env('REDIS_URL') ? $redisUrl["port"] : env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'), // anything from 1 to 15, except 0 (or what is set in default)
         ],
 
